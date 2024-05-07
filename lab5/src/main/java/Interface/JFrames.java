@@ -1,18 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package mortalkombatbversion;
+package Interface;
 
+import Actions.Game;
+import Game_components.*;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-/**
- *
- * @author Мария
- */
 public class JFrames extends javax.swing.JFrame {
     
     Game game = new Game();
@@ -21,10 +14,6 @@ public class JFrames extends javax.swing.JFrame {
     Items[] items = new Items[3];
     String nameButton = "";
 
-    
-    /**
-     * Creates new form JFrame
-     */
     public JFrames() {
         initComponents();
         try {
