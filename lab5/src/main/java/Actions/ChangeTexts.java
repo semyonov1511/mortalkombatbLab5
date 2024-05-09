@@ -27,7 +27,6 @@ public class ChangeTexts {
             turnText.setText(enemy.getName()+"'s turn");
         }
         BagText(items, item1, item2, item3);
-        label9.setText("");
     }
 
     public void RoundTexts(Player human, Player enemy, JLabel enemyHealth, JLabel humanHealth, int i, JLabel turnText) {

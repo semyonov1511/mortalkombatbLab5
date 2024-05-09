@@ -24,6 +24,15 @@ public class Fight {
     int k = -1;
     int stun = 0;
     double v = 0.0;
+    
+    public int location = 1;
+    
+    public void setLocation(int i){
+        location = i;
+    }
+    public int getLocation(){
+        return location;
+    }
 
     public void Move(Player p1, Player p2, JLabel l, JLabel l2) {
         if (stun == 1) {
@@ -114,13 +123,13 @@ public class Fight {
 
     public void EndRound(Player human, Player enemy, JDialog dialog, JLabel label,
             CharacterAction action, Items[] items) {
-
+        
         dialog.setVisible(true);
         dialog.setBounds(300, 150, 700, 600);
         if (human.getHealth() > 0) {
             label.setText("You win");
             ((Human) human).setWin();
-
+            location += 1;
             if (enemy instanceof ShaoKahn) {
                 action.AddItems(38, 23, 8, items);
                 action.AddPointsBoss(((Human) human), action.getEnemyes());
@@ -129,6 +138,7 @@ public class Fight {
                 action.AddPoints(((Human) human), action.getEnemyes());
             }
         } else {
+            location = 1;
             label.setText(enemy.getName() + " win");
         }
 
@@ -179,10 +189,8 @@ public class Fight {
     }
 
     public Player NewRound(Player human, JLabel label, JProgressBar pr1,
-            JProgressBar pr2, JLabel label2, JLabel text, JLabel label3, CharacterAction action) {
-
+        JProgressBar pr2, JLabel label2, JLabel text, JLabel label3, CharacterAction action) {
         Player enemy1 = null;
-        System.out.println("adsdfasdf");
         if (((Human) human).getWin() == 6 | ((Human) human).getWin() == 11) {
             enemy1 = action.ChooseBoss(label, label2, text, label3, human.getLevel());
         } else {

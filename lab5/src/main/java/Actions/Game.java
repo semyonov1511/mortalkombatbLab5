@@ -23,7 +23,16 @@ public class Game {
     public ChangeTexts change = new ChangeTexts();
     public Fight fight = new Fight();
     private ArrayList<Result> results = new ArrayList<>();
-
+    /* public int location = 1;
+    
+    public void setLocation(int i){
+        location = i;
+    }
+    public int getLocation(){
+        return location;
+    }
+    */ 
+    
     public Player NewEnemy(JLabel L1, JLabel L2,
             JLabel L3, JLabel L4, JProgressBar pr2) {
         action.setEnemyes();

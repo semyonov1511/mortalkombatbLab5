@@ -934,7 +934,8 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
+        
+        System.out.println("Текущая локация - " + game.fight.getLocation());
         enemy=game.fight.NewRound(human, jLabel4, jProgressBar1, jProgressBar2, 
                 jLabel5, jLabel10, jLabel13, game.action);
 
