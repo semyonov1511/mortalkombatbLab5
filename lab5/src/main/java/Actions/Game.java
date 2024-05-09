@@ -62,7 +62,7 @@ public class Game {
                 r2.createCell(2).setCellValue(results.get(i).getPoints());
             }
         }
-        File f = new File("C:\\Users\\Мария\\Desktop\\Results.xlsx");
+        File f = new File("C:\\Users\\semyo\\Desktop\\Results.xlsx");
         book.write(new FileOutputStream(f));
         book.close();
     }

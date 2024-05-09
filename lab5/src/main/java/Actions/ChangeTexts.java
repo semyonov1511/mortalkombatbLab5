@@ -16,25 +16,23 @@ import javax.swing.JRadioButton;
  * @author Мария
  */
 public class ChangeTexts {
-
-
-
+    
     public void NewRoundTexts(Player human, Player enemy, JProgressBar pr1,
-            JProgressBar pr2, JLabel label, JLabel label2, JLabel label3,
-            JLabel label4, JLabel label5, JLabel label6, JLabel label7, JLabel label8, JLabel label9,
+            JProgressBar pr2, JLabel points, JLabel humanExperience, JLabel humanLevel,
+            JLabel enemyLevel, JLabel humanHealth, JLabel enemyHealth, JLabel humanDamage, JLabel turnText, JLabel label9,
             int i, Items[] items, JRadioButton rb1, JRadioButton rb2, JRadioButton rb3) {
-        label.setText(Integer.toString(((Human) human).getPoints()));
-        label2.setText(Integer.toString(((Human) human).getExperience()) + "/" + ((Human) human).getNextExperience());
-        label3.setText(Integer.toString(human.getLevel()) + " level");
-        label4.setText(Integer.toString(enemy.getLevel()) + " level");
-        label5.setText(Integer.toString(human.getMaxHealth()) + "/" + Integer.toString(human.getMaxHealth()));
-        label6.setText(Integer.toString(enemy.getMaxHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
-        label7.setText(Integer.toString(human.getDamage()));
+        points.setText(Integer.toString(((Human) human).getPoints()));
+        humanExperience.setText(Integer.toString(((Human) human).getExperience()) + "/" + ((Human) human).getNextExperience());
+        humanLevel.setText(Integer.toString(human.getLevel()) + " level");
+        enemyLevel.setText(Integer.toString(enemy.getLevel()) + " level");
+        humanHealth.setText(Integer.toString(human.getMaxHealth()) + "/" + Integer.toString(human.getMaxHealth()));
+        enemyHealth.setText(Integer.toString(enemy.getMaxHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
+        humanDamage.setText(Integer.toString(human.getDamage()));
         if (i % 2 == 1) {
-            label8.setText("Your turn");
+            turnText.setText("Your turn");
         }
         else{
-            label8.setText(enemy.getName()+"'s turn");
+            turnText.setText(enemy.getName()+"'s turn");
         }
         /*rb1.setText(items[0].getName()+", "+items[0].getCount()+" шт");
         rb2.setText(items[1].getName()+", "+items[1].getCount()+" шт");
@@ -43,7 +41,7 @@ public class ChangeTexts {
         label9.setText("");
     }
 
-    public void RoundTexts(Player human, Player enemy, JLabel label, JLabel label2, int i, JLabel label3) {
+    public void RoundTexts(Player human, Player enemy, JLabel label, JLabel label2, int i, JLabel turnText) {
         if (enemy.getHealth() >= 0) {
             label.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
         } else {
@@ -55,19 +53,19 @@ public class ChangeTexts {
             label2.setText("0/" + Integer.toString(human.getMaxHealth()));
         }
         if (i % 2 == 1) {
-            label3.setText("Your turn");
+            turnText.setText("Your turn");
         }
         else{
-            label3.setText(enemy.getName()+"'s turn");
+            turnText.setText(enemy.getName()+"'s turn");
         }
     }
     
-    public void EndGameText(Human human, JLabel label){
+    public void EndGameText(Human human, JLabel resultText){
         if(human.getWin()==12){
-            label.setText("Победа на вашей стороне");
+            resultText.setText("Победа на вашей стороне");
         }
         else {
-            label.setText("Победа не на вашей стороне");
+            resultText.setText("Победа не на вашей стороне");
         }
     }
     
