@@ -3,31 +3,33 @@ package Interface;
 import Actions.Game;
 import Game_components.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class JFrames extends javax.swing.JFrame {
-    
+
     Game game = new Game();
     Human human = null;
     Player enemy = null;
+    ArrayList<Player> enemiesList = null;
     Items[] items = new Items[3];
     String nameButton = "";
 
     public JFrames() {
         initComponents();
         game.WriteToTable(jTable1);
-        
+
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
         buttonGroup1.add(jRadioButton3);
-        
-        items[0]=new Items("Малое зелье лечение",0);
-        items[1]=new Items("Большое зелье лечение",0);
-        items[2]=new Items("Крест возрождения",0);
+
+        items[0] = new Items("Малое зелье лечение", 0);
+        items[1] = new Items("Большое зелье лечение", 0);
+        items[2] = new Items("Крест возрождения", 0);
 
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -905,42 +907,48 @@ public class JFrames extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
-        jFrame1.setVisible(rootPaneCheckingEnabled);
-        jFrame1.setSize(1000,700);
-        
         human = game.NewHuman(jProgressBar1);
-        
-        enemy = game.NewEnemy(jLabel4, jLabel5, jLabel10, jLabel13, jProgressBar2);
-        
-        game.change.NewRoundTexts(human, enemy, jProgressBar1, jProgressBar2, 
-                jLabel17, jLabel16, jLabel6, jLabel19, jLabel12, jLabel13, jLabel9,
-                jLabel26, jLabel27, game.fight.i, items, jRadioButton1, jRadioButton2, jRadioButton3);
-        
+        // enemy = game.NewEnemy(jLabel4, jLabel5, jLabel10, jLabel13, jProgressBar2);
+        game.action.setEnemies();
+        enemiesList = game.enemiesAtLocation(0);
+        jFrame1.setVisible(rootPaneCheckingEnabled);
+        jFrame1.setSize(1000, 700);
+        for (Player enemyPlayer : enemiesList) {
+            jLabel4.setIcon(enemyPlayer.getPhoto());
+            jLabel10.setText(Integer.toString(enemyPlayer.getDamage()));
+            jLabel13.setText(Integer.toString(enemyPlayer.getHealth()) + "/" + Integer.toString(enemyPlayer.getMaxHealth()));
+            jLabel5.setText(enemyPlayer.getName());
+            game.action.HP(enemyPlayer, jProgressBar2);
+            jProgressBar2.setMaximum(enemyPlayer.getMaxHealth());
+            game.change.NewRoundTexts(human, enemyPlayer, jProgressBar1, jProgressBar2,
+                    jLabel17, jLabel16, jLabel6, jLabel19, jLabel12, jLabel13, jLabel9,
+                    jLabel26, jLabel27, game.fight.i, items, jRadioButton1, jRadioButton2, jRadioButton3);
+        }
+
     }//GEN-LAST:event_StartButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        game.fight.Hit( human, enemy, 1, jLabel13, jLabel12, jDialog1, 
-                jLabel18, game.action, jProgressBar1, jProgressBar2, jDialog2, 
-                jDialog4, jFrame1, game.getResults(), jLabel20, jLabel24, 
+        game.fight.Hit(human, enemy, 1, jLabel13, jLabel12, jDialog1,
+                jLabel18, game.action, jProgressBar1, jProgressBar2, jDialog2,
+                jDialog4, jFrame1, game.getResults(), jLabel20, jLabel24,
                 jLabel26, jLabel29, jLabel27, items, jRadioButton3);
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        game.fight.Hit( human, enemy, 0, jLabel13, jLabel12, jDialog1, 
-                jLabel18, game.action, jProgressBar1, jProgressBar2, jDialog2, 
-                jDialog4, jFrame1, game.getResults(), jLabel20, jLabel24, 
+        game.fight.Hit(human, enemy, 0, jLabel13, jLabel12, jDialog1,
+                jLabel18, game.action, jProgressBar1, jProgressBar2, jDialog2,
+                jDialog4, jFrame1, game.getResults(), jLabel20, jLabel24,
                 jLabel26, jLabel29, jLabel27, items, jRadioButton3);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+
         System.out.println("Текущая локация - " + game.fight.getLocation());
-        enemy=game.fight.NewRound(human, jLabel4, jProgressBar1, jProgressBar2, 
+        enemy = game.fight.NewRound(human, jLabel4, jProgressBar1, jProgressBar2,
                 jLabel5, jLabel10, jLabel13, game.action);
 
-        
-        game.change.NewRoundTexts(human, enemy, jProgressBar1, jProgressBar2, 
+        game.change.NewRoundTexts(human, enemy, jProgressBar1, jProgressBar2,
                 jLabel17, jLabel16, jLabel6, jLabel19, jLabel12, jLabel13, jLabel9,
                 jLabel26, jLabel27, game.fight.i, items, jRadioButton1, jRadioButton2, jRadioButton3);
 
@@ -983,14 +991,14 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        if(jRadioButton1.isSelected()){
-            nameButton="jRadioButton1";
+        if (jRadioButton1.isSelected()) {
+            nameButton = "jRadioButton1";
         }
-        if(jRadioButton2.isSelected()){
-            nameButton="jRadioButton2";
+        if (jRadioButton2.isSelected()) {
+            nameButton = "jRadioButton2";
         }
-        if(jRadioButton3.isSelected()){
-            nameButton="jRadioButton3";
+        if (jRadioButton3.isSelected()) {
+            nameButton = "jRadioButton3";
         }
         game.action.UseItem(human, items, nameButton, jDialog6, jDialog5);
         game.action.HP(human, jProgressBar1);

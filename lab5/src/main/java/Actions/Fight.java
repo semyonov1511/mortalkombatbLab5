@@ -39,42 +39,39 @@ public class Fight {
             p1.setAttack(-1);
         }
         switch (Integer.toString(p1.getAttack()) + Integer.toString(p2.getAttack())) {
-            case "10":
+            case "10" -> {
                 v = Math.random();
                 if (p1 instanceof ShaoKahn & v < 0.15) {
                     p2.setHealth(-(int) (p1.getDamage() * 0.5));
                     l2.setText("Your block is broken");
-
                 } else {
                     p1.setHealth(-(int) (p2.getDamage() * 0.5));
                     l2.setText(p2.getName() + " counterattacked");
                 }
-                break;
-            case "11":
+            }
+            case "11" -> {
                 p2.setHealth(-p1.getDamage());
                 l2.setText(p1.getName() + " attacked");
-                break;
-            case "00":
+            }
+            case "00" -> {
                 v = Math.random();
                 if (v <= 0.5) {
                     stun = 1;
                 }
                 l2.setText("Both defended themselves");
-                break;
-            case "01":
-                l2.setText(p1.getName() + " didn't attacked");
-                break;
-            case "-10":
+            }
+            case "01" -> l2.setText(p1.getName() + " didn't attacked");
+            case "-10" -> {
                 l.setText(p1.getName() + " was stunned");
                 stun = 0;
                 l2.setText(p2.getName() + " didn't attacked");
-                break;
-            case "-11":
+            }
+            case "-11" -> {
                 p1.setHealth(-p2.getDamage());
                 l.setText(p1.getName() + " was stunned");
                 stun = 0;
                 l2.setText(p2.getName() + " attacked");
-                break;
+            }
         }
     }
 
@@ -132,10 +129,10 @@ public class Fight {
             location += 1;
             if (enemy instanceof ShaoKahn) {
                 action.AddItems(38, 23, 8, items);
-                action.AddPointsBoss(((Human) human), action.getEnemyes());
+                action.AddPointsBoss(((Human) human), action.getEnemies());
             } else {
                 action.AddItems(25, 15, 5, items);
-                action.AddPoints(((Human) human), action.getEnemyes());
+                action.AddPoints(((Human) human), action.getEnemies());
             }
         } else {
             location = 1;
@@ -154,7 +151,7 @@ public class Fight {
         String text = "Победа не на вашей стороне";
         if (human.getHealth() > 0) {
             human.setWin();
-            action.AddPoints(human, action.getEnemyes());
+            action.AddPoints(human, action.getEnemies());
             text = "Победа на вашей стороне";
         }
         boolean top = false;
@@ -191,11 +188,11 @@ public class Fight {
     public Player NewRound(Player human, JLabel label, JProgressBar pr1,
         JProgressBar pr2, JLabel label2, JLabel text, JLabel label3, CharacterAction action) {
         Player enemy1 = null;
-        if (((Human) human).getWin() == 6 | ((Human) human).getWin() == 11) {
+        /* if (((Human) human).getWin() == 6 | ((Human) human).getWin() == 11) {
             enemy1 = action.ChooseBoss(label, label2, text, label3, human.getLevel());
         } else {
             enemy1 = action.ChooseEnemy(label, label2, text, label3);
-        }
+        } */
         pr1.setMaximum(human.getMaxHealth());
         pr2.setMaximum(enemy1.getMaxHealth());
         human.setNewHealth(human.getMaxHealth());

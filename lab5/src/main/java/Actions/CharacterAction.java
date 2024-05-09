@@ -22,7 +22,7 @@ public class CharacterAction {
 
     private Player enemy = null;
 
-    public void setEnemyes() {
+    public void setEnemies() {
         enemies[0] = fabric.create(0, 0);
         enemies[1] = fabric.create(1, 0);
         enemies[2] = fabric.create(2, 0);
@@ -31,12 +31,13 @@ public class CharacterAction {
         enemies[5] = fabric.create(4, 0);
     }
 
-    public Player[] getEnemyes() {
+    public Player[] getEnemies() {
         return this.enemies;
     }
 
     public Player ChooseEnemy(JLabel iconLabel, JLabel enemyName, JLabel text, JLabel enemyHealth) {
         int i = (int) (Math.random() * 4);
+        System.out.println("Выбирается новый персонаж");
         ImageIcon icon1 = null;
         switch (i) {
             case 0 -> {
@@ -71,12 +72,8 @@ public class CharacterAction {
         icon1 = new ImageIcon("C:\\Users\\Мария\\Desktop\\Shao Kahn.png");
         label2.setText("Shao Kahn (босс)");
         switch (i) {
-            case 2:
-                enemy = enemies[4];
-                break;
-            case 4:
-                enemy = enemies[5];
-                break;
+            case 2 -> enemy = enemies[4];
+            case 4 -> enemy = enemies[5];
         }
         label.setIcon(icon1);
         text.setText(Integer.toString(enemy.getDamage()));
@@ -133,26 +130,26 @@ public class CharacterAction {
 
     public void AddPoints(Human human, Player[] enemyes) {
         switch (human.getLevel()) {
-            case 0:
+            case 0 -> {
                 human.setExperience(20);
                 human.setPoints(25 + human.getHealth() / 4);
-                break;
-            case 1:
+            }
+            case 1 -> {
                 human.setExperience(25);
                 human.setPoints(30 + human.getHealth() / 4);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 human.setExperience(30);
                 human.setPoints(35 + human.getHealth() / 4);
-                break;
-            case 3:
+            }
+            case 3 -> {
                 human.setExperience(40);
                 human.setPoints(45 + human.getHealth() / 4);
-                break;
-            case 4:
+            }
+            case 4 -> {
                 human.setExperience(50);
                 human.setPoints(55 + human.getHealth() / 4);
-                break;
+            }
         }
         for (int i = 0; i < 5; i++) {
             if (experience_for_next_level[i] == human.getExperience()) {
@@ -181,7 +178,7 @@ public class CharacterAction {
             if (experience_for_next_level[i] == human.getExperience()) {
                 human.setLevel();
                 human.setNextExperience(experience_for_next_level[i + 1]);
-                NewHealthHuman(human);
+//                NewHealthHuman(human);
                 for (int j = 0; j < 4; j++) {
                     NewHealthEnemy(enemyes[j], human);
                 }

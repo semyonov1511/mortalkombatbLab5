@@ -4,6 +4,8 @@
  */
 package Game_components;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Мария
@@ -15,6 +17,7 @@ public class Player {
     private int maxhealth;
     private int damage;
     private int attack;
+    public ImageIcon icon;
     
     public Player(int level, int health, int damage, int attack){
         this.level=level;
@@ -23,7 +26,14 @@ public class Player {
         this.attack=attack;
         this.maxhealth=health;
     }
+    
+    public void setPhoto(String path){
+        icon = new ImageIcon(path);
+    }
    
+    public ImageIcon getPhoto(){
+        return icon;
+    }
     public void setLevel(){
         this.level++;
     }
