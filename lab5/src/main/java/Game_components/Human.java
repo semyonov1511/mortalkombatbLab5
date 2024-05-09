@@ -1,22 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Game_components;
 
-/**
- *
- * @author Мария
- */
 public class Human extends Player{
     
-
     private int points;
     private int experience;
     private int win;
     private int nextexperience;
-    
-    
     
     public Human(int level, int health, int  damage, int attack){
         super (level, health, damage, attack);
@@ -25,7 +14,6 @@ public class Human extends Player{
         this.nextexperience=40;
         this.win=0;
     }
-    
 
     public int getPoints(){
         return this.points;

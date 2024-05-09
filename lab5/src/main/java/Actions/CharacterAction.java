@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Actions;
 
 import Fabrics.EnemyFabric;
@@ -14,64 +10,60 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
-/**
- *
- * @author Мария
- */
 public class CharacterAction {
 
     private final int experience_for_next_level[] = {40, 90, 180, 260, 410, 1000};
 
     private final int kind_fight[][] = {{1, 0}, {1, 1, 0}, {0, 1, 0}, {1, 1, 1, 1}};
 
-    private Player enemyes[] = new Player[6];
+    private final Player enemies[] = new Player[6];
 
     EnemyFabric fabric = new EnemyFabric();
 
-    private Player enemyy = null;
+    private Player enemy = null;
 
     public void setEnemyes() {
-        enemyes[0] = fabric.create(0, 0);
-        enemyes[1] = fabric.create(1, 0);
-        enemyes[2] = fabric.create(2, 0);
-        enemyes[3] = fabric.create(3, 0);
-        enemyes[4] = fabric.create(4, 0);
-        enemyes[5] = fabric.create(4, 0);
+        enemies[0] = fabric.create(0, 0);
+        enemies[1] = fabric.create(1, 0);
+        enemies[2] = fabric.create(2, 0);
+        enemies[3] = fabric.create(3, 0);
+        enemies[4] = fabric.create(4, 0);
+        enemies[5] = fabric.create(4, 0);
     }
 
     public Player[] getEnemyes() {
-        return this.enemyes;
+        return this.enemies;
     }
 
-    public Player ChooseEnemy(JLabel label, JLabel label2, JLabel text, JLabel label3) {
+    public Player ChooseEnemy(JLabel iconLabel, JLabel enemyName, JLabel text, JLabel enemyHealth) {
         int i = (int) (Math.random() * 4);
         ImageIcon icon1 = null;
         switch (i) {
-            case 0:
-                enemyy = enemyes[0];
-                icon1 = new ImageIcon("C:\\Users\\Мария\\Desktop\\Baraka.jpg");
-                label2.setText("Baraka (танк)");
-                break;
-            case 1:
-                enemyy = enemyes[1];
-                icon1 = new ImageIcon("C:\\Users\\Мария\\Desktop\\Sub-Zero.jpg");
-                label2.setText("Sub-Zero (маг)");
-                break;
-            case 2:
-                enemyy = enemyes[2];
-                icon1 = new ImageIcon("C:\\Users\\Мария\\Desktop\\Liu Kang.jpg");
-                label2.setText("Liu Kang (боец)");
-                break;
-            case 3:
-                enemyy = enemyes[3];
-                icon1 = new ImageIcon("C:\\Users\\Мария\\Desktop\\Sonya Blade.jpg");
-                label2.setText("Sonya Blade (солдат)");
-                break;
+            case 0 -> {
+                enemy = enemies[0];
+                icon1 = new ImageIcon("B.jpg");
+                enemyName.setText("Baraka (танк)");
+            }
+            case 1 -> {
+                enemy = enemies[1];
+                icon1 = new ImageIcon("SZ.jpg");
+                enemyName.setText("Sub-Zero (маг)");
+            }
+            case 2 -> {
+                enemy = enemies[2];
+                icon1 = new ImageIcon("LK.jpg");
+                enemyName.setText("Liu Kang (боец)");
+            }
+            case 3 -> {
+                enemy = enemies[3];
+                icon1 = new ImageIcon("SB.jpg");
+                enemyName.setText("Sonya Blade (солдат)");
+            }
         }
-        label.setIcon(icon1);
-        text.setText(Integer.toString(enemyy.getDamage()));
-        label3.setText(Integer.toString(enemyy.getHealth()) + "/" + Integer.toString(enemyy.getMaxHealth()));
-        return enemyy;
+        iconLabel.setIcon(icon1);
+        text.setText(Integer.toString(enemy.getDamage()));
+        enemyHealth.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
+        return enemy;
     }
 
     public Player ChooseBoss(JLabel label, JLabel label2, JLabel text, JLabel label3, int i) {
@@ -80,16 +72,16 @@ public class CharacterAction {
         label2.setText("Shao Kahn (босс)");
         switch (i) {
             case 2:
-                enemyy = enemyes[4];
+                enemy = enemies[4];
                 break;
             case 4:
-                enemyy = enemyes[5];
+                enemy = enemies[5];
                 break;
         }
         label.setIcon(icon1);
-        text.setText(Integer.toString(enemyy.getDamage()));
-        label3.setText(Integer.toString(enemyy.getHealth()) + "/" + Integer.toString(enemyy.getMaxHealth()));
-        return enemyy;
+        text.setText(Integer.toString(enemy.getDamage()));
+        label3.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
+        return enemy;
     }
 
     public int[] EnemyBehavior(int k1, int k2, int k3, int k4, double i) {
@@ -176,14 +168,14 @@ public class CharacterAction {
 
     public void AddPointsBoss(Human human, Player[] enemyes) {
         switch (human.getLevel()) {
-            case 2:
+            case 2 -> {
                 human.setExperience(30);
                 human.setPoints(45 + human.getHealth() / 2);
-                break;
-            case 4:
+            }
+            case 4 -> {
                 human.setExperience(50);
                 human.setPoints(65 + human.getHealth() / 2);
-                break;
+            }
         }
         for (int i = 0; i < 5; i++) {
             if (experience_for_next_level[i] == human.getExperience()) {
@@ -214,22 +206,22 @@ public class CharacterAction {
         int hp = 0;
         int damage = 0;
         switch (human.getLevel()) {
-            case 1:
+            case 1 -> {
                 hp = 25;
                 damage = 3;
-                break;
-            case 2:
+            }
+            case 2 -> {
                 hp = 30;
                 damage = 3;
-                break;
-            case 3:
+            }
+            case 3 -> {
                 hp = 30;
                 damage = 4;
-                break;
-            case 4:
+            }
+            case 4 -> {
                 hp = 40;
                 damage = 6;
-                break;
+            }
         }
         human.setMaxHealth(hp);
         human.setDamage(damage);
@@ -239,22 +231,22 @@ public class CharacterAction {
         int hp = 0;
         int damage = 0;
         switch (human.getLevel()) {
-            case 1:
+            case 1 -> {
                 hp = 32;
                 damage = 25;
-                break;
-            case 2:
+            }
+            case 2 -> {
                 hp = 30;
                 damage = 20;
-                break;
-            case 3:
+            }
+            case 3 -> {
                 hp = 23;
                 damage = 24;
-                break;
-            case 4:
+            }
+            case 4 -> {
                 hp = 25;
                 damage = 26;
-                break;
+            }
         }
         enemy.setMaxHealth((int) enemy.getMaxHealth() * hp / 100);
         enemy.setDamage((int) enemy.getDamage() * damage / 100);
@@ -263,7 +255,7 @@ public class CharacterAction {
 
     public void UseItem(Player human, Items[] items, String name, JDialog dialog, JDialog dialog1) {
         switch (name) {
-            case "jRadioButton1":
+            case "jRadioButton1" -> {
                 if (items[0].getCount() > 0) {
                     human.setHealth((int) (human.getMaxHealth() * 0.25));
                     items[0].setCount(-1);
@@ -271,8 +263,8 @@ public class CharacterAction {
                     dialog.setVisible(true);
                     dialog.setBounds(300, 200, 400, 300);
                 }
-                break;
-            case "jRadioButton2":
+            }
+            case "jRadioButton2" -> {
                 if (items[1].getCount() > 0) {
                     human.setHealth((int) (human.getMaxHealth() * 0.5));
                     items[1].setCount(-1);
@@ -280,11 +272,11 @@ public class CharacterAction {
                     dialog.setVisible(true);
                     dialog.setBounds(300, 200, 400, 300);
                 }
-                break;
-            case "jRadioButton3":
+            }
+            case "jRadioButton3" -> {
                 dialog.setVisible(true);
                 dialog.setBounds(300, 200, 400, 300);
-                break;
+            }
         }
         
         if(dialog.isVisible()==false){

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Actions;
 
 import Game_components.Human;
@@ -11,16 +7,12 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 
-/**
- *
- * @author Мария
- */
 public class ChangeTexts {
     
     public void NewRoundTexts(Player human, Player enemy, JProgressBar pr1,
             JProgressBar pr2, JLabel points, JLabel humanExperience, JLabel humanLevel,
             JLabel enemyLevel, JLabel humanHealth, JLabel enemyHealth, JLabel humanDamage, JLabel turnText, JLabel label9,
-            int i, Items[] items, JRadioButton rb1, JRadioButton rb2, JRadioButton rb3) {
+            int i, Items[] items, JRadioButton item1, JRadioButton item2, JRadioButton item3) {
         points.setText(Integer.toString(((Human) human).getPoints()));
         humanExperience.setText(Integer.toString(((Human) human).getExperience()) + "/" + ((Human) human).getNextExperience());
         humanLevel.setText(Integer.toString(human.getLevel()) + " level");
@@ -34,23 +26,20 @@ public class ChangeTexts {
         else{
             turnText.setText(enemy.getName()+"'s turn");
         }
-        /*rb1.setText(items[0].getName()+", "+items[0].getCount()+" шт");
-        rb2.setText(items[1].getName()+", "+items[1].getCount()+" шт");
-        rb3.setText(items[2].getName()+", "+items[2].getCount()+" шт");*/
-        BagText(items, rb1, rb2, rb3);
+        BagText(items, item1, item2, item3);
         label9.setText("");
     }
 
-    public void RoundTexts(Player human, Player enemy, JLabel label, JLabel label2, int i, JLabel turnText) {
+    public void RoundTexts(Player human, Player enemy, JLabel enemyHealth, JLabel humanHealth, int i, JLabel turnText) {
         if (enemy.getHealth() >= 0) {
-            label.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
+            enemyHealth.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
         } else {
-            label.setText("0/" + Integer.toString(enemy.getMaxHealth()));
+            enemyHealth.setText("0/" + Integer.toString(enemy.getMaxHealth()));
         }
         if (human.getHealth() >= 0) {
-            label2.setText(Integer.toString(human.getHealth()) + "/" + Integer.toString(human.getMaxHealth()));
+            humanHealth.setText(Integer.toString(human.getHealth()) + "/" + Integer.toString(human.getMaxHealth()));
         } else {
-            label2.setText("0/" + Integer.toString(human.getMaxHealth()));
+            humanHealth.setText("0/" + Integer.toString(human.getMaxHealth()));
         }
         if (i % 2 == 1) {
             turnText.setText("Your turn");
@@ -69,10 +58,10 @@ public class ChangeTexts {
         }
     }
     
-    public void BagText( Items[] items, JRadioButton rb1, JRadioButton rb2, JRadioButton rb3){
-        rb1.setText(items[0].getName()+", "+items[0].getCount()+" шт");
-        rb2.setText(items[1].getName()+", "+items[1].getCount()+" шт");
-        rb3.setText(items[2].getName()+", "+items[2].getCount()+" шт");
+    public void BagText( Items[] items, JRadioButton item1, JRadioButton item2, JRadioButton item3){
+        item1.setText(items[0].getName()+", "+items[0].getCount()+" шт");
+        item2.setText(items[1].getName()+", "+items[1].getCount()+" шт");
+        item3.setText(items[2].getName()+", "+items[2].getCount()+" шт");
     }
 
 }

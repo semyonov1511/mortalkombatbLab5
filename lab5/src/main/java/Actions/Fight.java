@@ -182,6 +182,7 @@ public class Fight {
             JProgressBar pr2, JLabel label2, JLabel text, JLabel label3, CharacterAction action) {
 
         Player enemy1 = null;
+        System.out.println("adsdfasdf");
         if (((Human) human).getWin() == 6 | ((Human) human).getWin() == 11) {
             enemy1 = action.ChooseBoss(label, label2, text, label3, human.getLevel());
         } else {
