@@ -71,7 +71,7 @@ public class Fight {
             JProgressBar pr1, JProgressBar pr2, JDialog dialog1,
             JDialog dialog2, JFrame frame, ArrayList<Result> results,
             JLabel label4, JLabel label5, JLabel label6, JLabel label7,
-            JLabel label8, Items[] items, JRadioButton rb) {
+            JLabel label8, Items[] items, JRadioButton rb, Location location) {
         label7.setText("");
         human.setAttack(a);
 
@@ -104,13 +104,13 @@ public class Fight {
                 EndFinalRound(((Human) human), action, results, dialog1, dialog2,
                         frame, label4, label5);
             } else {
-                EndRound(human, enemy, dialog, label3, action, items);
+                EndRound(human, enemy, dialog, label3, action, items, location);
             }
         }
     }
 
     public void EndRound(Player human, Player enemy, JDialog dialog, JLabel label,
-            CharacterAction action, Items[] items) {
+            CharacterAction action, Items[] items, Location location) {
         
         dialog.setVisible(true);
         dialog.setBounds(300, 150, 700, 600);
@@ -120,11 +120,13 @@ public class Fight {
             if ("Shao Kahn".equals(enemy.getName())) {
                 action.AddItems(38, 23, 8, items);
                 action.AddPointsBoss(((Human) human), action.getEnemies());
+                location.resetLocation(true, human.getLevel());
             } else {
                 action.AddItems(25, 15, 5, items);
                 action.AddPoints(((Human) human), action.getEnemies());
             }
         } else {
+            location.resetLocation(false,human.getLevel());
             label.setText(enemy.getName() + " win");
         }
 

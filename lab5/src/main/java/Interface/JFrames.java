@@ -943,7 +943,7 @@ public class JFrames extends javax.swing.JFrame {
         game.fight.Hit(human, enemy, 1, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
                 EndRoundLabel, game.action, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
                 EndGameWithout, FightFrame, game.getResults(), jLabel20, jLabel24,
-                TurnLabel, StunLabel, ActionMadeLabel, items, jRadioButton3);
+                TurnLabel, StunLabel, ActionMadeLabel, items, jRadioButton3, game.location);
 
     }//GEN-LAST:event_AttackButtonActionPerformed
 
@@ -951,13 +951,18 @@ public class JFrames extends javax.swing.JFrame {
         game.fight.Hit(human, enemy, 0, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
                 EndRoundLabel, game.action, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
                 EndGameWithout, FightFrame, game.getResults(), jLabel20, jLabel24,
-                TurnLabel, StunLabel, ActionMadeLabel, items, jRadioButton3);
+                TurnLabel, StunLabel, ActionMadeLabel, items, jRadioButton3, game.location);
     }//GEN-LAST:event_BlockButtonActionPerformed
 
     private void NextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextRoundButtonActionPerformed
-        game.location.setEnemiesAtLocation(0);
+        game.location.setEnemiesAtLocation(human.getLevel());
         LocationLabel.setText("Текущая локация: " + game.location.getCurrentLocation());
-        EnemyNumberLabel.setText("Номер противника: " + (game.location.getCurrentEnemyNumber() + 1) + "/" + game.location.getEnemiesAtLocation().size());
+        if ((game.location.getCurrentEnemyNumber() + 1) <= game.location.getEnemiesAtLocation().size()) {
+            EnemyNumberLabel.setText("Номер противника: " + (game.location.getCurrentEnemyNumber() + 1) + "/" + game.location.getEnemiesAtLocation().size());
+        }
+        else {
+            EnemyNumberLabel.setText("Финальный босс локации!");
+        }
         enemy = game.location.getCurrentEnemy();
         EnemyIconLabel.setIcon(enemy.getPhoto());
         EnemyDamageValueLabel.setText(Integer.toString(enemy.getDamage()));
@@ -966,7 +971,7 @@ public class JFrames extends javax.swing.JFrame {
         game.action.HP(enemy, EnemtyHealthBar);
         EnemtyHealthBar.setMaximum(enemy.getMaxHealth());
 
-        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar,game.action);
+        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar, game.action);
 
         game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,

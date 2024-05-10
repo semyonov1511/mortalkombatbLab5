@@ -14,7 +14,7 @@ public class Location {
     public void setFullEnemiesList(Player[] list) {
         fullEnemiesList = list;
     }
-    
+
     public ArrayList<Player> getEnemiesAtLocation() {
         return currentEnemiesList;
     }
@@ -22,7 +22,7 @@ public class Location {
     public void setEnemiesAtLocation(int i) {
         currentEnemiesList = new ArrayList<Player>();
         Player enemy = null;
-        locationSize = 2 + (int) (Math.random() * i);
+        locationSize = 1 + (int) (Math.random() * i);
         for (int j = 0; j < locationSize; j++) {
             int k = (int) (Math.random() * 4);
             switch (k) {
@@ -47,14 +47,23 @@ public class Location {
         }
     }
 
-    public void passNewEnemy() {
-        currentEnemyNumber += 1;
+    public void resetLocation(boolean a, int i) {
+        if (a) {
+            currentLocation += 1 ;
+            currentEnemyNumber = 0;
+            setEnemiesAtLocation(i);
+        }
+        else {
+            currentLocation = 1;
+            currentEnemyNumber = 0;
+            setEnemiesAtLocation(0);
+        }
     }
 
     public int getCurrentLocation() {
         return currentLocation;
     }
-    
+
     public int getCurrentEnemyNumber() {
         return currentEnemyNumber;
     }
@@ -62,11 +71,10 @@ public class Location {
     public Player getCurrentEnemy() {
         Player enemy = null;
         if (currentEnemyNumber != locationSize) {
-            currentEnemyNumber +=1;
-            return currentEnemiesList.get(currentEnemyNumber-1);
-        }
-        else {
-            currentEnemyNumber=0;
+            currentEnemyNumber += 1;
+            return currentEnemiesList.get(currentEnemyNumber - 1);
+        } else {
+            currentEnemyNumber = 0;
             enemy = fullEnemiesList[4];
             enemy.setPhoto("SK.jpg");
             return enemy;
