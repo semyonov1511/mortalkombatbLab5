@@ -28,7 +28,6 @@ public class CharacterAction {
         enemies[2] = fabric.create(2, 0);
         enemies[3] = fabric.create(3, 0);
         enemies[4] = fabric.create(4, 0);
-        enemies[5] = fabric.create(4, 0);
     }
 
     public Player[] getEnemies() {
@@ -101,20 +100,14 @@ public class CharacterAction {
     public int[] ChooseBehavior(Player enemy, CharacterAction action) {
         int arr[] = null;
         double i = Math.random();
-        if (enemy instanceof Baraka) {
-            arr = action.EnemyBehavior(15, 15, 60, 10, i);
-        }
-        if (enemy instanceof SubZero) {
-            arr = action.EnemyBehavior(25, 25, 0, 50, i);
-        }
-        if (enemy instanceof LiuKang) {
-            arr = action.EnemyBehavior(13, 13, 10, 64, i);
-        }
-        if (enemy instanceof SonyaBlade) {
-            arr = action.EnemyBehavior(25, 25, 50, 0, i);
-        }
-        if (enemy instanceof ShaoKahn) {
-            arr = action.EnemyBehavior(10, 45, 0, 45, i);
+        if (null != enemy.getName()) switch (enemy.getName()) {
+            case "Baraka" -> arr = action.EnemyBehavior(15, 15, 60, 10, i);
+            case "Sub-Zero" -> arr = action.EnemyBehavior(25, 25, 0, 50, i);
+            case "Liu Kang" -> arr = action.EnemyBehavior(13, 13, 10, 64, i);
+            case "Sonya Blade" -> arr = action.EnemyBehavior(25, 25, 50, 0, i);
+            case "Shao Kahn" -> arr = action.EnemyBehavior(10, 45, 0, 45, i);
+            default -> {
+            }
         }
         return arr;
     }
@@ -152,7 +145,7 @@ public class CharacterAction {
             }
         }
         for (int i = 0; i < 5; i++) {
-            if (experience_for_next_level[i] == human.getExperience()) {
+            if (experience_for_next_level[i] <= human.getExperience()) {
                 human.setLevel();
                 human.setNextExperience(experience_for_next_level[i + 1]);
                 NewHealthHuman(human);

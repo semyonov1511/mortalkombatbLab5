@@ -5,13 +5,25 @@ import java.util.ArrayList;
 
 public class Location {
 
-    public int currentLocation;
-    public int currentEnemyNumber;
+    public int currentLocation = 1;
+    public int currentEnemyNumber = 0;
     ArrayList<Player> currentEnemiesList = new ArrayList<>();
+    Player[] fullEnemiesList = null;
+    public int locationSize;
 
-    public void setEnemiesAtLocation(int i, Player[] fullEnemiesList) {
+    public void setFullEnemiesList(Player[] list) {
+        fullEnemiesList = list;
+    }
+    
+    public ArrayList<Player> getEnemiesAtLocation() {
+        return currentEnemiesList;
+    }
+
+    public void setEnemiesAtLocation(int i) {
+        currentEnemiesList = new ArrayList<Player>();
         Player enemy = null;
-        for (int j = 0; j < 1 + (int) (Math.random() * i); j++) {
+        locationSize = 2 + (int) (Math.random() * i);
+        for (int j = 0; j < locationSize; j++) {
             int k = (int) (Math.random() * 4);
             switch (k) {
                 case 0 -> {
@@ -42,8 +54,22 @@ public class Location {
     public int getCurrentLocation() {
         return currentLocation;
     }
+    
+    public int getCurrentEnemyNumber() {
+        return currentEnemyNumber;
+    }
 
     public Player getCurrentEnemy() {
-        return currentEnemiesList.get(currentEnemyNumber);
+        Player enemy = null;
+        if (currentEnemyNumber != locationSize) {
+            currentEnemyNumber +=1;
+            return currentEnemiesList.get(currentEnemyNumber-1);
+        }
+        else {
+            currentEnemyNumber=0;
+            enemy = fullEnemiesList[4];
+            enemy.setPhoto("SK.jpg");
+            return enemy;
+        }
     }
 }

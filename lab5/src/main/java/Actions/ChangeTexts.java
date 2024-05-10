@@ -15,7 +15,7 @@ public class ChangeTexts {
             int i, Items[] items, JRadioButton item1, JRadioButton item2, JRadioButton item3) {
         points.setText(Integer.toString(((Human) human).getPoints()));
         humanExperience.setText(Integer.toString(((Human) human).getExperience()) + "/" + ((Human) human).getNextExperience());
-        humanLevel.setText(Integer.toString(human.getLevel()) + " level");
+        humanLevel.setText(Integer.toString((human.getLevel())+1) + " level");
         enemyLevel.setText(Integer.toString(enemy.getLevel()) + " level");
         humanHealth.setText(Integer.toString(human.getMaxHealth()) + "/" + Integer.toString(human.getMaxHealth()));
         enemyHealth.setText(Integer.toString(enemy.getMaxHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));

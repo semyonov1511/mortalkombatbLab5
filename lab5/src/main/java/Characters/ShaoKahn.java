@@ -1,12 +1,7 @@
 package Characters;
 
-
 import Game_components.Player;
 
-/**
- *
- * @author Мария
- */
 public class ShaoKahn extends Player{
     
     public ShaoKahn(int level, int health, int  damage, int attack){

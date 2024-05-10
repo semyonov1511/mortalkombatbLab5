@@ -24,15 +24,6 @@ public class Fight {
     int k = -1;
     int stun = 0;
     double v = 0.0;
-    
-    public int location = 1;
-    
-    public void setLocation(int i){
-        location = i;
-    }
-    public int getLocation(){
-        return location;
-    }
 
     public void Move(Player p1, Player p2, JLabel l, JLabel l2) {
         if (stun == 1) {
@@ -126,8 +117,7 @@ public class Fight {
         if (human.getHealth() > 0) {
             label.setText("You win");
             ((Human) human).setWin();
-            location += 1;
-            if (enemy instanceof ShaoKahn) {
+            if ("Shao Kahn".equals(enemy.getName())) {
                 action.AddItems(38, 23, 8, items);
                 action.AddPointsBoss(((Human) human), action.getEnemies());
             } else {
@@ -135,7 +125,6 @@ public class Fight {
                 action.AddPoints(((Human) human), action.getEnemies());
             }
         } else {
-            location = 1;
             label.setText(enemy.getName() + " win");
         }
 
@@ -185,21 +174,14 @@ public class Fight {
         return a;
     }
 
-    public Player NewRound(Player human, JLabel label, JProgressBar pr1,
-        JProgressBar pr2, JLabel label2, JLabel text, JLabel label3, CharacterAction action) {
-        Player enemy1 = null;
-        /* if (((Human) human).getWin() == 6 | ((Human) human).getWin() == 11) {
-            enemy1 = action.ChooseBoss(label, label2, text, label3, human.getLevel());
-        } else {
-            enemy1 = action.ChooseEnemy(label, label2, text, label3);
-        } */
+    public void NewRound(Player human, Player enemy, JProgressBar pr1,
+        JProgressBar pr2, CharacterAction action) {
         pr1.setMaximum(human.getMaxHealth());
-        pr2.setMaximum(enemy1.getMaxHealth());
+        pr2.setMaximum(enemy.getMaxHealth());
         human.setNewHealth(human.getMaxHealth());
-        enemy1.setNewHealth(enemy1.getMaxHealth());
+        enemy.setNewHealth(enemy.getMaxHealth());
         action.HP(human, pr1);
-        action.HP(enemy1, pr2);
-        return enemy1;
+        action.HP(enemy, pr2);
     }
 
 }
