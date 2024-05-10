@@ -5,6 +5,7 @@ import Characters.*;
 import Game_components.Human;
 import Game_components.Player;
 import Game_components.Items;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -71,8 +72,10 @@ public class CharacterAction {
         icon1 = new ImageIcon("C:\\Users\\Мария\\Desktop\\Shao Kahn.png");
         label2.setText("Shao Kahn (босс)");
         switch (i) {
-            case 2 -> enemy = enemies[4];
-            case 4 -> enemy = enemies[5];
+            case 2 ->
+                enemy = enemies[4];
+            case 4 ->
+                enemy = enemies[5];
         }
         label.setIcon(icon1);
         text.setText(Integer.toString(enemy.getDamage()));
@@ -100,13 +103,20 @@ public class CharacterAction {
     public int[] ChooseBehavior(Player enemy, CharacterAction action) {
         int arr[] = null;
         double i = Math.random();
-        if (null != enemy.getName()) switch (enemy.getName()) {
-            case "Baraka" -> arr = action.EnemyBehavior(15, 15, 60, 10, i);
-            case "Sub-Zero" -> arr = action.EnemyBehavior(25, 25, 0, 50, i);
-            case "Liu Kang" -> arr = action.EnemyBehavior(13, 13, 10, 64, i);
-            case "Sonya Blade" -> arr = action.EnemyBehavior(25, 25, 50, 0, i);
-            case "Shao Kahn" -> arr = action.EnemyBehavior(10, 45, 0, 45, i);
-            default -> {
+        if (null != enemy.getName()) {
+            switch (enemy.getName()) {
+                case "Baraka" ->
+                    arr = action.EnemyBehavior(15, 15, 60, 10, i);
+                case "Sub-Zero" ->
+                    arr = action.EnemyBehavior(25, 25, 0, 50, i);
+                case "Liu Kang" ->
+                    arr = action.EnemyBehavior(13, 13, 10, 64, i);
+                case "Sonya Blade" ->
+                    arr = action.EnemyBehavior(25, 25, 50, 0, i);
+                case "Shao Kahn" ->
+                    arr = action.EnemyBehavior(10, 45, 0, 45, i);
+                default -> {
+                }
             }
         }
         return arr;
@@ -144,37 +154,33 @@ public class CharacterAction {
                 human.setPoints(55 + human.getHealth() / 4);
             }
         }
-        for (int i = 0; i < 5; i++) {
-            if (experience_for_next_level[i] <= human.getExperience()) {
-                human.setLevel();
-                human.setNextExperience(experience_for_next_level[i + 1]);
-                NewHealthHuman(human);
-                for (int j = 0; j < 4; j++) {
-                    NewHealthEnemy(enemyes[j], human);
-                }
+        int i=0;
+        if (human.getExperience() >= human.getNextExperience()) {
+            human.setLevel();
+            while (human.getNextExperience() >= experience_for_next_level[i]){
+                i=i+1;
+            } 
+            human.setNextExperience(experience_for_next_level[i]);
+            NewHealthHuman(human);
+            for (int j = 0; j < 5; j++) {
+                NewHealthEnemy(enemyes[j], human);
             }
         }
     }
 
     public void AddPointsBoss(Human human, Player[] enemyes) {
-        switch (human.getLevel()) {
-            case 2 -> {
-                human.setExperience(30);
-                human.setPoints(45 + human.getHealth() / 2);
-            }
-            case 4 -> {
-                human.setExperience(50);
-                human.setPoints(65 + human.getHealth() / 2);
-            }
-        }
-        for (int i = 0; i < 5; i++) {
-            if (experience_for_next_level[i] == human.getExperience()) {
-                human.setLevel();
-                human.setNextExperience(experience_for_next_level[i + 1]);
-//                NewHealthHuman(human);
-                for (int j = 0; j < 4; j++) {
-                    NewHealthEnemy(enemyes[j], human);
-                }
+        human.setExperience(50);
+        human.setPoints(65 + human.getHealth() / 2);
+        int i=0;
+        if (human.getExperience() >= human.getNextExperience()) {
+            human.setLevel();
+            while (human.getNextExperience() >= experience_for_next_level[i]){
+                i=i+1;
+            } 
+            human.setNextExperience(experience_for_next_level[i]);
+            NewHealthHuman(human);
+            for (int j = 0; j < 5; j++) {
+                NewHealthEnemy(enemyes[j], human);
             }
         }
     }
@@ -245,7 +251,7 @@ public class CharacterAction {
 
     public void UseItem(Player human, Items[] items, String name, JDialog dialog, JDialog dialog1) {
         switch (name) {
-            case "jRadioButton1" -> {
+            case "First item" -> {
                 if (items[0].getCount() > 0) {
                     human.setHealth((int) (human.getMaxHealth() * 0.25));
                     items[0].setCount(-1);
@@ -254,7 +260,7 @@ public class CharacterAction {
                     dialog.setBounds(300, 200, 400, 300);
                 }
             }
-            case "jRadioButton2" -> {
+            case "Second item" -> {
                 if (items[1].getCount() > 0) {
                     human.setHealth((int) (human.getMaxHealth() * 0.5));
                     items[1].setCount(-1);
@@ -263,13 +269,13 @@ public class CharacterAction {
                     dialog.setBounds(300, 200, 400, 300);
                 }
             }
-            case "jRadioButton3" -> {
+            case "Third item" -> {
                 dialog.setVisible(true);
                 dialog.setBounds(300, 200, 400, 300);
             }
         }
-        
-        if(dialog.isVisible()==false){
+
+        if (dialog.isVisible() == false) {
             dialog1.dispose();
         }
     }

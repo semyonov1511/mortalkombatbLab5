@@ -20,7 +20,7 @@ public class Location {
     }
 
     public void setEnemiesAtLocation(int i) {
-        currentEnemiesList = new ArrayList<Player>();
+        currentEnemiesList = new ArrayList<>();
         Player enemy = null;
         locationSize = 1 + (int) (Math.random() * i);
         for (int j = 0; j < locationSize; j++) {

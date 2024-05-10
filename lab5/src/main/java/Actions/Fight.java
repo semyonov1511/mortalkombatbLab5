@@ -51,7 +51,8 @@ public class Fight {
                 }
                 l2.setText("Both defended themselves");
             }
-            case "01" -> l2.setText(p1.getName() + " didn't attacked");
+            case "01" ->
+                l2.setText(p1.getName() + " didn't attacked");
             case "-10" -> {
                 l.setText(p1.getName() + " was stunned");
                 stun = 0;
@@ -71,7 +72,7 @@ public class Fight {
             JProgressBar pr1, JProgressBar pr2, JDialog dialog1,
             JDialog dialog2, JFrame frame, ArrayList<Result> results,
             JLabel label4, JLabel label5, JLabel label6, JLabel label7,
-            JLabel label8, Items[] items, JRadioButton rb, Location location) {
+            JLabel label8, Items[] items, JRadioButton rb, Location location, int locationsNumber) {
         label7.setText("");
         human.setAttack(a);
 
@@ -100,8 +101,8 @@ public class Fight {
             label7.setText("Вы воскресли");
         }
         if (human.getHealth() <= 0 | enemy.getHealth() <= 0) {
-            if (((Human) human).getWin() == 11) {
-                EndFinalRound(((Human) human), action, results, dialog1, dialog2,
+            if (location.getCurrentLocation()==locationsNumber & "Shao Kahn".equals(enemy.getName())) {
+                EndFinalRound(((Human) human), enemy, action, results, dialog1, dialog2,
                         frame, label4, label5);
             } else {
                 EndRound(human, enemy, dialog, label3, action, items, location);
@@ -117,6 +118,7 @@ public class Fight {
         if (human.getHealth() > 0) {
             label.setText("You win");
             ((Human) human).setWin();
+            
             if ("Shao Kahn".equals(enemy.getName())) {
                 action.AddItems(38, 23, 8, items);
                 action.AddPointsBoss(((Human) human), action.getEnemies());
@@ -126,7 +128,16 @@ public class Fight {
                 action.AddPoints(((Human) human), action.getEnemies());
             }
         } else {
-            location.resetLocation(false,human.getLevel());
+            human.resetDamage();
+            human.setDamage(16);
+            human.setNewHealth(80);
+            human.resetMaxHealth(80);
+            action.setEnemies();
+            human.resetLevel();
+            ((Human)human).resetPoints();
+            ((Human)human).resetExperience();
+            ((Human)human).setNextExperience(40);
+            location.resetLocation(false, human.getLevel());
             label.setText(enemy.getName() + " win");
         }
 
@@ -136,9 +147,10 @@ public class Fight {
 
     }
 
-    public void EndFinalRound(Human human, CharacterAction action,
+    public void EndFinalRound(Human human, Player enemy, CharacterAction action,
             ArrayList<Result> results, JDialog dialog1, JDialog dialog2, JFrame frame,
             JLabel label1, JLabel label2) {
+        action.setEnemies();
         String text = "Победа не на вашей стороне";
         if (human.getHealth() > 0) {
             human.setWin();
@@ -177,7 +189,7 @@ public class Fight {
     }
 
     public void NewRound(Player human, Player enemy, JProgressBar pr1,
-        JProgressBar pr2, CharacterAction action) {
+            JProgressBar pr2, CharacterAction action) {
         pr1.setMaximum(human.getMaxHealth());
         pr2.setMaximum(enemy.getMaxHealth());
         human.setNewHealth(human.getMaxHealth());
