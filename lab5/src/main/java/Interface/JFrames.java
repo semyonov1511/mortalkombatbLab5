@@ -16,7 +16,7 @@ public class JFrames extends javax.swing.JFrame {
     ArrayList<Player> enemiesList = null;
     Items[] items = new Items[3];
     String nameButton = "";
-
+    int locationsNumber = 0;
     public JFrames() {
         initComponents();
         game.WriteToTable(jTable1);
@@ -101,6 +101,11 @@ public class JFrames extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
+        SetLocationsFrame = new javax.swing.JFrame();
+        jPanel1 = new javax.swing.JPanel();
+        SetLocationsLabel = new javax.swing.JLabel();
+        SetLocationsField = new javax.swing.JTextField();
+        StartWithLocationsButton = new javax.swing.JButton();
         Panel = new javax.swing.JPanel();
         MKLabel = new javax.swing.JLabel();
         StartButton = new javax.swing.JButton();
@@ -840,6 +845,59 @@ public class JFrames extends javax.swing.JFrame {
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        SetLocationsLabel.setText("Введите количество локаций, которое хотите пройти");
+
+        StartWithLocationsButton.setText("Начать игру");
+        StartWithLocationsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartWithLocationsButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(SetLocationsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addComponent(SetLocationsField, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(StartWithLocationsButton)
+                .addGap(18, 18, 18))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(SetLocationsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SetLocationsField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StartWithLocationsButton))
+                .addGap(27, 27, 27))
+        );
+
+        javax.swing.GroupLayout SetLocationsFrameLayout = new javax.swing.GroupLayout(SetLocationsFrame.getContentPane());
+        SetLocationsFrame.getContentPane().setLayout(SetLocationsFrameLayout);
+        SetLocationsFrameLayout.setHorizontalGroup(
+            SetLocationsFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SetLocationsFrameLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        SetLocationsFrameLayout.setVerticalGroup(
+            SetLocationsFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SetLocationsFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Panel.setBackground(new java.awt.Color(255, 255, 255));
@@ -921,22 +979,8 @@ public class JFrames extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
-        game.location.setEnemiesAtLocation(0);
-        LocationLabel.setText("Текущая локация: " + game.location.getCurrentLocation());
-        EnemyNumberLabel.setText("Номер противника: " + (game.location.getCurrentEnemyNumber() + 1) + "/" + game.location.getEnemiesAtLocation().size());
-        human = game.NewHuman(PlayerHealthBar);
-        FightFrame.setVisible(rootPaneCheckingEnabled);
-        FightFrame.setSize(1000, 700);
-        enemy = game.location.getCurrentEnemy();
-        EnemyIconLabel.setIcon(enemy.getPhoto());
-        EnemyDamageValueLabel.setText(Integer.toString(enemy.getDamage()));
-        EnemyHealthLabel.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
-        EnemyHeroLabel.setText(enemy.getName());
-        game.action.HP(enemy, EnemtyHealthBar);
-        EnemtyHealthBar.setMaximum(enemy.getMaxHealth());
-        game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
-                PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
-                TurnLabel, ActionMadeLabel, game.fight.i, items, jRadioButton1, jRadioButton2, jRadioButton3);
+        SetLocationsFrame.setVisible(rootPaneCheckingEnabled);
+        SetLocationsFrame.setSize(1000, 700);
     }//GEN-LAST:event_StartButtonActionPerformed
 
     private void AttackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttackButtonActionPerformed
@@ -957,27 +1001,6 @@ public class JFrames extends javax.swing.JFrame {
     private void NextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextRoundButtonActionPerformed
         game.location.setEnemiesAtLocation(human.getLevel());
         LocationLabel.setText("Текущая локация: " + game.location.getCurrentLocation());
-        if ((game.location.getCurrentEnemyNumber() + 1) <= game.location.getEnemiesAtLocation().size()) {
-            EnemyNumberLabel.setText("Номер противника: " + (game.location.getCurrentEnemyNumber() + 1) + "/" + game.location.getEnemiesAtLocation().size());
-        }
-        else {
-            EnemyNumberLabel.setText("Финальный босс локации!");
-        }
-        enemy = game.location.getCurrentEnemy();
-        EnemyIconLabel.setIcon(enemy.getPhoto());
-        EnemyDamageValueLabel.setText(Integer.toString(enemy.getDamage()));
-        EnemyHealthLabel.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
-        EnemyHeroLabel.setText(enemy.getName());
-        game.action.HP(enemy, EnemtyHealthBar);
-        EnemtyHealthBar.setMaximum(enemy.getMaxHealth());
-
-        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar, game.action);
-
-        game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
-                PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
-                TurnLabel, ActionMadeLabel, game.fight.i, items, jRadioButton1, jRadioButton2, jRadioButton3);
-
-        EndFightDialog.dispose();
     }//GEN-LAST:event_NextRoundButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -1039,6 +1062,34 @@ public class JFrames extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         CantUseItemDialog.dispose();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void StartWithLocationsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartWithLocationsButtonActionPerformed
+        human = game.NewHuman(PlayerHealthBar);
+        game.location.setEnemiesAtLocation(0);
+        FightFrame.setVisible(rootPaneCheckingEnabled);
+        FightFrame.setSize(1000, 700);
+        if ((game.location.getCurrentEnemyNumber() + 1) <= game.location.getEnemiesAtLocation().size()) {
+            EnemyNumberLabel.setText("Номер противника: " + (game.location.getCurrentEnemyNumber() + 1) + "/" + game.location.getEnemiesAtLocation().size());
+        }
+        else {
+            EnemyNumberLabel.setText("Финальный босс локации!");
+        }
+        enemy = game.location.getCurrentEnemy();
+        EnemyIconLabel.setIcon(enemy.getPhoto());
+        EnemyDamageValueLabel.setText(Integer.toString(enemy.getDamage()));
+        EnemyHealthLabel.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
+        EnemyHeroLabel.setText(enemy.getName());
+        game.action.HP(enemy, EnemtyHealthBar);
+        EnemtyHealthBar.setMaximum(enemy.getMaxHealth());
+
+        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar, game.action);
+
+        game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
+                PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
+                TurnLabel, ActionMadeLabel, game.fight.i, items, jRadioButton1, jRadioButton2, jRadioButton3);
+
+        EndFightDialog.dispose();
+    }//GEN-LAST:event_StartWithLocationsButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1113,7 +1164,11 @@ public class JFrames extends javax.swing.JFrame {
     private javax.swing.JLabel PointsValueLabel;
     private javax.swing.JDialog RecordsTableDialog;
     private javax.swing.JButton SeeResultsButton;
+    private javax.swing.JTextField SetLocationsField;
+    private javax.swing.JFrame SetLocationsFrame;
+    private javax.swing.JLabel SetLocationsLabel;
     private javax.swing.JButton StartButton;
+    private javax.swing.JButton StartWithLocationsButton;
     private javax.swing.JLabel StunLabel;
     private javax.swing.JLabel TurnLabel;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -1132,6 +1187,7 @@ public class JFrames extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
