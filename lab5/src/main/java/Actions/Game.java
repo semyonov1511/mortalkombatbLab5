@@ -23,6 +23,7 @@ public class Game {
     public CharacterAction action = new CharacterAction();
     public ChangeTexts change = new ChangeTexts();
     public Fight fight = new Fight();
+    public Location location = new Location();
     private ArrayList<Result> results = new ArrayList<>();
 
     public ArrayList<Player> enemiesAtLocation(int i) {

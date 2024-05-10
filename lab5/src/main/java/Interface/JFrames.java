@@ -910,20 +910,20 @@ public class JFrames extends javax.swing.JFrame {
         human = game.NewHuman(jProgressBar1);
         // enemy = game.NewEnemy(jLabel4, jLabel5, jLabel10, jLabel13, jProgressBar2);
         game.action.setEnemies();
-        enemiesList = game.enemiesAtLocation(0);
+        game.location.setEnemiesAtLocation(0, game.action.getEnemies());
         jFrame1.setVisible(rootPaneCheckingEnabled);
         jFrame1.setSize(1000, 700);
-        for (Player enemyPlayer : enemiesList) {
-            jLabel4.setIcon(enemyPlayer.getPhoto());
-            jLabel10.setText(Integer.toString(enemyPlayer.getDamage()));
-            jLabel13.setText(Integer.toString(enemyPlayer.getHealth()) + "/" + Integer.toString(enemyPlayer.getMaxHealth()));
-            jLabel5.setText(enemyPlayer.getName());
-            game.action.HP(enemyPlayer, jProgressBar2);
-            jProgressBar2.setMaximum(enemyPlayer.getMaxHealth());
-            game.change.NewRoundTexts(human, enemyPlayer, jProgressBar1, jProgressBar2,
-                    jLabel17, jLabel16, jLabel6, jLabel19, jLabel12, jLabel13, jLabel9,
-                    jLabel26, jLabel27, game.fight.i, items, jRadioButton1, jRadioButton2, jRadioButton3);
-        }
+        enemy = game.location.getCurrentEnemy();
+        jLabel4.setIcon(enemy.getPhoto());
+        jLabel10.setText(Integer.toString(enemy.getDamage()));
+        jLabel13.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
+        jLabel5.setText(enemy.getName());
+        game.action.HP(enemy, jProgressBar2);
+        jProgressBar2.setMaximum(enemy.getMaxHealth());
+        game.change.NewRoundTexts(human, enemy, jProgressBar1, jProgressBar2,
+                jLabel17, jLabel16, jLabel6, jLabel19, jLabel12, jLabel13, jLabel9,
+                jLabel26, jLabel27, game.fight.i, items, jRadioButton1, jRadioButton2, jRadioButton3);
+
 
     }//GEN-LAST:event_StartButtonActionPerformed
 
