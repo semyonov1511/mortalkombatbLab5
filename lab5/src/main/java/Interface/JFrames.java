@@ -23,7 +23,7 @@ public class JFrames extends javax.swing.JFrame {
         game.WriteToTable(jTable1);
         game.action.setEnemies();
         game.location.setFullEnemiesList(game.action.getEnemies());
-        PlayerIconLabel.setIcon(new ImageIcon("краб.jpg"));
+        PlayerIconLabel.setIcon(new ImageIcon("crab.jpg"));
         AttributesGroup.add(HealthButton);
         AttributesGroup.add(DamageButton);
         ItemsGroup.add(FirstItemButton);

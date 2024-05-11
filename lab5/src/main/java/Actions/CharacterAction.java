@@ -1,14 +1,10 @@
 package Actions;
 
 import Fabrics.EnemyFabric;
-import Interface.JFrames;
 import Game_components.Human;
 import Game_components.Player;
 import Game_components.Items;
-import Interface.LevelUp;
-import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
 public class CharacterAction {
@@ -21,8 +17,6 @@ public class CharacterAction {
 
     EnemyFabric fabric = new EnemyFabric();
 
-    private Player enemy = null;
-
     public void setEnemies() {
         enemies[0] = fabric.create(0, 0);
         enemies[1] = fabric.create(1, 0);
@@ -34,55 +28,7 @@ public class CharacterAction {
     public Player[] getEnemies() {
         return this.enemies;
     }
-
-    public Player ChooseEnemy(JLabel iconLabel, JLabel enemyName, JLabel text, JLabel enemyHealth) {
-        int i = (int) (Math.random() * 4);
-        System.out.println("Выбирается новый персонаж");
-        ImageIcon icon1 = null;
-        switch (i) {
-            case 0 -> {
-                enemy = enemies[0];
-                icon1 = new ImageIcon("B.jpg");
-                enemyName.setText("Baraka (танк)");
-            }
-            case 1 -> {
-                enemy = enemies[1];
-                icon1 = new ImageIcon("SZ.jpg");
-                enemyName.setText("Sub-Zero (маг)");
-            }
-            case 2 -> {
-                enemy = enemies[2];
-                icon1 = new ImageIcon("LK.jpg");
-                enemyName.setText("Liu Kang (боец)");
-            }
-            case 3 -> {
-                enemy = enemies[3];
-                icon1 = new ImageIcon("SB.jpg");
-                enemyName.setText("Sonya Blade (солдат)");
-            }
-        }
-        iconLabel.setIcon(icon1);
-        text.setText(Integer.toString(enemy.getDamage()));
-        enemyHealth.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
-        return enemy;
-    }
-
-    public Player ChooseBoss(JLabel label, JLabel label2, JLabel text, JLabel label3, int i) {
-        ImageIcon icon1 = null;
-        icon1 = new ImageIcon("C:\\Users\\Мария\\Desktop\\Shao Kahn.png");
-        label2.setText("Shao Kahn (босс)");
-        switch (i) {
-            case 2 ->
-                enemy = enemies[4];
-            case 4 ->
-                enemy = enemies[5];
-        }
-        label.setIcon(icon1);
-        text.setText(Integer.toString(enemy.getDamage()));
-        label3.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
-        return enemy;
-    }
-
+    
     public int[] EnemyBehavior(int k1, int k2, int k3, int k4, double i) {
         int arr[] = null;
         if (i < k1 * 0.01) {
@@ -162,6 +108,7 @@ public class CharacterAction {
             } 
             human.setNextExperience(experience_for_next_level[i]);
             AddHealthHuman(human);
+            AddDamageHuman(human);
             for (int j = 0; j < 5; j++) {
                 NewHealthEnemy(enemyes[j], human);
             }

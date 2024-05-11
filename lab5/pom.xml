@@ -64,7 +64,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        com.mycompany.lab2.Lab2
+                                        com.mycompany.lab5.Lab5
                                     </mainClass>
                                 </manifest>
                             </archive>
