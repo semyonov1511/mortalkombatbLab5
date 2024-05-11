@@ -1,11 +1,11 @@
 package Actions;
 
 import Fabrics.EnemyFabric;
-import Characters.*;
+import Interface.JFrames;
 import Game_components.Human;
 import Game_components.Player;
 import Game_components.Items;
-import java.util.ArrayList;
+import Interface.LevelUp;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -161,7 +161,7 @@ public class CharacterAction {
                 i=i+1;
             } 
             human.setNextExperience(experience_for_next_level[i]);
-            NewHealthHuman(human);
+            AddHealthHuman(human);
             for (int j = 0; j < 5; j++) {
                 NewHealthEnemy(enemyes[j], human);
             }
@@ -178,7 +178,7 @@ public class CharacterAction {
                 i=i+1;
             } 
             human.setNextExperience(experience_for_next_level[i]);
-            NewHealthHuman(human);
+            AddHealthHuman(human);
             for (int j = 0; j < 5; j++) {
                 NewHealthEnemy(enemyes[j], human);
             }
@@ -198,28 +198,41 @@ public class CharacterAction {
         }
     }
 
-    public void NewHealthHuman(Human human) {
+    public void AddHealthHuman(Human human) {
         int hp = 0;
-        int damage = 0;
         switch (human.getLevel()) {
             case 1 -> {
                 hp = 25;
-                damage = 3;
             }
             case 2 -> {
                 hp = 30;
-                damage = 3;
             }
             case 3 -> {
                 hp = 30;
-                damage = 4;
             }
             case 4 -> {
                 hp = 40;
-                damage = 6;
             }
         }
         human.setMaxHealth(hp);
+    }
+    
+    public void AddDamageHuman(Human human) {
+        int damage = 0;
+        switch (human.getLevel()) {
+            case 1 -> {
+                damage = 3;
+            }
+            case 2 -> {
+                damage = 3;
+            }
+            case 3 -> {
+                damage = 4;
+            }
+            case 4 -> {
+                damage = 6;
+            }
+        }
         human.setDamage(damage);
     }
 

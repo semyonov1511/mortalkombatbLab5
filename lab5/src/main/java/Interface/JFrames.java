@@ -24,9 +24,11 @@ public class JFrames extends javax.swing.JFrame {
         game.action.setEnemies();
         game.location.setFullEnemiesList(game.action.getEnemies());
         PlayerIconLabel.setIcon(new ImageIcon("краб.jpg"));
-        buttonGroup.add(FirstItemButton);
-        buttonGroup.add(SecondItemButton);
-        buttonGroup.add(ThirdItemButton);
+        AttributesGroup.add(HealthButton);
+        AttributesGroup.add(DamageButton);
+        ItemsGroup.add(FirstItemButton);
+        ItemsGroup.add(SecondItemButton);
+        ItemsGroup.add(ThirdItemButton);
 
         items[0] = new Items("Малое зелье лечение", 0);
         items[1] = new Items("Большое зелье лечение", 0);
@@ -96,7 +98,7 @@ public class JFrames extends javax.swing.JFrame {
         SecondItemButton = new javax.swing.JRadioButton();
         ThirdItemButton = new javax.swing.JRadioButton();
         UseItemButton = new javax.swing.JButton();
-        buttonGroup = new javax.swing.ButtonGroup();
+        ItemsGroup = new javax.swing.ButtonGroup();
         CantUseItemDialog = new javax.swing.JDialog();
         CantUseItemPanel = new javax.swing.JPanel();
         CantUseItemLabel = new javax.swing.JLabel();
@@ -107,6 +109,13 @@ public class JFrames extends javax.swing.JFrame {
         SetLocationsLabel = new javax.swing.JLabel();
         SetLocationsField = new javax.swing.JTextField();
         StartWithLocationsButton = new javax.swing.JButton();
+        LevelUp = new javax.swing.JFrame();
+        jPanel1 = new javax.swing.JPanel();
+        LevelUpLabel = new javax.swing.JLabel();
+        HealthButton = new javax.swing.JRadioButton();
+        DamageButton = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        AttributesGroup = new javax.swing.ButtonGroup();
         Panel = new javax.swing.JPanel();
         MKLabel = new javax.swing.JLabel();
         StartButton = new javax.swing.JButton();
@@ -906,6 +915,71 @@ public class JFrames extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        LevelUpLabel.setText("Какой параметр улучшить?");
+
+        HealthButton.setText("Здоровье");
+        HealthButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HealthButtonActionPerformed(evt);
+            }
+        });
+
+        DamageButton.setSelected(true);
+        DamageButton.setText("Урон");
+
+        jButton1.setText("ОК");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(HealthButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(DamageButton)
+                .addGap(32, 32, 32))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(LevelUpLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(jButton1)))
+                .addContainerGap(125, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(LevelUpLabel)
+                .addGap(66, 66, 66)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(HealthButton)
+                    .addComponent(DamageButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(35, 35, 35))
+        );
+
+        javax.swing.GroupLayout LevelUpLayout = new javax.swing.GroupLayout(LevelUp.getContentPane());
+        LevelUp.getContentPane().setLayout(LevelUpLayout);
+        LevelUpLayout.setHorizontalGroup(
+            LevelUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LevelUpLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        LevelUpLayout.setVerticalGroup(
+            LevelUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LevelUpLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Panel.setBackground(new java.awt.Color(255, 255, 255));
@@ -1121,6 +1195,10 @@ public class JFrames extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SetLocationsFieldActionPerformed
 
+    private void HealthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HealthButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HealthButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1159,12 +1237,14 @@ public class JFrames extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ActionMadeLabel;
     private javax.swing.JButton AttackButton;
+    private javax.swing.ButtonGroup AttributesGroup;
     private javax.swing.JButton BlockButton;
     private javax.swing.JDialog CantUseItemDialog;
     private javax.swing.JLabel CantUseItemLabel;
     private javax.swing.JPanel CantUseItemPanel;
     private javax.swing.JButton CloseCantUseItemButton;
     private javax.swing.JButton CloseRecordsTableButton;
+    private javax.swing.JRadioButton DamageButton;
     private javax.swing.JDialog EndFightDialog;
     private javax.swing.JPanel EndFightPanel;
     private javax.swing.JButton EndGameButton;
@@ -1192,10 +1272,14 @@ public class JFrames extends javax.swing.JFrame {
     private javax.swing.JLabel FightLabel;
     private javax.swing.JPanel FightPanel;
     private javax.swing.JRadioButton FirstItemButton;
+    private javax.swing.JRadioButton HealthButton;
     private javax.swing.JDialog ItemsBagDialog;
     private javax.swing.JLabel ItemsBagLabel;
     private javax.swing.JPanel ItemsBagPanel;
     private javax.swing.JButton ItemsButton;
+    private javax.swing.ButtonGroup ItemsGroup;
+    public static javax.swing.JFrame LevelUp;
+    private javax.swing.JLabel LevelUpLabel;
     private javax.swing.JLabel LocationLabel;
     private javax.swing.JLabel MKLabel;
     private javax.swing.JButton NextRoundButton;
@@ -1228,8 +1312,9 @@ public class JFrames extends javax.swing.JFrame {
     private javax.swing.JLabel UnavailableItemLabel;
     private javax.swing.JButton UseItemButton;
     private javax.swing.JLabel VictoryLabel;
-    private javax.swing.ButtonGroup buttonGroup;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
