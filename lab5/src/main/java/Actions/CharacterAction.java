@@ -78,7 +78,7 @@ public class CharacterAction {
         }
     }
 
-    public void AddPoints(Human human, Player[] enemyes) {
+    public void AddPoints(Human human) {
         switch (human.getLevel()) {
             case 0 -> {
                 human.setExperience(20);
@@ -101,7 +101,6 @@ public class CharacterAction {
                 human.setPoints(55 + human.getHealth() / 4);
             }
         }
-        LevelUp(human, enemyes);
     }
 
     public boolean checkExperience(Human human) {
@@ -109,36 +108,24 @@ public class CharacterAction {
     }
 
     public void LevelUp(Human human, Player[] enemyes) {
+        human.setLevel();
         int i = 0;
-        if (human.getExperience() >= human.getNextExperience()) {
-            human.setLevel();
-            while (human.getNextExperience() >= experience_for_next_level[i]) {
-                i = i + 1;
-            }
-            human.setNextExperience(experience_for_next_level[i]);
-            AddHealthHuman(human);
-            AddDamageHuman(human);
-            for (int j = 0; j < 5; j++) {
-                NewHealthEnemy(enemyes[j], human);
-            }
+        while (human.getNextExperience() >= experience_for_next_level[i]) {
+            i = i + 1;
         }
+        human.setNextExperience(experience_for_next_level[i]);
+        AddHealthHuman(human);
+        AddDamageHuman(human);
+        System.out.println(human.getDamage());
+        for (int j = 0; j < 5; j++) {
+            NewHealthEnemy(enemyes[j], human);
+        }
+
     }
 
-    public void AddPointsBoss(Human human, Player[] enemyes) {
+    public void AddPointsBoss(Human human) {
         human.setExperience(50);
         human.setPoints(65 + human.getHealth() / 2);
-        int i = 0;
-        if (human.getExperience() >= human.getNextExperience()) {
-            human.setLevel();
-            while (human.getNextExperience() >= experience_for_next_level[i]) {
-                i = i + 1;
-            }
-            human.setNextExperience(experience_for_next_level[i]);
-            AddHealthHuman(human);
-            for (int j = 0; j < 5; j++) {
-                NewHealthEnemy(enemyes[j], human);
-            }
-        }
     }
 
     public void AddItems(int k1, int k2, int k3, Items[] items) {

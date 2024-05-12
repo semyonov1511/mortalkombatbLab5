@@ -105,14 +105,13 @@ public class Fight {
                 EndFinalRound(((Human) human), enemy, action, results, dialog1, dialog2,
                         frame, label4, label5);
             } else {
-                EndRound(human, enemy, dialog, label3, action, items, location);
+                EndRound(human, enemy, dialog, label3, items, location);
             }
         }
     }
 
-    public void EndRound(Player human, Player enemy, JDialog dialog, JLabel label,
-            CharacterAction action, Items[] items, Location location) {
-        
+    public void EndRound(Player human, Player enemy, JDialog dialog, JLabel label, Items[] items, Location location) {
+        CharacterAction action = new CharacterAction();
         dialog.setVisible(true);
         dialog.setBounds(300, 150, 700, 600);
         if (human.getHealth() > 0) {
@@ -121,11 +120,11 @@ public class Fight {
             
             if ("Shao Kahn".equals(enemy.getName())) {
                 action.AddItems(38, 23, 8, items);
-                action.AddPointsBoss(((Human) human), action.getEnemies());
+                action.AddPointsBoss(((Human) human));
                 location.resetLocation(true, human.getLevel());
             } else {
                 action.AddItems(25, 15, 5, items);
-                action.AddPoints(((Human) human), action.getEnemies());
+                action.AddPoints(((Human) human));
             }
         } else {
             human.resetDamage();
@@ -154,7 +153,7 @@ public class Fight {
         String text = "Победа не на вашей стороне";
         if (human.getHealth() > 0) {
             human.setWin();
-            action.AddPoints(human, action.getEnemies());
+            action.AddPoints(human);
             text = "Победа на вашей стороне";
         }
         boolean top = false;

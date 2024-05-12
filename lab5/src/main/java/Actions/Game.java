@@ -24,7 +24,7 @@ public class Game {
     private final ArrayList<Result> results = new ArrayList<>();
 
     public Human NewHuman(JProgressBar bar) {
-        Human human = new Human(0, 80, 16, 1);
+        Human human = new Human(0, 80, 160, 1);
         action.HP(human, bar);
         bar.setMaximum(human.getMaxHealth());
         return human;

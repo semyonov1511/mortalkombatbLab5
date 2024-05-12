@@ -1069,7 +1069,7 @@ public class JFrames extends javax.swing.JFrame {
         game.fight.Hit(human, enemy, 1, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
                 EndRoundLabel, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
                 EndGameWithoutLadderDialog, FightFrame, game.getResults(), VictoryLabel, EndGameWithoutLadderTitlleLabel,
-                TurnLabel, StunLabel, ActionMadeLabel, items, ThirdItemButton, game.location,locationsNumber);
+                TurnLabel, StunLabel, ActionMadeLabel, items, ThirdItemButton, game.location, locationsNumber);
 
     }//GEN-LAST:event_AttackButtonActionPerformed
 
@@ -1077,7 +1077,7 @@ public class JFrames extends javax.swing.JFrame {
         game.fight.Hit(human, enemy, 0, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
                 EndRoundLabel, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
                 EndGameWithoutLadderDialog, FightFrame, game.getResults(), VictoryLabel, EndGameWithoutLadderTitlleLabel,
-                TurnLabel, StunLabel, ActionMadeLabel, items, ThirdItemButton, game.location,locationsNumber);
+                TurnLabel, StunLabel, ActionMadeLabel, items, ThirdItemButton, game.location, locationsNumber);
     }//GEN-LAST:event_BlockButtonActionPerformed
 
     private void NextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextRoundButtonActionPerformed
@@ -1095,9 +1095,13 @@ public class JFrames extends javax.swing.JFrame {
         game.action.HP(enemy, EnemtyHealthBar);
         EnemtyHealthBar.setMaximum(enemy.getMaxHealth());
         game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar);
+        if (game.action.checkExperience(human)) {
+            game.action.LevelUp(human, game.action.getEnemies());
+        }
         game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
                 TurnLabel, ActionMadeLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
+        
         EndFightDialog.dispose();
     }//GEN-LAST:event_NextRoundButtonActionPerformed
 
