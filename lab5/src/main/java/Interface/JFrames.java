@@ -1067,7 +1067,7 @@ public class JFrames extends javax.swing.JFrame {
 
     private void AttackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttackButtonActionPerformed
         game.fight.Hit(human, enemy, 1, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
-                EndRoundLabel, game.action, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
+                EndRoundLabel, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
                 EndGameWithoutLadderDialog, FightFrame, game.getResults(), VictoryLabel, EndGameWithoutLadderTitlleLabel,
                 TurnLabel, StunLabel, ActionMadeLabel, items, ThirdItemButton, game.location,locationsNumber);
 
@@ -1075,7 +1075,7 @@ public class JFrames extends javax.swing.JFrame {
 
     private void BlockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlockButtonActionPerformed
         game.fight.Hit(human, enemy, 0, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
-                EndRoundLabel, game.action, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
+                EndRoundLabel, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
                 EndGameWithoutLadderDialog, FightFrame, game.getResults(), VictoryLabel, EndGameWithoutLadderTitlleLabel,
                 TurnLabel, StunLabel, ActionMadeLabel, items, ThirdItemButton, game.location,locationsNumber);
     }//GEN-LAST:event_BlockButtonActionPerformed
@@ -1094,7 +1094,7 @@ public class JFrames extends javax.swing.JFrame {
         EnemyHeroLabel.setText(enemy.getName());
         game.action.HP(enemy, EnemtyHealthBar);
         EnemtyHealthBar.setMaximum(enemy.getMaxHealth());
-        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar, game.action);
+        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar);
         game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
                 TurnLabel, ActionMadeLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
@@ -1182,7 +1182,7 @@ public class JFrames extends javax.swing.JFrame {
         game.action.HP(enemy, EnemtyHealthBar);
         EnemtyHealthBar.setMaximum(enemy.getMaxHealth());
 
-        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar, game.action);
+        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar);
 
         game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
@@ -1226,11 +1226,8 @@ public class JFrames extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrames().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrames().setVisible(true);
         });
     }
 

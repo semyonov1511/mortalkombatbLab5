@@ -46,9 +46,10 @@ public class CharacterAction {
         return arr;
     }
 
-    public int[] ChooseBehavior(Player enemy, CharacterAction action) {
+    public int[] ChooseBehavior(Player enemy) {
         int arr[] = null;
         double i = Math.random();
+        CharacterAction action = new CharacterAction();
         if (null != enemy.getName()) {
             switch (enemy.getName()) {
                 case "Baraka" ->

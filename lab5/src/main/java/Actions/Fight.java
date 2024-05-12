@@ -68,18 +68,18 @@ public class Fight {
     }
 
     public void Hit(Player human, Player enemy, int a, JLabel label,
-            JLabel label2, JDialog dialog, JLabel label3, CharacterAction action,
+            JLabel label2, JDialog dialog, JLabel label3,
             JProgressBar pr1, JProgressBar pr2, JDialog dialog1,
             JDialog dialog2, JFrame frame, ArrayList<Result> results,
             JLabel label4, JLabel label5, JLabel label6, JLabel label7,
             JLabel label8, Items[] items, JRadioButton rb, Location location, int locationsNumber) {
         label7.setText("");
         human.setAttack(a);
-
+        CharacterAction action = new CharacterAction();
         if (k < kind_attack.length - 1) {
             k++;
         } else {
-            kind_attack = action.ChooseBehavior(enemy, action);
+            kind_attack = action.ChooseBehavior(enemy);
             k = 0;
         }
         enemy.setAttack(kind_attack[k]);
@@ -161,13 +161,13 @@ public class Fight {
         if (results == null) {
             top = true;
         } else {
-            int i = 0;
+            int a = 0;
             for (int j = 0; j < results.size(); j++) {
                 if (human.getPoints() < results.get(j).getPoints()) {
-                    i++;
+                    a++;
                 }
             }
-            if (i < 10) {
+            if (a < 10) {
                 top = true;
             }
         }
@@ -189,11 +189,12 @@ public class Fight {
     }
 
     public void NewRound(Player human, Player enemy, JProgressBar pr1,
-            JProgressBar pr2, CharacterAction action) {
+            JProgressBar pr2) {
         pr1.setMaximum(human.getMaxHealth());
         pr2.setMaximum(enemy.getMaxHealth());
         human.setNewHealth(human.getMaxHealth());
         enemy.setNewHealth(enemy.getMaxHealth());
+        CharacterAction action = new CharacterAction();
         action.HP(human, pr1);
         action.HP(enemy, pr2);
     }
