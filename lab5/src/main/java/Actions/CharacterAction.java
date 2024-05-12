@@ -114,8 +114,6 @@ public class CharacterAction {
             i = i + 1;
         }
         human.setNextExperience(experience_for_next_level[i]);
-        AddHealthHuman(human);
-        AddDamageHuman(human);
         System.out.println(human.getDamage());
         for (int j = 0; j < 5; j++) {
             NewHealthEnemy(enemyes[j], human);

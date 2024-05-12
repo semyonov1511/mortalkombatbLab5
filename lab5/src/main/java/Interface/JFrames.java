@@ -114,7 +114,7 @@ public class JFrames extends javax.swing.JFrame {
         LevelUpLabel = new javax.swing.JLabel();
         HealthButton = new javax.swing.JRadioButton();
         DamageButton = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        ChooseAttributeButton = new javax.swing.JButton();
         AttributesGroup = new javax.swing.ButtonGroup();
         Panel = new javax.swing.JPanel();
         MKLabel = new javax.swing.JLabel();
@@ -927,7 +927,12 @@ public class JFrames extends javax.swing.JFrame {
         DamageButton.setSelected(true);
         DamageButton.setText("Урон");
 
-        jButton1.setText("ОК");
+        ChooseAttributeButton.setText("ОК");
+        ChooseAttributeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChooseAttributeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -946,7 +951,7 @@ public class JFrames extends javax.swing.JFrame {
                         .addComponent(LevelUpLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(145, 145, 145)
-                        .addComponent(jButton1)))
+                        .addComponent(ChooseAttributeButton)))
                 .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -959,7 +964,7 @@ public class JFrames extends javax.swing.JFrame {
                     .addComponent(HealthButton)
                     .addComponent(DamageButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(ChooseAttributeButton)
                 .addGap(35, 35, 35))
         );
 
@@ -1097,7 +1102,9 @@ public class JFrames extends javax.swing.JFrame {
         game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar);
         if (game.action.checkExperience(human)) {
             game.action.LevelUp(human, game.action.getEnemies());
-        }
+            LevelUp.setVisible(true);
+            LevelUp.setBounds(300, 200, 430, 350);
+        }   
         game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
                 TurnLabel, ActionMadeLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
@@ -1203,6 +1210,19 @@ public class JFrames extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_HealthButtonActionPerformed
 
+    private void ChooseAttributeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseAttributeButtonActionPerformed
+        if (HealthButton.isSelected()){
+            game.action.AddHealthHuman(human);
+        }
+        else {
+            game.action.AddDamageHuman(human);
+        }
+        game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
+                PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
+                TurnLabel, ActionMadeLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
+        LevelUp.dispose();
+    }//GEN-LAST:event_ChooseAttributeButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1243,6 +1263,7 @@ public class JFrames extends javax.swing.JFrame {
     private javax.swing.JDialog CantUseItemDialog;
     private javax.swing.JLabel CantUseItemLabel;
     private javax.swing.JPanel CantUseItemPanel;
+    private javax.swing.JButton ChooseAttributeButton;
     private javax.swing.JButton CloseCantUseItemButton;
     private javax.swing.JButton CloseRecordsTableButton;
     private javax.swing.JRadioButton DamageButton;
@@ -1313,7 +1334,6 @@ public class JFrames extends javax.swing.JFrame {
     private javax.swing.JLabel UnavailableItemLabel;
     private javax.swing.JButton UseItemButton;
     private javax.swing.JLabel VictoryLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTable jTable1;
