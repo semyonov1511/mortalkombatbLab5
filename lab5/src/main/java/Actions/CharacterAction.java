@@ -28,7 +28,7 @@ public class CharacterAction {
     public Player[] getEnemies() {
         return this.enemies;
     }
-    
+
     public int[] EnemyBehavior(int k1, int k2, int k3, int k4, double i) {
         int arr[] = null;
         if (i < k1 * 0.01) {
@@ -101,12 +101,20 @@ public class CharacterAction {
                 human.setPoints(55 + human.getHealth() / 4);
             }
         }
-        int i=0;
+        LevelUp(human, enemyes);
+    }
+
+    public boolean checkExperience(Human human) {
+        return human.getExperience() >= human.getNextExperience();
+    }
+
+    public void LevelUp(Human human, Player[] enemyes) {
+        int i = 0;
         if (human.getExperience() >= human.getNextExperience()) {
             human.setLevel();
-            while (human.getNextExperience() >= experience_for_next_level[i]){
-                i=i+1;
-            } 
+            while (human.getNextExperience() >= experience_for_next_level[i]) {
+                i = i + 1;
+            }
             human.setNextExperience(experience_for_next_level[i]);
             AddHealthHuman(human);
             AddDamageHuman(human);
@@ -119,12 +127,12 @@ public class CharacterAction {
     public void AddPointsBoss(Human human, Player[] enemyes) {
         human.setExperience(50);
         human.setPoints(65 + human.getHealth() / 2);
-        int i=0;
+        int i = 0;
         if (human.getExperience() >= human.getNextExperience()) {
             human.setLevel();
-            while (human.getNextExperience() >= experience_for_next_level[i]){
-                i=i+1;
-            } 
+            while (human.getNextExperience() >= experience_for_next_level[i]) {
+                i = i + 1;
+            }
             human.setNextExperience(experience_for_next_level[i]);
             AddHealthHuman(human);
             for (int j = 0; j < 5; j++) {
@@ -164,7 +172,7 @@ public class CharacterAction {
         }
         human.setMaxHealth(hp);
     }
-    
+
     public void AddDamageHuman(Human human) {
         int damage = 0;
         switch (human.getLevel()) {
