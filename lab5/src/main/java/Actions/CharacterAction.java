@@ -4,6 +4,8 @@ import Fabrics.EnemyFabric;
 import Game_components.Human;
 import Game_components.Player;
 import Game_components.Items;
+import Particular_Actions.*;
+import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JProgressBar;
 
@@ -12,6 +14,15 @@ public class CharacterAction {
     private final int experience_for_next_level[] = {40, 90, 180, 260, 410, 1000};
 
     private final int kind_fight[][] = {{1, 0}, {1, 1, 0}, {0, 1, 0}, {1, 1, 1, 1}};
+
+    private final ArrayList<Object> actionsList = new ArrayList<>() {
+        {
+            add(new Hit());
+            add(new Block());
+            add(new Debuff());
+            add(new Heal());
+        }
+    };
 
     private final Player enemies[] = new Player[6];
 
@@ -46,28 +57,32 @@ public class CharacterAction {
         return arr;
     }
 
-    public int[] ChooseBehavior(Player enemy) {
+    public Object ChooseEnemyAction() {
+        int i = (int) (Math.random()*5);
+        return actionsList.get(i);
+    }
+
+    /* public int[] ChooseBehavior(Player enemy) { 
         int arr[] = null;
         double i = Math.random();
-        CharacterAction action = new CharacterAction();
         if (null != enemy.getName()) {
             switch (enemy.getName()) {
                 case "Baraka" ->
-                    arr = action.EnemyBehavior(15, 15, 60, 10, i);
+                    arr = EnemyBehavior(15, 15, 60, 10, i);
                 case "Sub-Zero" ->
-                    arr = action.EnemyBehavior(25, 25, 0, 50, i);
+                    arr = EnemyBehavior(25, 25, 0, 50, i);
                 case "Liu Kang" ->
-                    arr = action.EnemyBehavior(13, 13, 10, 64, i);
+                    arr = EnemyBehavior(13, 13, 10, 64, i);
                 case "Sonya Blade" ->
-                    arr = action.EnemyBehavior(25, 25, 50, 0, i);
+                    arr = EnemyBehavior(25, 25, 50, 0, i);
                 case "Shao Kahn" ->
-                    arr = action.EnemyBehavior(10, 45, 0, 45, i);
+                    arr = EnemyBehavior(10, 45, 0, 45, i);
                 default -> {
                 }
             }
         }
         return arr;
-    }
+    }   */
 
     public void HP(Player player, JProgressBar progress) {
 

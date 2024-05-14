@@ -25,7 +25,7 @@ public class Fight {
     int stun = 0;
     double v = 0.0;
 
-    public void Move(Player p1, Player p2, JLabel l, JLabel l2) {
+    public void Move(Player p1, Player p2, JLabel l, JLabel l2, Object concreteAction) {
         if (stun == 1) {
             p1.setAttack(-1);
         }
@@ -79,14 +79,14 @@ public class Fight {
         if (k < kind_attack.length - 1) {
             k++;
         } else {
-            kind_attack = action.ChooseBehavior(enemy);
+            //kind_attack = action.ChooseBehavior(enemy);
             k = 0;
         }
         enemy.setAttack(kind_attack[k]);
         if (i % 2 == 1) {
-            Move(human, enemy, label7, label8);
+            //Move(human, enemy, label7, label8);
         } else {
-            Move(enemy, human, label7, label8);
+            //Move(enemy, human, label7, label8);
         }
         i++;
         change.RoundTexts(human, enemy, label, label2, i, label6);
