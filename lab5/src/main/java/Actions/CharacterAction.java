@@ -15,7 +15,7 @@ public class CharacterAction {
 
     private final int kind_fight[][] = {{1, 0}, {1, 1, 0}, {0, 1, 0}, {1, 1, 1, 1}};
 
-    private final ArrayList<Object> actionsList = new ArrayList<>() {
+    private final ArrayList<Action> actionsList = new ArrayList<>() {
         {
             add(new Hit());
             add(new Block());
@@ -57,9 +57,20 @@ public class CharacterAction {
         return arr;
     }
 
-    public Object ChooseEnemyAction() {
-        int i = (int) (Math.random()*5);
-        return actionsList.get(i);
+    public Action ChooseEnemyAction(Player enemy, ArrayList<Action> list) {
+        int i = 0;
+        switch (enemy.getName()){
+            case "Sub-Zero" -> {
+                return actionsList.get((int) (Math.random()*3));
+            }
+            case "Shao Kahn" -> {
+                list.remove(2);
+                return actionsList.get((int) (Math.random()*3));
+            }
+            default -> {
+                return actionsList.get((int) (Math.random()*2));
+            }
+        }
     }
 
     /* public int[] ChooseBehavior(Player enemy) { 

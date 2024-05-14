@@ -1,6 +1,6 @@
 package Particular_Actions;
 
 public abstract class Action {
-    public abstract String isAttack();
-    public abstract String isBlock();
+    public abstract String isHit();
+    public abstract String isDefense();
 }

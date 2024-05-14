@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import Fabrics.*;
+import Particular_Actions.Action;
 
 public class Fight {
 
@@ -25,7 +26,7 @@ public class Fight {
     int stun = 0;
     double v = 0.0;
 
-    public void Move(Player p1, Player p2, JLabel l, JLabel l2, Object concreteAction) {
+    public void Move(Player p1, Player p2, JLabel l, JLabel l2, Action concreteAction) {
         if (stun == 1) {
             p1.setAttack(-1);
         }
