@@ -1,7 +1,6 @@
 package Actions;
 
 //ADD IMAGE!!!
-import Characters.ShaoKahn;
 import Game_components.Result;
 import Game_components.Human;
 import Game_components.Player;
@@ -14,11 +13,22 @@ import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import Fabrics.*;
 import Particular_Actions.Action;
+import Particular_Actions.Block;
+import Particular_Actions.Debuff;
+import Particular_Actions.Heal;
+import Particular_Actions.Hit;
 
 public class Fight {
 
     ChangeTexts change = new ChangeTexts();
-    int kind_attack[] = {0};
+    private final ArrayList<Action> actionsList = new ArrayList<>() {
+        {
+            add(new Hit());
+            add(new Block());
+            add(new Debuff());
+            add(new Heal());
+        }
+    };
     int experiences[] = {40, 90, 180, 260, 410};
     EnemyFabric fabric = new EnemyFabric();
     public int i = 1;
@@ -27,90 +37,101 @@ public class Fight {
     double v = 0.0;
 
     public void Move(Player human, Player enemy, JLabel l1, JLabel l2, Action playerAction, Action enemyAction) {
+        switch (enemyAction.getType() + playerAction.getType()) {
+            case "BlockBlock" -> {
+            }
+            case "BlockHeal" -> {
+            }
+            case "BlockHit" -> {
+            }
+            case "BlockDebuff" -> {
+            }
+            case "HitBlock" -> {
+            }
+            case "HitHeal" -> {
+            }
+            case "HitHit" -> {
+            }
+            case "HitDebuff" -> {
+            }
+            case "DebuffBlock" -> {
+            }
+            case "DebuffHeal" -> {
+            }
+            case "DebuffHit" -> {
+            }
+            case "DebuffDebuff" -> {
+            }
+
+        }
+
         switch (playerAction.isAttack() + enemyAction.isAttack()) {
             case "00" -> {
-                playerAction.realisation(human, enemy, false);
-                enemyAction.realisation(human, enemy, false);
-                l2.setText("Both defended themselves");
+                playerAction.realisation(human, enemy, true);
+                enemyAction.realisation(human, enemy, true);
+                if (enemyAction.getType().equals("Heal")) {
+                    l2.setText("Boss healed himself");
+                } else {
+                    l2.setText("Both defended themselves");
+                }
             }
             case "01" -> {
-                playerAction.realisation(human, enemy, true);
+                playerAction.realisation(human, enemy, false);
                 enemyAction.realisation(human, enemy, false);
+                if (enemyAction.getType().equals("Hit")) {
+                    l2.setText("Enemy tries to hit throuh your block");
+                } else {
+                    l2.setText("Enemy applies a debuff");
+                }
             }
             case "10" -> {
-                playerAction.realisation(human, enemy, false);
-                enemyAction.realisation(human, enemy, true);
+                switch (playerAction.getType() + enemyAction.getType()) {
+                    case "HitBlock" -> {
+                        playerAction.realisation(human, enemy, false);
+                        enemyAction.realisation(enemy, human, false);
+                        l2.setText("You try to hit through the block");
+                    }
+                    case "HitHeal" -> {
+                        playerAction.realisation(human, enemy, true);
+                        enemyAction.realisation(enemy, human, false);
+                        l2.setText("You make a stronger hit");
+                    }
+                    case "DebuffBlock" -> {
+                        playerAction.realisation(human, enemy, false);
+                        enemyAction.realisation(enemy, human, false);
+                        l2.setText("You apply a debuff");
+                    }
+                    case "DebuffHeal" -> {
+                        playerAction.realisation(human, enemy, false);
+                        enemyAction.realisation(enemy, human, false);
+                        l2.setText("You apply a debuff, boss heals up");
+                    }
+                }
             }
             case "11" -> {
                 playerAction.realisation(human, enemy, true);
-                enemyAction.realisation(human, enemy, true);
+                enemyAction.realisation(enemy, human, true);
+                if (playerAction.getType().equals("Hit")) {
+                    l2.setText("You make a successful attack");
+                } else {
+                    l2.setText("You make an unsucessful attack");
+                }
             }
         }
     }
-        /*
-        if (stun == 1) {
-            p1.setAttack(-1);
-        }
-        /*
-        switch (Integer.toString(p1.getAttack()) + Integer.toString(p2.getAttack())) {
-             case "10" -> {
-                v = Math.random();
-                if (player instanceof ShaoKahn & v < 0.15) {
-                    p2.setHealth(-(int) (p1.getDamage() * 0.5));
-                    l2.setText("Your block is broken");
-                } else {
-                    p1.setHealth(-(int) (p2.getDamage() * 0.5));
-                    l2.setText(p2.getName() + " counterattacked");
-                }
-            }
-            case "11" -> {
-                p2.setHealth(-p1.getDamage());
-                l2.setText(p1.getName() + " attacked");
-            }
-            case "00" -> {
-                v = Math.random();
-                if (v <= 0.5) {
-                    stun = 1;
-                }
-                l2.setText("Both defended themselves");
-            }
-            case "01" ->
-                l2.setText(p1.getName() + " didn't attacked");
-            case "-10" -> {
-                l.setText(p1.getName() + " was stunned");
-                stun = 0;
-                l2.setText(p2.getName() + " didn't attacked");
-            }
-            case "-11" -> {
-                p1.setHealth(-p2.getDamage());
-                l.setText(p1.getName() + " was stunned");
-                stun = 0;
-                l2.setText(p2.getName() + " attacked");
-            }
-         */
 
-public void Hit(Player human, Player enemy, int a, JLabel label,
+    public void Hit(Player human, Player enemy, int a, JLabel label,
             JLabel label2, JDialog dialog, JLabel label3,
             JProgressBar pr1, JProgressBar pr2, JDialog dialog1,
             JDialog dialog2, JFrame frame, ArrayList<Result> results,
             JLabel label4, JLabel label5, JLabel label6, JLabel label7,
             JLabel label8, Items[] items, JRadioButton rb, Location location, int locationsNumber) {
         label7.setText("");
-        human.setAttack(a);
         CharacterAction action = new CharacterAction();
-        if (k < kind_attack.length - 1) {
-            k++;
-        } else {
-            //kind_attack = action.ChooseBehavior(enemy);
-            k = 0;
+        switch (a){
+            case 0 -> Move(human, enemy, label7, label8, new Block(), action.ChooseEnemyAction(enemy, actionsList));
+            case 1 -> Move(human, enemy, label7, label8,new Hit(), action.ChooseEnemyAction(enemy, actionsList));
         }
-        enemy.setAttack(kind_attack[k]);
-        if (i % 2 == 1) {
-            //Move(human, enemy, label7, label8);
-        } else {
-            //Move(enemy, human, label7, label8);
-        }
-        i++;
         change.RoundTexts(human, enemy, label, label2, i, label6);
         action.HP(human, pr1);
         action.HP(enemy, pr2);
@@ -123,7 +144,7 @@ public void Hit(Player human, Player enemy, int a, JLabel label,
             label7.setText("Вы воскресли");
         }
         if (human.getHealth() <= 0 | enemy.getHealth() <= 0) {
-            if (location.getCurrentLocation()==locationsNumber & "Shao Kahn".equals(enemy.getName())) {
+            if (location.getCurrentLocation() == locationsNumber & "Shao Kahn".equals(enemy.getName())) {
                 EndFinalRound(((Human) human), enemy, action, results, dialog1, dialog2,
                         frame, label4, label5);
             } else {
@@ -139,7 +160,7 @@ public void Hit(Player human, Player enemy, int a, JLabel label,
         if (human.getHealth() > 0) {
             label.setText("You win");
             ((Human) human).setWin();
-            
+
             if ("Shao Kahn".equals(enemy.getName())) {
                 action.AddItems(38, 23, 8, items);
                 action.AddPointsBoss(((Human) human));
@@ -155,17 +176,15 @@ public void Hit(Player human, Player enemy, int a, JLabel label,
             human.resetMaxHealth(80);
             action.setEnemies();
             human.resetLevel();
-            ((Human)human).resetPoints();
-            ((Human)human).resetExperience();
-            ((Human)human).setNextExperience(40);
+            ((Human) human).resetPoints();
+            ((Human) human).resetExperience();
+            ((Human) human).setNextExperience(40);
             location.resetLocation(false, human.getLevel());
             label.setText(enemy.getName() + " win");
         }
 
         i = 1;
         k = -1;
-        kind_attack = ResetAttack();
-
     }
 
     public void EndFinalRound(Human human, Player enemy, CharacterAction action,
