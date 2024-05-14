@@ -65,6 +65,13 @@ public class Fight {
         change.RoundTexts(human, enemy, label, label2, i, label6);
         action.HP(human, pr1);
         action.HP(enemy, pr2);
+        checkDeath(human, enemy, label2, dialog, label3, pr1, dialog1, dialog2, frame, results, label4, label5, label7, items, rb, location, locationsNumber);
+    }
+    
+    public void checkDeath(Player human, Player enemy, JLabel label2, JDialog dialog, JLabel label3,
+            JProgressBar pr1, JDialog dialog1, JDialog dialog2, JFrame frame, ArrayList<Result> results,
+            JLabel label4, JLabel label5, JLabel label7,Items[] items, JRadioButton rb, Location location, int locationsNumber){
+        CharacterAction action = new CharacterAction();
         if (human.getHealth() <= 0 & items[2].getCount() > 0) {
             human.setNewHealth((int) (human.getMaxHealth() * 0.05));
             items[2].setCount(-1);
@@ -151,11 +158,6 @@ public class Fight {
             label2.setText(text);
         }
         frame.dispose();
-    }
-
-    public int[] ResetAttack() {
-        int a[] = {0};
-        return a;
     }
 
     public void NewRound(Player human, Player enemy, JProgressBar pr1,
