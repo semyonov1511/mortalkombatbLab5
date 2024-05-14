@@ -29,12 +29,7 @@ public class Fight {
             add(new Heal());
         }
     };
-    int experiences[] = {40, 90, 180, 260, 410};
-    EnemyFabric fabric = new EnemyFabric();
     public int i = 1;
-    int k = -1;
-    int stun = 0;
-    double v = 0.0;
 
     public void Move(Player human, Player enemy, JLabel l1, JLabel l2, Action playerAction, Action enemyAction) {
         playerAction.realisation(human, enemy, enemyAction.getType());
@@ -119,9 +114,6 @@ public class Fight {
             location.resetLocation(false, human.getLevel());
             label.setText(enemy.getName() + " win");
         }
-
-        i = 1;
-        k = -1;
     }
 
     public void EndFinalRound(Human human, Player enemy, CharacterAction action,
