@@ -1,6 +1,5 @@
 package Actions;
 
-import Fabrics.EnemyFabric;
 import Game_components.Player;
 import java.util.ArrayList;
 
@@ -11,8 +10,6 @@ public class Location {
     ArrayList<Player> currentEnemiesList = new ArrayList<>();
     Player[] fullEnemiesList = null;
     public int locationSize;
-    
-    EnemyFabric fabric = new EnemyFabric();
 
     public void setFullEnemiesList(Player[] list) {
         fullEnemiesList = list;
@@ -30,19 +27,19 @@ public class Location {
             int k = (int) (Math.random() * 4);
             switch (k) {
                 case 0 -> {
-                    enemy = fabric.create(0, 0);
+                    enemy = fullEnemiesList[0];
                     enemy.setPhoto("B.jpg");
                 }
                 case 1 -> {
-                    enemy = fabric.create(1, 0);
+                    enemy = fullEnemiesList[1];
                     enemy.setPhoto("SZ.jpg");
                 }
                 case 2 -> {
-                    enemy = fabric.create(2, 0);
+                    enemy = fullEnemiesList[2];
                     enemy.setPhoto("LK.jpg");
                 }
                 case 3 -> {
-                    enemy = fabric.create(3, 0);
+                    enemy = fullEnemiesList[3];
                     enemy.setPhoto("SB.jpg");
                 }
             }

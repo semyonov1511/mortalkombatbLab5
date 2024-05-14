@@ -32,6 +32,8 @@ public class Fight {
     public int i = 1;
 
     public void Move(Player human, Player enemy, JLabel l1, JLabel l2, Action playerAction, Action enemyAction) {
+        l1.setText(enemy.getName() + " uses " + enemyAction.getType());
+        l2.setText(human.getName() + " uses " + playerAction.getType());
         playerAction.realisation(human, enemy, enemyAction.getType());
     }
 
@@ -47,17 +49,17 @@ public class Fight {
             case 0 -> {
                 Move(human, enemy, label7, label8, actionsList.get(1), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
                 if (enemy.getHealth()>0){
-                    Move(enemy, human, label7, label8, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)),actionsList.get(1));
+                    Move(enemy, human, label7, label6, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)),actionsList.get(1));
                 }
             }
             case 1 -> {
                 Move(human, enemy, label7, label8, new Hit(), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
                 if (enemy.getHealth()>0){
-                    Move(enemy, human, label7, label8, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)), new Hit());
+                    Move(enemy, human, label7, label6, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)), new Hit());
                 }
             }
         }
-        change.RoundTexts(human, enemy, label, label2, i, label6);
+        change.RoundTexts(human, enemy, label, label2);
         action.HP(human, pr1);
         action.HP(enemy, pr2);
         checkDeath(human, enemy, label2, dialog, label3, pr1, dialog1, dialog2, frame, results, label4, label5, label7, items, rb, location, locationsNumber);

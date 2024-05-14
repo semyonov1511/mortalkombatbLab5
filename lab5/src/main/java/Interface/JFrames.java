@@ -69,6 +69,7 @@ public class JFrames extends javax.swing.JFrame {
         ItemsButton = new javax.swing.JButton();
         LocationLabel = new javax.swing.JLabel();
         EnemyNumberLabel = new javax.swing.JLabel();
+        ActionMadeLabel1 = new javax.swing.JLabel();
         EndFightDialog = new javax.swing.JDialog();
         EndFightPanel = new javax.swing.JPanel();
         EndRoundLabel = new javax.swing.JLabel();
@@ -244,6 +245,10 @@ public class JFrames extends javax.swing.JFrame {
 
         EnemyNumberLabel.setText("Номер противника:");
 
+        ActionMadeLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        ActionMadeLabel1.setForeground(new java.awt.Color(204, 0, 0));
+        ActionMadeLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout FightPanelLayout = new javax.swing.GroupLayout(FightPanel);
         FightPanel.setLayout(FightPanelLayout);
         FightPanelLayout.setHorizontalGroup(
@@ -287,7 +292,8 @@ public class JFrames extends javax.swing.JFrame {
                                         .addGap(26, 26, 26)
                                         .addGroup(FightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(ActionMadeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(StunLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(StunLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ActionMadeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE))))
                             .addGroup(FightPanelLayout.createSequentialGroup()
                                 .addComponent(LocationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -386,6 +392,8 @@ public class JFrames extends javax.swing.JFrame {
                             .addGroup(FightPanelLayout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addComponent(ActionMadeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ActionMadeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(TurnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -1074,7 +1082,7 @@ public class JFrames extends javax.swing.JFrame {
         game.fight.Hit(human, enemy, 1, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
                 EndRoundLabel, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
                 EndGameWithoutLadderDialog, FightFrame, game.getResults(), VictoryLabel, EndGameWithoutLadderTitlleLabel,
-                TurnLabel, StunLabel, ActionMadeLabel, items, ThirdItemButton, game.location, locationsNumber);
+                ActionMadeLabel1, StunLabel, ActionMadeLabel, items, ThirdItemButton, game.location, locationsNumber);
 
     }//GEN-LAST:event_AttackButtonActionPerformed
 
@@ -1082,7 +1090,7 @@ public class JFrames extends javax.swing.JFrame {
         game.fight.Hit(human, enemy, 0, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
                 EndRoundLabel, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
                 EndGameWithoutLadderDialog, FightFrame, game.getResults(), VictoryLabel, EndGameWithoutLadderTitlleLabel,
-                TurnLabel, StunLabel, ActionMadeLabel, items, ThirdItemButton, game.location, locationsNumber);
+                ActionMadeLabel1, StunLabel, ActionMadeLabel, items, ThirdItemButton, game.location, locationsNumber);
     }//GEN-LAST:event_BlockButtonActionPerformed
 
     private void NextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextRoundButtonActionPerformed
@@ -1107,7 +1115,7 @@ public class JFrames extends javax.swing.JFrame {
         }   
         game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
-                TurnLabel, ActionMadeLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
+                ActionMadeLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
         
         EndFightDialog.dispose();
     }//GEN-LAST:event_NextRoundButtonActionPerformed
@@ -1197,7 +1205,7 @@ public class JFrames extends javax.swing.JFrame {
 
         game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
-                TurnLabel, ActionMadeLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
+                ActionMadeLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
 
         EndFightDialog.dispose();
     }//GEN-LAST:event_StartWithLocationsButtonActionPerformed
@@ -1219,7 +1227,7 @@ public class JFrames extends javax.swing.JFrame {
         }
         game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
-                TurnLabel, ActionMadeLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
+                ActionMadeLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
         LevelUp.dispose();
     }//GEN-LAST:event_ChooseAttributeButtonActionPerformed
 
@@ -1257,6 +1265,7 @@ public class JFrames extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ActionMadeLabel;
+    private javax.swing.JLabel ActionMadeLabel1;
     private javax.swing.JButton AttackButton;
     private javax.swing.ButtonGroup AttributesGroup;
     private javax.swing.JButton BlockButton;

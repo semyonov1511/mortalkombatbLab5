@@ -79,6 +79,7 @@
                                               <Group type="103" groupAlignment="1" attributes="0">
                                                   <Component id="ActionMadeLabel" min="-2" pref="237" max="-2" attributes="0"/>
                                                   <Component id="StunLabel" min="-2" pref="227" max="-2" attributes="0"/>
+                                                  <Component id="ActionMadeLabel1" alignment="1" min="-2" pref="237" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace pref="46" max="32767" attributes="0"/>
                                           </Group>
@@ -212,6 +213,8 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                       <Component id="ActionMadeLabel" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="ActionMadeLabel1" min="-2" pref="35" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="TurnLabel" min="-2" pref="43" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -536,6 +539,17 @@
             <Component class="javax.swing.JLabel" name="EnemyNumberLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x41d;&#x43e;&#x43c;&#x435;&#x440; &#x43f;&#x440;&#x43e;&#x442;&#x438;&#x432;&#x43d;&#x438;&#x43a;&#x430;:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ActionMadeLabel1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Comic Sans MS" size="12" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="cc" type="rgb"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
           </SubComponents>
