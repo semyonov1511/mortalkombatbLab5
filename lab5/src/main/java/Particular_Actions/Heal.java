@@ -15,12 +15,17 @@ public class Heal extends Action {
     }
 
     @Override
-    public void realisation(Player human, Player enemy, boolean a) {
-        if (a) {
-            enemy.setHealth((enemy.getMaxHealth() - enemy.getHealth()) / 2);
-        } else {
-            enemy.setHealth(-human.getDamage() * 2);
-            
+    public void realisation(Player human, Player enemy, String enemyActionType) {
+        switch (enemyActionType) {
+            case "Hit" -> {
+            }
+            case "Block" -> {
+                enemy.setHealth((enemy.getMaxHealth() - enemy.getHealth()) / 2);
+            }
+            case "Debuff" -> {
+            }
+            case "Heal" -> {
+            }
         }
     }
 }

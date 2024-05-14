@@ -15,12 +15,16 @@ public class Debuff extends Action {
     }
 
     @Override
-    public void realisation(Player human, Player enemy, boolean a) {
-        if (a) {
-            enemy.setHealth((int) -(1.15 * human.getDamage()));
-        } else {
-            if (Math.random() <= 0.75) {
-
+    public void realisation(Player human, Player enemy, String enemyActionType) {
+        switch (enemyActionType) {
+            case "Hit" -> {
+            }
+            case "Block" -> {
+                // ПРОПИСАТЬ ДЕБАФФ
+            }
+            case "Debuff" -> {
+            }
+            case "Heal" -> {
             }
         }
     }

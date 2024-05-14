@@ -21,7 +21,7 @@ import Particular_Actions.Hit;
 public class Fight {
 
     ChangeTexts change = new ChangeTexts();
-    private final ArrayList<Action> actionsList = new ArrayList<>() {
+    public ArrayList<Action> actionsList = new ArrayList<>() {
         {
             add(new Hit());
             add(new Block());
@@ -37,38 +37,11 @@ public class Fight {
     double v = 0.0;
 
     public void Move(Player human, Player enemy, JLabel l1, JLabel l2, Action playerAction, Action enemyAction) {
-        switch (enemyAction.getType() + playerAction.getType()) {
-            case "BlockBlock" -> {
-            }
-            case "BlockHeal" -> {
-            }
-            case "BlockHit" -> {
-            }
-            case "BlockDebuff" -> {
-            }
-            case "HitBlock" -> {
-            }
-            case "HitHeal" -> {
-            }
-            case "HitHit" -> {
-            }
-            case "HitDebuff" -> {
-            }
-            case "DebuffBlock" -> {
-            }
-            case "DebuffHeal" -> {
-            }
-            case "DebuffHit" -> {
-            }
-            case "DebuffDebuff" -> {
-            }
-
-        }
 
         switch (playerAction.isAttack() + enemyAction.isAttack()) {
             case "00" -> {
                 playerAction.realisation(human, enemy, true);
-                enemyAction.realisation(human, enemy, true);
+                enemyAction.realisation(human, human, true);
                 if (enemyAction.getType().equals("Heal")) {
                     l2.setText("Boss healed himself");
                 } else {
@@ -77,7 +50,7 @@ public class Fight {
             }
             case "01" -> {
                 playerAction.realisation(human, enemy, false);
-                enemyAction.realisation(human, enemy, false);
+                enemyAction.realisation(enemy, human, false);
                 if (enemyAction.getType().equals("Hit")) {
                     l2.setText("Enemy tries to hit throuh your block");
                 } else {
@@ -129,8 +102,8 @@ public class Fight {
         label7.setText("");
         CharacterAction action = new CharacterAction();
         switch (a){
-            case 0 -> Move(human, enemy, label7, label8, new Block(), action.ChooseEnemyAction(enemy, actionsList));
-            case 1 -> Move(human, enemy, label7, label8,new Hit(), action.ChooseEnemyAction(enemy, actionsList));
+            case 0 -> Move(human, enemy, label7, label8, new Block(), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
+            case 1 -> Move(human, enemy, label7, label8,new Hit(), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
         }
         change.RoundTexts(human, enemy, label, label2, i, label6);
         action.HP(human, pr1);

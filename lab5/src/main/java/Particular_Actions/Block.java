@@ -15,6 +15,6 @@ public class Block extends Action {
     }
 
     @Override
-    public void realisation(Player human, Player enemy, boolean a) {
+    public void realisation(Player human, Player enemy, String enemyActionType) {
     }
 }

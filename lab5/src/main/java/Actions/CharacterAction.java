@@ -15,8 +15,6 @@ public class CharacterAction {
 
     private final int kind_fight[][] = {{1, 0}, {1, 1, 0}, {0, 1, 0}, {1, 1, 1, 1}};
 
-    
-
     private final Player enemies[] = new Player[6];
 
     EnemyFabric fabric = new EnemyFabric();
