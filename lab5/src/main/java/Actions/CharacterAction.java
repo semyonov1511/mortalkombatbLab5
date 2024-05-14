@@ -13,8 +13,6 @@ public class CharacterAction {
 
     private final int experience_for_next_level[] = {40, 90, 180, 260, 410, 1000};
 
-    private final int kind_fight[][] = {{1, 0}, {1, 1, 0}, {0, 1, 0}, {1, 1, 1, 1}};
-
     private final Player enemies[] = new Player[6];
 
     EnemyFabric fabric = new EnemyFabric();
@@ -31,23 +29,6 @@ public class CharacterAction {
         return this.enemies;
     }
 
-    public int[] EnemyBehavior(int k1, int k2, int k3, int k4, double i) {
-        int arr[] = null;
-        if (i < k1 * 0.01) {
-            arr = kind_fight[0];
-        }
-        if (i >= k1 * 0.01 & i < (k1 + k2) * 0.01) {
-            arr = kind_fight[1];
-        }
-        if (i >= (k1 + k2) * 0.01 & i < (k1 + k2 + k3) * 0.01) {
-            arr = kind_fight[2];
-        }
-        if (i >= (k1 + k2 + k3) * 0.01 & i < 1) {
-            arr = kind_fight[3];
-        }
-        return arr;
-    }
-
     public Action ChooseEnemyAction(Player enemy, ArrayList<Action> list) {
         int i = 0;
         switch (enemy.getName()){
@@ -62,29 +43,7 @@ public class CharacterAction {
                 return list.get((int) (Math.random()*2));
             }
         }
-    }
-
-    /* public int[] ChooseBehavior(Player enemy) { 
-        int arr[] = null;
-        double i = Math.random();
-        if (null != enemy.getName()) {
-            switch (enemy.getName()) {
-                case "Baraka" ->
-                    arr = EnemyBehavior(15, 15, 60, 10, i);
-                case "Sub-Zero" ->
-                    arr = EnemyBehavior(25, 25, 0, 50, i);
-                case "Liu Kang" ->
-                    arr = EnemyBehavior(13, 13, 10, 64, i);
-                case "Sonya Blade" ->
-                    arr = EnemyBehavior(25, 25, 50, 0, i);
-                case "Shao Kahn" ->
-                    arr = EnemyBehavior(10, 45, 0, 45, i);
-                default -> {
-                }
-            }
-        }
-        return arr;
-    }   */
+    } 
 
     public void HP(Player player, JProgressBar progress) {
 

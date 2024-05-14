@@ -37,60 +37,7 @@ public class Fight {
     double v = 0.0;
 
     public void Move(Player human, Player enemy, JLabel l1, JLabel l2, Action playerAction, Action enemyAction) {
-
-        switch (playerAction.isAttack() + enemyAction.isAttack()) {
-            case "00" -> {
-                playerAction.realisation(human, enemy, true);
-                enemyAction.realisation(human, human, true);
-                if (enemyAction.getType().equals("Heal")) {
-                    l2.setText("Boss healed himself");
-                } else {
-                    l2.setText("Both defended themselves");
-                }
-            }
-            case "01" -> {
-                playerAction.realisation(human, enemy, false);
-                enemyAction.realisation(enemy, human, false);
-                if (enemyAction.getType().equals("Hit")) {
-                    l2.setText("Enemy tries to hit throuh your block");
-                } else {
-                    l2.setText("Enemy applies a debuff");
-                }
-            }
-            case "10" -> {
-                switch (playerAction.getType() + enemyAction.getType()) {
-                    case "HitBlock" -> {
-                        playerAction.realisation(human, enemy, false);
-                        enemyAction.realisation(enemy, human, false);
-                        l2.setText("You try to hit through the block");
-                    }
-                    case "HitHeal" -> {
-                        playerAction.realisation(human, enemy, true);
-                        enemyAction.realisation(enemy, human, false);
-                        l2.setText("You make a stronger hit");
-                    }
-                    case "DebuffBlock" -> {
-                        playerAction.realisation(human, enemy, false);
-                        enemyAction.realisation(enemy, human, false);
-                        l2.setText("You apply a debuff");
-                    }
-                    case "DebuffHeal" -> {
-                        playerAction.realisation(human, enemy, false);
-                        enemyAction.realisation(enemy, human, false);
-                        l2.setText("You apply a debuff, boss heals up");
-                    }
-                }
-            }
-            case "11" -> {
-                playerAction.realisation(human, enemy, true);
-                enemyAction.realisation(enemy, human, true);
-                if (playerAction.getType().equals("Hit")) {
-                    l2.setText("You make a successful attack");
-                } else {
-                    l2.setText("You make an unsucessful attack");
-                }
-            }
-        }
+        playerAction.realisation(human, enemy, enemyAction.getType());
     }
 
     public void Hit(Player human, Player enemy, int a, JLabel label,
@@ -101,9 +48,19 @@ public class Fight {
             JLabel label8, Items[] items, JRadioButton rb, Location location, int locationsNumber) {
         label7.setText("");
         CharacterAction action = new CharacterAction();
-        switch (a){
-            case 0 -> Move(human, enemy, label7, label8, new Block(), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
-            case 1 -> Move(human, enemy, label7, label8,new Hit(), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
+        switch (a) {
+            case 0 -> {
+                Move(human, enemy, label7, label8, actionsList.get(1), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
+                if (enemy.getHealth()>0){
+                    Move(enemy, human, label7, label8, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)),actionsList.get(1));
+                }
+            }
+            case 1 -> {
+                Move(human, enemy, label7, label8, new Hit(), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
+                if (enemy.getHealth()>0){
+                    Move(enemy, human, label7, label8, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)), new Hit());
+                }
+            }
         }
         change.RoundTexts(human, enemy, label, label2, i, label6);
         action.HP(human, pr1);
