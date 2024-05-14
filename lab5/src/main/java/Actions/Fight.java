@@ -26,14 +26,36 @@ public class Fight {
     int stun = 0;
     double v = 0.0;
 
-    public void Move(Player p1, Player p2, JLabel l, JLabel l2, Action concreteAction) {
+    public void Move(Player human, Player enemy, JLabel l1, JLabel l2, Action playerAction, Action enemyAction) {
+        switch (playerAction.isAttack() + enemyAction.isAttack()) {
+            case "00" -> {
+                playerAction.realisation(human, enemy, false);
+                enemyAction.realisation(human, enemy, false);
+                l2.setText("Both defended themselves");
+            }
+            case "01" -> {
+                playerAction.realisation(human, enemy, true);
+                enemyAction.realisation(human, enemy, false);
+            }
+            case "10" -> {
+                playerAction.realisation(human, enemy, false);
+                enemyAction.realisation(human, enemy, true);
+            }
+            case "11" -> {
+                playerAction.realisation(human, enemy, true);
+                enemyAction.realisation(human, enemy, true);
+            }
+        }
+    }
+        /*
         if (stun == 1) {
             p1.setAttack(-1);
         }
+        /*
         switch (Integer.toString(p1.getAttack()) + Integer.toString(p2.getAttack())) {
-            case "10" -> {
+             case "10" -> {
                 v = Math.random();
-                if (p1 instanceof ShaoKahn & v < 0.15) {
+                if (player instanceof ShaoKahn & v < 0.15) {
                     p2.setHealth(-(int) (p1.getDamage() * 0.5));
                     l2.setText("Your block is broken");
                 } else {
@@ -65,10 +87,9 @@ public class Fight {
                 stun = 0;
                 l2.setText(p2.getName() + " attacked");
             }
-        }
-    }
+         */
 
-    public void Hit(Player human, Player enemy, int a, JLabel label,
+public void Hit(Player human, Player enemy, int a, JLabel label,
             JLabel label2, JDialog dialog, JLabel label3,
             JProgressBar pr1, JProgressBar pr2, JDialog dialog1,
             JDialog dialog2, JFrame frame, ArrayList<Result> results,

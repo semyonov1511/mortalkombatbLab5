@@ -1,14 +1,20 @@
 package Particular_Actions;
 
-public class Hit extends Action{
-    
+import Game_components.Player;
+
+public class Hit extends Action {
+
     @Override
-    public String isHit(){
+    public String isAttack() {
         return "1";
     }
 
     @Override
-    public String isDefense() {
-        return "0";
+    public void realisation(Player human, Player enemy, boolean a) {
+        if (a) {
+            enemy.setHealth(-human.getDamage());
+        } else {
+
+        }
     }
 }

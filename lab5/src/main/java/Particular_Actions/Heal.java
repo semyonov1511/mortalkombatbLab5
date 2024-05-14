@@ -1,14 +1,19 @@
 package Particular_Actions;
 
+import Game_components.Player;
+
 public class Heal extends Action {
 
     @Override
-    public String isHit() {
+    public String isAttack() {
         return "1";
     }
-
     @Override
-    public String isDefense() {
-        return "0";
+    public void realisation(Player human, Player enemy, boolean a){
+        if (a) {
+
+        } else {
+
+        }
     }
 }
