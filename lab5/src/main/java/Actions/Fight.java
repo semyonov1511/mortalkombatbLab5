@@ -31,43 +31,74 @@ public class Fight {
     };
     public int i = 1;
 
-    public void Move(Player human, Player enemy, JLabel l1, JLabel l2, Action playerAction, Action enemyAction) {
-        l1.setText(enemy.getName() + " uses " + enemyAction.getType());
-        l2.setText(human.getName() + " uses " + playerAction.getType());
+    public void Move(Player human, Player enemy, JLabel PlayerActionLabel, JLabel EnemyActionLabel, Action playerAction, Action enemyAction) {
+        PlayerActionLabel.setText(enemy.getName() + " use " + enemyAction.getType());
+        EnemyActionLabel.setText(human.getName() + " uses " + playerAction.getType());
         playerAction.realisation(human, enemy, enemyAction.getType());
     }
 
-    public void Hit(Player human, Player enemy, int a, JLabel label,
+    public void checkDebuff(Player human, Player enemy, JLabel EnemyDebuffLabel, JLabel PlayerDebuffLabel) {
+        if (enemy.isDebuffed()) {
+            EnemyDebuffLabel.setText(enemy.getName() + " is debuffed for " + enemy.getDebuffTurns() + " turns");
+            enemy.loseDebuffTurn();
+        }
+        if (!enemy.isDebuffed()){
+            EnemyDebuffLabel.setText("");
+        }
+        if (human.isDebuffed()) {
+            PlayerDebuffLabel.setText(human.getName() + " is debuffed for " + human.getDebuffTurns() + " turns");
+            PlayerDebuffLabel.setText("CHECK");
+            System.out.println("check");
+            human.loseDebuffTurn();
+        }
+        if (!human.isDebuffed()){
+            PlayerDebuffLabel.setText("check");
+        }
+    }
+
+    public void Hit(Human human, Player enemy, int a, JLabel label,
             JLabel label2, JDialog dialog, JLabel label3,
             JProgressBar pr1, JProgressBar pr2, JDialog dialog1,
-            JDialog dialog2, JFrame frame, ArrayList<Result> results,
-            JLabel label4, JLabel label5, JLabel label6, JLabel label7,
-            JLabel label8, Items[] items, JRadioButton rb, Location location, int locationsNumber) {
-        label7.setText("");
+            JDialog dialog2, JFrame frame, ArrayList<Result> results, JLabel EnemyDebuffLabel,
+            JLabel victoryLabel, JLabel EndGameWithoutLadderTitlleLabel, JLabel PlayerActionLabel, JLabel PlayerDebuffLabel,
+            JLabel EnemyActionLabel, Items[] items, JRadioButton rb, Location location, int locationsNumber) {
         CharacterAction action = new CharacterAction();
         switch (a) {
             case 0 -> {
-                Move(human, enemy, label7, label8, actionsList.get(1), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
-                if (enemy.getHealth()>0){
-                    Move(enemy, human, label7, label6, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)),actionsList.get(1));
+                Move(human, enemy, PlayerActionLabel, EnemyActionLabel, actionsList.get(1), 
+                        action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
+                if (enemy.getHealth() > 0) {
+                    Move(enemy, human, PlayerActionLabel, EnemyActionLabel, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)), 
+                            actionsList.get(1));
                 }
             }
             case 1 -> {
-                Move(human, enemy, label7, label8, new Hit(), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
-                if (enemy.getHealth()>0){
-                    Move(enemy, human, label7, label6, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)), new Hit());
+                Move(human, enemy, PlayerActionLabel, EnemyActionLabel, new Hit(), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
+                if (enemy.getHealth() > 0) {
+                    Move(enemy, human, PlayerActionLabel, EnemyActionLabel, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)), 
+                            new Hit());
+                }
+            }
+            case 2 -> {
+                Move(human, enemy, PlayerActionLabel, EnemyActionLabel, new Debuff(), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
+                if (enemy.getHealth() > 0) {
+                    Move(enemy, human, PlayerActionLabel, EnemyActionLabel, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)),
+                            new Debuff());
                 }
             }
         }
         change.RoundTexts(human, enemy, label, label2);
+        checkDebuff(human, enemy, EnemyDebuffLabel, PlayerDebuffLabel);
+        checkDebuff(human, enemy, EnemyDebuffLabel, PlayerDebuffLabel);
         action.HP(human, pr1);
         action.HP(enemy, pr2);
-        checkDeath(human, enemy, label2, dialog, label3, pr1, dialog1, dialog2, frame, results, label4, label5, label7, items, rb, location, locationsNumber);
+        checkDeath(human, enemy, label2, dialog, label3, pr1, dialog1, dialog2, frame, results, victoryLabel, EndGameWithoutLadderTitlleLabel, 
+                PlayerActionLabel, items, rb, location, locationsNumber);
     }
-    
-    public void checkDeath(Player human, Player enemy, JLabel label2, JDialog dialog, JLabel label3,
+
+    public void checkDeath(Human human, Player enemy, JLabel label2, JDialog dialog, JLabel label3,
             JProgressBar pr1, JDialog dialog1, JDialog dialog2, JFrame frame, ArrayList<Result> results,
-            JLabel label4, JLabel label5, JLabel label7,Items[] items, JRadioButton rb, Location location, int locationsNumber){
+            JLabel label4, JLabel label5, JLabel label7, Items[] items, JRadioButton rb, Location location, int locationsNumber) {
         CharacterAction action = new CharacterAction();
         if (human.getHealth() <= 0 & items[2].getCount() > 0) {
             human.setNewHealth((int) (human.getMaxHealth() * 0.05));
@@ -87,35 +118,41 @@ public class Fight {
         }
     }
 
-    public void EndRound(Player human, Player enemy, JDialog dialog, JLabel label, Items[] items, Location location) {
+    public void EndRound(Human human, Player enemy, JDialog dialog, JLabel label, Items[] items, Location location) {
         CharacterAction action = new CharacterAction();
         dialog.setVisible(true);
         dialog.setBounds(300, 150, 700, 600);
         if (human.getHealth() > 0) {
             label.setText("You win");
-            ((Human) human).setWin();
+            human.setWin();
 
             if ("Shao Kahn".equals(enemy.getName())) {
                 action.AddItems(38, 23, 8, items);
-                action.AddPointsBoss(((Human) human));
+                action.AddPointsBoss(human);
                 location.resetLocation(true, human.getLevel());
             } else {
                 action.AddItems(25, 15, 5, items);
-                action.AddPoints(((Human) human));
+                action.AddPoints(human);
             }
         } else {
-            human.resetDamage();
-            human.setDamage(16);
-            human.setNewHealth(80);
-            human.resetMaxHealth(80);
-            action.setEnemies();
-            human.resetLevel();
-            ((Human) human).resetPoints();
-            ((Human) human).resetExperience();
-            ((Human) human).setNextExperience(40);
-            location.resetLocation(false, human.getLevel());
+            reset(human, enemy, location);
             label.setText(enemy.getName() + " win");
         }
+    }
+
+    public void reset(Human human, Player enemy, Location location) {
+        CharacterAction action = new CharacterAction();
+        human.resetDamage();
+        human.setDamage(16);
+        human.setNewHealth(80);
+        human.resetMaxHealth(80);
+        action.setEnemies();
+        human.resetLevel();
+        human.resetPoints();
+        human.resetExperience();
+        human.setNextExperience(40);
+        location.setFullEnemiesList(action.getEnemies());
+        location.resetLocation(false, human.getLevel());
     }
 
     public void EndFinalRound(Human human, Player enemy, CharacterAction action,

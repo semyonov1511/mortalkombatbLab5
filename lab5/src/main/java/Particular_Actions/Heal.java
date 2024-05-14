@@ -20,7 +20,7 @@ public class Heal extends Action {
             case "Hit" -> {
             }
             case "Block" -> {
-                enemy.setHealth((enemy.getMaxHealth() - enemy.getHealth()) / 2);
+                human.setHealth((human.getMaxHealth() - human.getHealth()) / 2);
             }
             case "Debuff" -> {
             }

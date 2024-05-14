@@ -18,7 +18,18 @@ public class Hit extends Action {
     public void realisation(Player human, Player enemy, String enemyActionType) {
         switch (enemyActionType) {
             case "Hit" -> {
-                enemy.setHealth(-human.getDamage());
+                if (enemy.isDebuffed() & human.isDebuffed()){
+                    enemy.setHealth((int) (-human.getDamage()*1.25/2));
+                }
+                if (enemy.isDebuffed() & !human.isDebuffed()){
+                    enemy.setHealth((int) (-human.getDamage()*1.25));
+                }
+                if (!enemy.isDebuffed() & human.isDebuffed()){
+                    enemy.setHealth((int) (-human.getDamage()/2));
+                }
+                if (!enemy.isDebuffed() & !human.isDebuffed()){
+                    enemy.setHealth((int) (-human.getDamage()));
+                }
             }
             case "Block" -> {
                 if (Math.random() < 0.5) {
