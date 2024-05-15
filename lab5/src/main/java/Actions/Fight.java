@@ -32,8 +32,8 @@ public class Fight {
     public int i = 1;
 
     public void Move(Player enemy, Player human, JLabel PlayerActionLabel, JLabel EnemyActionLabel, Action enemyAction, Action playerAction) {
-        PlayerActionLabel.setText(enemy.getName() + " uses " + enemyAction.getType());
-        EnemyActionLabel.setText(human.getName() + " use " + playerAction.getType());
+        PlayerActionLabel.setText(human.getName() + " uses " + playerAction.getType());
+        EnemyActionLabel.setText(enemy.getName() + " use " + enemyAction.getType());
         playerAction.realisation(human, enemy, enemyAction.getType());
     }
 
@@ -62,26 +62,27 @@ public class Fight {
             JLabel victoryLabel, JLabel EndGameWithoutLadderTitlleLabel, JLabel PlayerActionLabel, JLabel PlayerDebuffLabel,
             JLabel EnemyActionLabel, Items[] items, JRadioButton rb, Location location, int locationsNumber) {
         CharacterAction action = new CharacterAction();
+        Action enemyAction = action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList));
+        System.out.println(enemyAction.getType());
         switch (a) {
             case 0 -> {
-                Move(human, enemy, PlayerActionLabel, EnemyActionLabel, actionsList.get(1), 
-                        action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
+                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, 
+                        actionsList.get(1));
                 if (enemy.getHealth() > 0) {
-                    Move(enemy, human, PlayerActionLabel, EnemyActionLabel, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)), 
-                            actionsList.get(1));
+                    Move(human, enemy, EnemyActionLabel, PlayerActionLabel, actionsList.get(1), enemyAction);
                 }
             }
             case 1 -> {
-                Move(human, enemy, PlayerActionLabel, EnemyActionLabel, new Hit(), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
+                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, actionsList.get(0));
                 if (enemy.getHealth() > 0) {
-                    Move(enemy, human, PlayerActionLabel, EnemyActionLabel, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)), 
-                            new Hit());
+                    Move(human, enemy, PlayerActionLabel, EnemyActionLabel, actionsList.get(0), 
+                            enemyAction);
                 }
             }
             case 2 -> {
-                Move(human, enemy, PlayerActionLabel, EnemyActionLabel, new Debuff(), action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)));
+                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, new Debuff(), enemyAction);
                 if (enemy.getHealth() > 0) {
-                    Move(enemy, human, PlayerActionLabel, EnemyActionLabel, action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList)),
+                    Move(human, enemy, PlayerActionLabel, EnemyActionLabel, enemyAction,
                             new Debuff());
                 }
             }
@@ -135,6 +136,7 @@ public class Fight {
         } else {
             reset(human, enemy, location);
             label.setText(enemy.getName() + " win");
+            
         }
     }
 

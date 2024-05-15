@@ -28,10 +28,12 @@ public class Hit extends Action {
                     enemy.setHealth((int) (-human.getDamage()/2));
                 }
                 if (!enemy.isDebuffed() & !human.isDebuffed()){
+                    System.out.println(human.getName() + " бьет " + enemy.getName());
                     enemy.setHealth((int) (-human.getDamage()));
                 }
             }
             case "Block" -> {
+                System.out.println(human.getName() + " бьет через блок " + enemy.getName());
                 if (Math.random() < 0.5) {
                     enemy.setHealth(-human.getDamage() / 2);
                 }

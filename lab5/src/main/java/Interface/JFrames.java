@@ -20,7 +20,7 @@ public class JFrames extends javax.swing.JFrame {
 
     public JFrames() {
         initComponents();
-        game.WriteToTable(jTable1);
+        game.WriteToTable(RecordsTable);
         game.action.setEnemies();
         game.location.setFullEnemiesList(game.action.getEnemies());
         PlayerIconLabel.setIcon(new ImageIcon("crab.jpg"));
@@ -88,7 +88,7 @@ public class JFrames extends javax.swing.JFrame {
         RecordsTablePanel = new javax.swing.JPanel();
         RecordsTableLabel = new javax.swing.JLabel();
         RecordsTableScrollPane = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        RecordsTable = new javax.swing.JTable();
         CloseRecordsTableButton = new javax.swing.JButton();
         EndGameWithoutLadderDialog = new javax.swing.JDialog();
         EndGameWithoutLadderPanel = new javax.swing.JPanel();
@@ -114,7 +114,7 @@ public class JFrames extends javax.swing.JFrame {
         SetLocationsField = new javax.swing.JTextField();
         StartWithLocationsButton = new javax.swing.JButton();
         LevelUp = new javax.swing.JFrame();
-        jPanel1 = new javax.swing.JPanel();
+        AttributePanel = new javax.swing.JPanel();
         LevelUpLabel = new javax.swing.JLabel();
         HealthButton = new javax.swing.JRadioButton();
         DamageButton = new javax.swing.JRadioButton();
@@ -124,7 +124,6 @@ public class JFrames extends javax.swing.JFrame {
         MKLabel = new javax.swing.JLabel();
         StartButton = new javax.swing.JButton();
         SeeResultsButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
 
         FightPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -604,7 +603,7 @@ public class JFrames extends javax.swing.JFrame {
         RecordsTableLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         RecordsTableLabel.setText("Таблица рекордов");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        RecordsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -629,7 +628,7 @@ public class JFrames extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        RecordsTableScrollPane.setViewportView(jTable1);
+        RecordsTableScrollPane.setViewportView(RecordsTable);
 
         CloseRecordsTableButton.setBackground(new java.awt.Color(255, 255, 153));
         CloseRecordsTableButton.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
@@ -966,33 +965,33 @@ public class JFrames extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout AttributePanelLayout = new javax.swing.GroupLayout(AttributePanel);
+        AttributePanel.setLayout(AttributePanelLayout);
+        AttributePanelLayout.setHorizontalGroup(
+            AttributePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AttributePanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(HealthButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(DamageButton)
                 .addGap(32, 32, 32))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(AttributePanelLayout.createSequentialGroup()
+                .addGroup(AttributePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AttributePanelLayout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addComponent(LevelUpLabel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(AttributePanelLayout.createSequentialGroup()
                         .addGap(145, 145, 145)
                         .addComponent(ChooseAttributeButton)))
                 .addContainerGap(125, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        AttributePanelLayout.setVerticalGroup(
+            AttributePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AttributePanelLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(LevelUpLabel)
                 .addGap(66, 66, 66)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(AttributePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(HealthButton)
                     .addComponent(DamageButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
@@ -1006,14 +1005,14 @@ public class JFrames extends javax.swing.JFrame {
             LevelUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LevelUpLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AttributePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         LevelUpLayout.setVerticalGroup(
             LevelUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LevelUpLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AttributePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1054,13 +1053,8 @@ public class JFrames extends javax.swing.JFrame {
                 .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
             .addGroup(PanelLayout.createSequentialGroup()
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(MKLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(jLabel3)))
+                .addGap(159, 159, 159)
+                .addComponent(MKLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelLayout.setVerticalGroup(
@@ -1068,9 +1062,7 @@ public class JFrames extends javax.swing.JFrame {
             .addGroup(PanelLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(MKLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SeeResultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1088,10 +1080,7 @@ public class JFrames extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -1149,7 +1138,7 @@ public class JFrames extends javax.swing.JFrame {
 
     private void EndGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EndGameButtonActionPerformed
         try {
-            game.EndGameTop(human, EnterNameField, jTable1);
+            game.EndGameTop(human, EnterNameField, RecordsTable);
         } catch (IOException ex) {
             Logger.getLogger(JFrames.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1295,6 +1284,7 @@ public class JFrames extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AttackButton;
+    private javax.swing.JPanel AttributePanel;
     private javax.swing.ButtonGroup AttributesGroup;
     private javax.swing.JButton BlockButton;
     private javax.swing.JDialog CantUseItemDialog;
@@ -1358,6 +1348,7 @@ public class JFrames extends javax.swing.JFrame {
     private javax.swing.JLabel PlayerLevelLabel;
     private javax.swing.JLabel PointsTitleLabel;
     private javax.swing.JLabel PointsValueLabel;
+    private javax.swing.JTable RecordsTable;
     private javax.swing.JDialog RecordsTableDialog;
     private javax.swing.JLabel RecordsTableLabel;
     private javax.swing.JPanel RecordsTablePanel;
@@ -1376,8 +1367,5 @@ public class JFrames extends javax.swing.JFrame {
     private javax.swing.JLabel UnavailableItemLabel;
     private javax.swing.JButton UseItemButton;
     private javax.swing.JLabel VictoryLabel;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
