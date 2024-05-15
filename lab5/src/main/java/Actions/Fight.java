@@ -31,29 +31,28 @@ public class Fight {
     };
     public int i = 1;
 
-    public void Move(Player human, Player enemy, JLabel PlayerActionLabel, JLabel EnemyActionLabel, Action playerAction, Action enemyAction) {
-        PlayerActionLabel.setText(enemy.getName() + " use " + enemyAction.getType());
-        EnemyActionLabel.setText(human.getName() + " uses " + playerAction.getType());
+    public void Move(Player enemy, Player human, JLabel PlayerActionLabel, JLabel EnemyActionLabel, Action enemyAction, Action playerAction) {
+        PlayerActionLabel.setText(enemy.getName() + " uses " + enemyAction.getType());
+        EnemyActionLabel.setText(human.getName() + " use " + playerAction.getType());
         playerAction.realisation(human, enemy, enemyAction.getType());
     }
 
     public void checkDebuff(Player human, Player enemy, JLabel EnemyDebuffLabel, JLabel PlayerDebuffLabel) {
+        if (!enemy.isDebuffed()){
+            EnemyDebuffLabel.setText("");
+        }
         if (enemy.isDebuffed()) {
             EnemyDebuffLabel.setText(enemy.getName() + " is debuffed for " + enemy.getDebuffTurns() + " turns");
             enemy.loseDebuffTurn();
         }
-        if (!enemy.isDebuffed()){
-            EnemyDebuffLabel.setText("");
+        if (!human.isDebuffed()){
+            PlayerDebuffLabel.setText("");
         }
         if (human.isDebuffed()) {
-            PlayerDebuffLabel.setText(human.getName() + " is debuffed for " + human.getDebuffTurns() + " turns");
-            PlayerDebuffLabel.setText("CHECK");
-            System.out.println("check");
+            PlayerDebuffLabel.setText(human.getName() + " are debuffed for " + human.getDebuffTurns() + " turns");
             human.loseDebuffTurn();
         }
-        if (!human.isDebuffed()){
-            PlayerDebuffLabel.setText("check");
-        }
+        
     }
 
     public void Hit(Human human, Player enemy, int a, JLabel label,
@@ -88,7 +87,6 @@ public class Fight {
             }
         }
         change.RoundTexts(human, enemy, label, label2);
-        checkDebuff(human, enemy, EnemyDebuffLabel, PlayerDebuffLabel);
         checkDebuff(human, enemy, EnemyDebuffLabel, PlayerDebuffLabel);
         action.HP(human, pr1);
         action.HP(enemy, pr2);

@@ -47,7 +47,7 @@ public class JFrames extends javax.swing.JFrame {
         BlockButton = new javax.swing.JButton();
         PlayerHealthBar = new javax.swing.JProgressBar();
         EnemyIconLabel = new javax.swing.JLabel();
-        EnemtyHealthBar = new javax.swing.JProgressBar();
+        EnemyHealthBar = new javax.swing.JProgressBar();
         EnemyHeroLabel = new javax.swing.JLabel();
         EnemyDamageLabel = new javax.swing.JLabel();
         PlayerDamageLabel = new javax.swing.JLabel();
@@ -151,9 +151,9 @@ public class JFrames extends javax.swing.JFrame {
         PlayerHealthBar.setMaximum(80);
         PlayerHealthBar.setMinimum(-1);
 
-        EnemtyHealthBar.setBackground(new java.awt.Color(204, 204, 204));
-        EnemtyHealthBar.setForeground(new java.awt.Color(0, 255, 0));
-        EnemtyHealthBar.setMinimum(-1);
+        EnemyHealthBar.setBackground(new java.awt.Color(204, 204, 204));
+        EnemyHealthBar.setForeground(new java.awt.Color(0, 255, 0));
+        EnemyHealthBar.setMinimum(-1);
 
         EnemyHeroLabel.setBackground(new java.awt.Color(0, 0, 0));
         EnemyHeroLabel.setFont(new java.awt.Font("Comic Sans MS", 2, 14)); // NOI18N
@@ -283,7 +283,7 @@ public class JFrames extends javax.swing.JFrame {
                                             .addGap(10, 10, 10)
                                             .addComponent(EnemyHeroLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(FightPanelLayout.createSequentialGroup()
-                                            .addComponent(EnemtyHealthBar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(EnemyHealthBar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(FightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(FightPanelLayout.createSequentialGroup()
                                                     .addGap(92, 92, 92)
@@ -320,8 +320,7 @@ public class JFrames extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(ItemsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(AttackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(AttackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(FightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(FightPanelLayout.createSequentialGroup()
                                 .addComponent(PlayerDebuffLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -383,7 +382,7 @@ public class JFrames extends javax.swing.JFrame {
                         .addGap(149, 149, 149)
                         .addGroup(FightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(PlayerHealthBar, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                            .addComponent(EnemtyHealthBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(EnemyHealthBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(FightPanelLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(PlayerHealthLabel)))))
@@ -408,16 +407,15 @@ public class JFrames extends javax.swing.JFrame {
                             .addComponent(EnemyNumberLabel))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(FightPanelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
                         .addGroup(FightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(FightPanelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addGroup(FightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(PlayerLevelLabel)
                                     .addComponent(PlayerDebuffLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(6, 6, 6)
                                 .addComponent(PlayerIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(FightPanelLayout.createSequentialGroup()
-                                .addGap(60, 60, 60)
                                 .addComponent(EnemyActionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(PlayerActionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1108,14 +1106,14 @@ public class JFrames extends javax.swing.JFrame {
 
     private void AttackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttackButtonActionPerformed
         game.fight.Hit(human, enemy, 1, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
-                EndRoundLabel, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
+                EndRoundLabel, PlayerHealthBar, EnemyHealthBar, EndGameDialog,
                 EndGameWithoutLadderDialog, FightFrame, game.getResults(), EnemyDebuffLabel, VictoryLabel, EndGameWithoutLadderTitlleLabel,
                 PlayerActionLabel, PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber);
     }//GEN-LAST:event_AttackButtonActionPerformed
 
     private void BlockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlockButtonActionPerformed
         game.fight.Hit(human, enemy, 0, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
-                EndRoundLabel, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
+                EndRoundLabel, PlayerHealthBar, EnemyHealthBar, EndGameDialog,
                 EndGameWithoutLadderDialog, FightFrame, game.getResults(),EnemyDebuffLabel, VictoryLabel, EndGameWithoutLadderTitlleLabel,
                 PlayerActionLabel, PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber);
     }//GEN-LAST:event_BlockButtonActionPerformed
@@ -1132,15 +1130,15 @@ public class JFrames extends javax.swing.JFrame {
         EnemyDamageValueLabel.setText(Integer.toString(enemy.getDamage()));
         EnemyHealthLabel.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
         EnemyHeroLabel.setText(enemy.getName());
-        game.action.HP(enemy, EnemtyHealthBar);
-        EnemtyHealthBar.setMaximum(enemy.getMaxHealth());
-        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar);
+        game.action.HP(enemy, EnemyHealthBar);
+        EnemyHealthBar.setMaximum(enemy.getMaxHealth());
+        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemyHealthBar);
         if (game.action.checkExperience(human)) {
             game.action.LevelUp(human, game.action.getEnemies());
             LevelUp.setVisible(true);
             LevelUp.setBounds(300, 200, 430, 350);
         }   
-        game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
+        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel,PlayerHealthBar, EnemyHealthBar, 
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
                 EnemyActionLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
         
@@ -1225,12 +1223,12 @@ public class JFrames extends javax.swing.JFrame {
         EnemyDamageValueLabel.setText(Integer.toString(enemy.getDamage()));
         EnemyHealthLabel.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
         EnemyHeroLabel.setText(enemy.getName());
-        game.action.HP(enemy, EnemtyHealthBar);
-        EnemtyHealthBar.setMaximum(enemy.getMaxHealth());
+        game.action.HP(enemy, EnemyHealthBar);
+        EnemyHealthBar.setMaximum(enemy.getMaxHealth());
 
-        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemtyHealthBar);
+        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemyHealthBar);
 
-        game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,
+        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel,PlayerHealthBar, EnemyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
                 EnemyActionLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
 
@@ -1252,7 +1250,7 @@ public class JFrames extends javax.swing.JFrame {
         else {
             game.action.AddDamageHuman(human);
         }
-        game.change.NewRoundTexts(human, enemy, PlayerHealthBar, EnemtyHealthBar,PointsValueLabel, ExperienceValueLabel, 
+        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel,PlayerHealthBar, EnemyHealthBar,PointsValueLabel, ExperienceValueLabel, 
                 PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel,   EnemyHealthLabel, PlayerDamageValueLabel,
                 EnemyActionLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
         LevelUp.dispose();
@@ -1260,7 +1258,7 @@ public class JFrames extends javax.swing.JFrame {
 
     private void DebuffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DebuffButtonActionPerformed
         game.fight.Hit(human, enemy, 2, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
-                EndRoundLabel, PlayerHealthBar, EnemtyHealthBar, EndGameDialog,
+                EndRoundLabel, PlayerHealthBar, EnemyHealthBar, EndGameDialog,
                 EndGameWithoutLadderDialog, FightFrame, game.getResults(), EnemyDebuffLabel, VictoryLabel, EndGameWithoutLadderTitlleLabel,
                 PlayerActionLabel, PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber);
     }//GEN-LAST:event_DebuffButtonActionPerformed
@@ -1319,11 +1317,11 @@ public class JFrames extends javax.swing.JFrame {
     private javax.swing.JPanel EndGameWithoutLadderPanel;
     private javax.swing.JLabel EndGameWithoutLadderTitlleLabel;
     private javax.swing.JLabel EndRoundLabel;
-    private javax.swing.JProgressBar EnemtyHealthBar;
     private javax.swing.JLabel EnemyActionLabel;
     private javax.swing.JLabel EnemyDamageLabel;
     private javax.swing.JLabel EnemyDamageValueLabel;
     private javax.swing.JLabel EnemyDebuffLabel;
+    private javax.swing.JProgressBar EnemyHealthBar;
     private javax.swing.JLabel EnemyHealthLabel;
     private javax.swing.JLabel EnemyHeroLabel;
     private javax.swing.JLabel EnemyIconLabel;

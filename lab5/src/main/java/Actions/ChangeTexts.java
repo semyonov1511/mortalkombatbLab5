@@ -9,10 +9,12 @@ import javax.swing.JRadioButton;
 
 public class ChangeTexts {
     
-    public void NewRoundTexts(Player human, Player enemy, JProgressBar pr1,
-            JProgressBar pr2, JLabel points, JLabel humanExperience, JLabel humanLevel,
+    public void NewRoundTexts(Player human, Player enemy, JLabel PlayerActionLabel, JLabel EnemyActionLabel,
+            JProgressBar pr1, JProgressBar pr2, JLabel points, JLabel humanExperience, JLabel humanLevel,
             JLabel enemyLevel, JLabel humanHealth, JLabel enemyHealth, JLabel humanDamage, JLabel label9,
             int i, Items[] items, JRadioButton item1, JRadioButton item2, JRadioButton item3) {
+        PlayerActionLabel.setText("");
+        EnemyActionLabel.setText("");
         points.setText(Integer.toString(((Human) human).getPoints()));
         humanExperience.setText(Integer.toString(((Human) human).getExperience()) + "/" + ((Human) human).getNextExperience());
         humanLevel.setText(Integer.toString((human.getLevel())+1) + " level");
