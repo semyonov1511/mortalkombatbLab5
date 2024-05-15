@@ -38,15 +38,6 @@ public class ChangeTexts {
         }
     }
     
-    public void EndGameText(Human human, JLabel resultText){
-        if(human.getWin()==12){
-            resultText.setText("Победа на вашей стороне");
-        }
-        else {
-            resultText.setText("Победа не на вашей стороне");
-        }
-    }
-    
     public void BagText( Items[] items, JRadioButton item1, JRadioButton item2, JRadioButton item3){
         item1.setText(items[0].getName()+", "+items[0].getCount()+" шт");
         item2.setText(items[1].getName()+", "+items[1].getCount()+" шт");

@@ -1,6 +1,5 @@
 package Actions;
 
-//ADD IMAGE!!!
 import Game_components.Result;
 import Game_components.Human;
 import Game_components.Player;
@@ -11,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
-import Fabrics.*;
 import Particular_Actions.Action;
 import Particular_Actions.Block;
 import Particular_Actions.Debuff;
@@ -63,7 +61,6 @@ public class Fight {
             JLabel EnemyActionLabel, Items[] items, JRadioButton rb, Location location, int locationsNumber) {
         CharacterAction action = new CharacterAction();
         Action enemyAction = action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList));
-        System.out.println(enemyAction.getType());
         switch (a) {
             case 0 -> {
                 Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, 
@@ -123,8 +120,6 @@ public class Fight {
         dialog.setBounds(300, 150, 700, 600);
         if (human.getHealth() > 0) {
             label.setText("You win");
-            human.setWin();
-
             if ("Shao Kahn".equals(enemy.getName())) {
                 action.AddItems(38, 23, 8, items);
                 action.AddPointsBoss(human);
@@ -161,7 +156,6 @@ public class Fight {
         action.setEnemies();
         String text = "Победа не на вашей стороне";
         if (human.getHealth() > 0) {
-            human.setWin();
             action.AddPoints(human);
             text = "Победа на вашей стороне";
         }

@@ -30,7 +30,6 @@ public class CharacterAction {
     }
 
     public Action ChooseEnemyAction(Player enemy, ArrayList<Action> list) {
-        int i = 0;
         switch (enemy.getName()){
             case "Sub-Zero" -> {
                 return list.get((int) (Math.random()*3));
@@ -83,7 +82,7 @@ public class CharacterAction {
         return human.getExperience() >= human.getNextExperience();
     }
 
-    public void LevelUp(Human human, Player[] enemyes) {
+    public void LevelUp(Human human, Player[] enemies) {
         human.setLevel();
         int i = 0;
         while (human.getNextExperience() >= experience_for_next_level[i]) {
@@ -91,7 +90,7 @@ public class CharacterAction {
         }
         human.setNextExperience(experience_for_next_level[i]);
         for (int j = 0; j < 5; j++) {
-            NewHealthEnemy(enemyes[j], human);
+            NewHealthEnemy(enemies[j], human);
         }
 
     }
