@@ -584,9 +584,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="PlayerDebuffLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="DASDASD"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

@@ -261,8 +261,6 @@ public class JFrames extends javax.swing.JFrame {
             }
         });
 
-        PlayerDebuffLabel.setText("DASDASD");
-
         javax.swing.GroupLayout FightPanelLayout = new javax.swing.GroupLayout(FightPanel);
         FightPanel.setLayout(FightPanelLayout);
         FightPanelLayout.setHorizontalGroup(
