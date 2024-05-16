@@ -5,7 +5,6 @@ import Game_components.Human;
 import Game_components.Player;
 import Game_components.Items;
 import java.util.ArrayList;
-import javax.swing.JProgressBar;
 import Particular_Actions.Action;
 import Particular_Actions.Block;
 import Particular_Actions.Debuff;
@@ -84,7 +83,6 @@ public class Fight {
 
     public void checkDeath(Human human, Player enemy, ArrayList<Result> results,
             Items[] items, Location location, int locationsNumber, Player[] enemiesList, Mediator mediator) {
-        CharacterAction action = new CharacterAction();
         if (human.getHealth() <= 0 & items[2].getCount() > 0) {
             human.setHealth((int) (human.getMaxHealth() * 0.05));
             items[2].setCount(-1);
@@ -161,7 +159,8 @@ public class Fight {
     }
 
     public void NewRound(Player human, Player enemy, Mediator mediator) {
-        mediator.setNewRoundHealthBars(human, enemy);
+        mediator.setPlayerMaxHealthBar(human);
+        mediator.setEnemyMaxHealthBar(enemy);
         human.setHealth(human.getMaxHealth());
         enemy.setHealth(enemy.getMaxHealth());
         mediator.setHealthBar(human);

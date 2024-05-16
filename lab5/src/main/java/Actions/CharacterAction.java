@@ -6,9 +6,6 @@ import Game_components.Player;
 import Game_components.Items;
 import Particular_Actions.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.JDialog;
-import javax.swing.JProgressBar;
 
 public class CharacterAction {
 
@@ -44,15 +41,7 @@ public class CharacterAction {
             }
         }
     }
-
-    public void HP(Player player, JProgressBar progress) {
-        if (player.getHealth() >= 0) {
-            progress.setValue(player.getHealth());
-        } else {
-            progress.setValue(0);
-        }
-    }
-
+    
     public void AddPoints(Human human) {
         switch (human.getLevel()) {
             case 0 -> {

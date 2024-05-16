@@ -137,9 +137,10 @@ public class Mediator {
             }
         }
     }
-
-    public void setNewRoundHealthBars(Player human, Player enemy) {
+    public void setPlayerMaxHealthBar(Player human){
         playerHealthBar.setMaximum(human.getMaxHealth());
+    }
+    public void setEnemyMaxHealthBar(Player enemy){
         enemyHealthBar.setMaximum(enemy.getMaxHealth());
     }
 

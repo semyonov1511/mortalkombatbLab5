@@ -1186,7 +1186,7 @@ public class JFrames extends javax.swing.JFrame {
             nameButton = "Third item";
         }
         game.action.UseItem(human, items, nameButton, mediator);
-        game.action.HP(human, PlayerHealthBar);
+        mediator.setHealthBar(human);
         PlayerHealthLabel.setText(human.getHealth() + "/" + human.getMaxHealth());
         game.change.BagText(items, FirstItemButton, SecondItemButton, ThirdItemButton);
     }//GEN-LAST:event_UseItemButtonActionPerformed
@@ -1204,7 +1204,7 @@ public class JFrames extends javax.swing.JFrame {
         SetLocationsFrame.setVisible(false);
         locationsNumber = Integer.parseInt(SetLocationsField.getText());
         LocationLabel.setText("Текущая локация: " + game.location.getCurrentLocation() + "/" + locationsNumber);
-        human = game.NewHuman(PlayerHealthBar);
+        human = game.NewHuman(mediator);
         game.location.setEnemiesAtLocation(human.getLevel());
         FightFrame.setVisible(true);
         FightFrame.setSize(1000, 700);
@@ -1218,7 +1218,7 @@ public class JFrames extends javax.swing.JFrame {
         EnemyDamageValueLabel.setText(Integer.toString(enemy.getDamage()));
         EnemyHealthLabel.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
         EnemyHeroLabel.setText(enemy.getName());
-        game.action.HP(enemy, EnemyHealthBar);
+        mediator.setHealthBar(enemy);
         EnemyHealthBar.setMaximum(enemy.getMaxHealth());
 
         game.fight.NewRound(human, enemy, mediator);

@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import javax.swing.JProgressBar;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -23,10 +22,10 @@ public class Game {
     public Location location = new Location();
     private final ArrayList<Result> results = new ArrayList<>();
 
-    public Human NewHuman(JProgressBar bar) {
+    public Human NewHuman(Mediator mediator) {
         Human human = new Human(0, 80, 160, 1);
-        action.HP(human, bar);
-        bar.setMaximum(human.getMaxHealth());
+        mediator.setHealthBar(human);
+        mediator.setPlayerMaxHealthBar(human);
         return human;
     }
 
