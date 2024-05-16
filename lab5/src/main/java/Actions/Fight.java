@@ -29,9 +29,8 @@ public class Fight {
     };
     public int i = 1;
 
-    public void Move(Player enemy, Player human, JLabel PlayerActionLabel, JLabel EnemyActionLabel, Action enemyAction, Action playerAction) {
-        PlayerActionLabel.setText(human.getName() + " uses " + playerAction.getType());
-        EnemyActionLabel.setText(enemy.getName() + " use " + enemyAction.getType());
+    public void Move(Player enemy, Player human, JLabel PlayerActionLabel, JLabel EnemyActionLabel, Action enemyAction, Action playerAction, Mediator mediator) {
+        mediator.setActionLabels(enemy, human, enemyAction, playerAction);
         playerAction.realisation(human, enemy, enemyAction.getType());
     }
 
@@ -58,29 +57,29 @@ public class Fight {
             JProgressBar pr1, JProgressBar pr2, JDialog dialog1,
             JDialog dialog2, JFrame frame, ArrayList<Result> results, JLabel EnemyDebuffLabel,
             JLabel victoryLabel, JLabel EndGameWithoutLadderTitlleLabel, JLabel PlayerActionLabel, JLabel PlayerDebuffLabel,
-            JLabel EnemyActionLabel, Items[] items, JRadioButton rb, Location location, int locationsNumber, Player[] enemiesList) {
+            JLabel EnemyActionLabel, Items[] items, JRadioButton rb, Location location, int locationsNumber, Player[] enemiesList, Mediator mediator) {
         CharacterAction action = new CharacterAction();
         Action enemyAction = action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList));
         switch (a) {
             case 0 -> {
                 Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction,
-                        actionsList.get(1));
+                        actionsList.get(1), mediator);
                 if (enemy.getHealth() > 0) {
-                    Move(human, enemy, EnemyActionLabel, PlayerActionLabel, actionsList.get(1), enemyAction);
+                    Move(human, enemy, EnemyActionLabel, PlayerActionLabel, actionsList.get(1), enemyAction, mediator);
                 }
             }
             case 1 -> {
-                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, actionsList.get(0));
+                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, actionsList.get(0), mediator);
                 if (enemy.getHealth() > 0) {
                     Move(human, enemy, PlayerActionLabel, EnemyActionLabel, actionsList.get(0),
-                            enemyAction);
+                            enemyAction, mediator);
                 }
             }
             case 2 -> {
-                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, actionsList.get(2));
+                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, actionsList.get(2), mediator);
                 if (enemy.getHealth() > 0) {
                     Move(human, enemy, PlayerActionLabel, EnemyActionLabel,actionsList.get(2),
-                            enemyAction);
+                            enemyAction, mediator);
                 }
             }
         }

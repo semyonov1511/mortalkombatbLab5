@@ -1,6 +1,7 @@
 package Interface;
 
 import Actions.Game;
+import Actions.Mediator;
 import Game_components.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import javax.swing.ImageIcon;
 
 public class JFrames extends javax.swing.JFrame {
 
+    Mediator mediator;
     Game game = new Game();
     Human human = null;
     Player enemy = null;
@@ -31,11 +33,15 @@ public class JFrames extends javax.swing.JFrame {
         ItemsGroup.add(FirstItemButton);
         ItemsGroup.add(SecondItemButton);
         ItemsGroup.add(ThirdItemButton);
-
         items[0] = new Items("Малое зелье лечение", 0);
         items[1] = new Items("Большое зелье лечение", 0);
         items[2] = new Items("Крест возрождения", 0);
-
+        mediator = new Mediator(EnemyHealthLabel, PlayerHealthLabel, EndFightDialog, PointsValueLabel, ExperienceValueLabel,
+                PlayerLevelLabel, EnemyLevelLabel, PlayerDamageValueLabel, EndRoundLabel, PlayerHealthBar,
+                EnemyHealthBar, EndGameDialog, EndGameWithoutLadderDialog, FightFrame, EnemyDebuffLabel,
+                VictoryLabel, EndGameWithoutLadderTitlleLabel, PlayerActionLabel, PlayerDebuffLabel, EnemyActionLabel,
+                FirstItemButton, SecondItemButton, ThirdItemButton, EnterNameField, RecordsTable,
+                CantUseItemDialog, ItemsBagDialog);
     }
 
     @SuppressWarnings("unchecked")
@@ -1102,14 +1108,14 @@ public class JFrames extends javax.swing.JFrame {
         game.fight.Hit(human, enemy, 1, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
                 EndRoundLabel, PlayerHealthBar, EnemyHealthBar, EndGameDialog,
                 EndGameWithoutLadderDialog, FightFrame, game.getResults(), EnemyDebuffLabel, VictoryLabel, EndGameWithoutLadderTitlleLabel,
-                PlayerActionLabel, PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber,game.action.getEnemies());
+                PlayerActionLabel, PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber, game.action.getEnemies(), mediator);
     }//GEN-LAST:event_AttackButtonActionPerformed
 
     private void BlockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlockButtonActionPerformed
-        game.fight.Hit(human, enemy, 0, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,EndRoundLabel, 
-                PlayerHealthBar, EnemyHealthBar, EndGameDialog,EndGameWithoutLadderDialog, FightFrame, 
-                game.getResults(),EnemyDebuffLabel, VictoryLabel, EndGameWithoutLadderTitlleLabel,PlayerActionLabel, 
-                PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber,game.action.getEnemies());
+        game.fight.Hit(human, enemy, 0, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog, EndRoundLabel,
+                PlayerHealthBar, EnemyHealthBar, EndGameDialog, EndGameWithoutLadderDialog, FightFrame,
+                game.getResults(), EnemyDebuffLabel, VictoryLabel, EndGameWithoutLadderTitlleLabel, PlayerActionLabel,
+                PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber, game.action.getEnemies(), mediator);
     }//GEN-LAST:event_BlockButtonActionPerformed
 
     private void NextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextRoundButtonActionPerformed
@@ -1124,7 +1130,7 @@ public class JFrames extends javax.swing.JFrame {
             game.location.setFullEnemiesList(game.action.getEnemies());
             LevelUp.setVisible(true);
             LevelUp.setBounds(300, 200, 430, 350);
-        }  
+        }
         enemy = game.location.getCurrentEnemy();
         System.out.println("в бою " + enemy);
         EnemyIconLabel.setIcon(enemy.getPhoto());
@@ -1134,11 +1140,11 @@ public class JFrames extends javax.swing.JFrame {
         game.action.HP(enemy, EnemyHealthBar);
         EnemyHealthBar.setMaximum(enemy.getMaxHealth());
         game.fight.NewRound(human, enemy, PlayerHealthBar, EnemyHealthBar);
-         
-        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel,PlayerHealthBar, EnemyHealthBar, 
+
+        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel, PlayerHealthBar, EnemyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
                 EnemyActionLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
-        
+
         EndFightDialog.dispose();
     }//GEN-LAST:event_NextRoundButtonActionPerformed
 
@@ -1225,7 +1231,7 @@ public class JFrames extends javax.swing.JFrame {
 
         game.fight.NewRound(human, enemy, PlayerHealthBar, EnemyHealthBar);
 
-        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel,PlayerHealthBar, EnemyHealthBar,
+        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel, PlayerHealthBar, EnemyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
                 EnemyActionLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
 
@@ -1241,14 +1247,13 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_HealthButtonActionPerformed
 
     private void ChooseAttributeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseAttributeButtonActionPerformed
-        if (HealthButton.isSelected()){
+        if (HealthButton.isSelected()) {
             game.action.AddHealthHuman(human);
-        }
-        else {
+        } else {
             game.action.AddDamageHuman(human);
         }
-        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel,PlayerHealthBar, EnemyHealthBar,PointsValueLabel, ExperienceValueLabel, 
-                PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel,   EnemyHealthLabel, PlayerDamageValueLabel,
+        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel, PlayerHealthBar, EnemyHealthBar, PointsValueLabel, ExperienceValueLabel,
+                PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
                 EnemyActionLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
         LevelUp.dispose();
     }//GEN-LAST:event_ChooseAttributeButtonActionPerformed
@@ -1257,7 +1262,7 @@ public class JFrames extends javax.swing.JFrame {
         game.fight.Hit(human, enemy, 2, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
                 EndRoundLabel, PlayerHealthBar, EnemyHealthBar, EndGameDialog,
                 EndGameWithoutLadderDialog, FightFrame, game.getResults(), EnemyDebuffLabel, VictoryLabel, EndGameWithoutLadderTitlleLabel,
-                PlayerActionLabel, PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber,game.action.getEnemies());
+                PlayerActionLabel, PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber, game.action.getEnemies(), mediator);
     }//GEN-LAST:event_DebuffButtonActionPerformed
 
     /**
