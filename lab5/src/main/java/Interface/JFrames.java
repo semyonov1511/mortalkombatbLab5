@@ -25,7 +25,6 @@ public class JFrames extends javax.swing.JFrame {
         initComponents();
         game.WriteToTable(RecordsTable);
         game.action.setEnemies();
-        System.out.println("В начале " + Arrays.toString(game.action.getEnemies()));
         game.location.setFullEnemiesList(game.action.getEnemies());
         PlayerIconLabel.setIcon(new ImageIcon("crab.jpg"));
         AttributesGroup.add(HealthButton);
@@ -1132,7 +1131,6 @@ public class JFrames extends javax.swing.JFrame {
             LevelUp.setBounds(300, 200, 430, 350);
         }
         enemy = game.location.getCurrentEnemy();
-        System.out.println("в бою " + enemy);
         EnemyIconLabel.setIcon(enemy.getPhoto());
         EnemyDamageValueLabel.setText(Integer.toString(enemy.getDamage()));
         EnemyHealthLabel.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
