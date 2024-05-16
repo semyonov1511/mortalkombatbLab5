@@ -12,39 +12,39 @@ import javax.swing.JTextField;
 
 public class Mediator {
 
-    private JLabel enemyHealthLabel;
-    private JLabel playerHealthLabel;
-    private JLabel pointsValueLabel;
-    private JLabel experienceValueLabel;
-    private JLabel playerLevelLabel;
-    private JLabel enemyLevelLabel;
-    private JLabel playerDamageValueLabel;
-    private JLabel endRoundLabel;
-    private JLabel enemyDebuffLabel;
-    private JLabel victoryLabel;
-    private JLabel endGameWithoutLadderTitlleLabel;
-    private JLabel playerActionLabel;
-    private JLabel playerDebuffLabel;
-    private JLabel enemyActionLabel;
+    private final JLabel enemyHealthLabel;
+    private final JLabel playerHealthLabel;
+    private final JLabel pointsValueLabel;
+    private final JLabel experienceValueLabel;
+    private final JLabel playerLevelLabel;
+    private final JLabel enemyLevelLabel;
+    private final JLabel playerDamageValueLabel;
+    private final JLabel endRoundLabel;
+    private final JLabel enemyDebuffLabel;
+    private final JLabel victoryLabel;
+    private final JLabel endGameWithoutLadderTitlleLabel;
+    private final JLabel playerActionLabel;
+    private final JLabel playerDebuffLabel;
+    private final JLabel enemyActionLabel;
 
-    private JProgressBar playerHealthBar;
-    private JProgressBar enemyHealthBar;
+    private final JProgressBar playerHealthBar;
+    private final JProgressBar enemyHealthBar;
 
-    private JDialog endFightDialog;
-    private JDialog endGameDialog;
-    private JDialog endGameWithoutLadderDialog;
-    private JDialog cantUseItemDialog;
-    private JDialog itemsBagDialog;
+    private final JDialog endFightDialog;
+    private final JDialog endGameDialog;
+    private final JDialog endGameWithoutLadderDialog;
+    private final JDialog cantUseItemDialog;
+    private final JDialog itemsBagDialog;
 
-    private JFrame fightFrame;
+    private final JFrame fightFrame;
 
-    private JRadioButton firstItemButton;
-    private JRadioButton secondItemButton;
-    private JRadioButton thirdItemButton;
+    private final JRadioButton firstItemButton;
+    private final JRadioButton secondItemButton;
+    private final JRadioButton thirdItemButton;
 
-    private JTextField enterNameField;
+    private final JTextField enterNameField;
 
-    private JTable recordsTable;
+    private final JTable recordsTable;
 
     public Mediator(JLabel enemyHealthLabel, JLabel playerHealthLabel, JDialog endFightDialog, JLabel pointsValueLabel, JLabel experienceValueLabel,
             JLabel playerLevelLabel, JLabel enemyLevelLabel, JLabel playerDamageValueLabel, JLabel endRoundLabel, JProgressBar playerHealthBar,
@@ -53,7 +53,6 @@ public class Mediator {
             JRadioButton firstItemButton, JRadioButton secondItemButton, JRadioButton thirdItemButton, JTextField enterNameField, JTable recordsTable,
             JDialog cantUseItemDialog, JDialog itemsBagDialog) {
 
-        // Set-functions using this. keyword
         this.enemyHealthLabel = enemyHealthLabel;
         this.playerHealthLabel = playerHealthLabel;
         this.endFightDialog = endFightDialog;
@@ -87,4 +86,5 @@ public class Mediator {
         playerActionLabel.setText(human.getName() + " uses " + playerAction.getType());
         enemyActionLabel.setText(enemy.getName() + " use " + enemyAction.getType());
     }
+    
 }
