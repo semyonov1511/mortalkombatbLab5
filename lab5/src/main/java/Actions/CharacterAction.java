@@ -176,15 +176,16 @@ public class CharacterAction {
         enemy.addLevel();
     }
 
-    public void UseItem(Player human, Items[] items, String name, JDialog dialog, JDialog dialog1) {
+    public void UseItem(Player human, Items[] items, String name, Mediator mediator) {
+        boolean a = false;
         switch (name) {
             case "First item" -> {
                 if (items[0].getCount() > 0) {
                     human.addHealth((int) (human.getMaxHealth() * 0.25));
                     items[0].setCount(-1);
                 } else {
-                    dialog.setVisible(true);
-                    dialog.setBounds(300, 200, 400, 300);
+                    a = true;
+                    mediator.openCantUseItemDialog();
                 }
             }
             case "Second item" -> {
@@ -192,18 +193,14 @@ public class CharacterAction {
                     human.addHealth((int) (human.getMaxHealth() * 0.5));
                     items[1].setCount(-1);
                 } else {
-                    dialog.setVisible(true);
-                    dialog.setBounds(300, 200, 400, 300);
+                    a = true;
+                    mediator.openCantUseItemDialog();
                 }
             }
             case "Third item" -> {
-                dialog.setVisible(true);
-                dialog.setBounds(300, 200, 400, 300);
+                a = true;
+                mediator.openCantUseItemDialog();
             }
-        }
-
-        if (dialog.isVisible() == false) {
-            dialog1.dispose();
         }
     }
 

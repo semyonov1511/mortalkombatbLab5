@@ -1185,7 +1185,7 @@ public class JFrames extends javax.swing.JFrame {
         if (ThirdItemButton.isSelected()) {
             nameButton = "Third item";
         }
-        game.action.UseItem(human, items, nameButton, CantUseItemDialog, ItemsBagDialog);
+        game.action.UseItem(human, items, nameButton, mediator);
         game.action.HP(human, PlayerHealthBar);
         PlayerHealthLabel.setText(human.getHealth() + "/" + human.getMaxHealth());
         game.change.BagText(items, FirstItemButton, SecondItemButton, ThirdItemButton);

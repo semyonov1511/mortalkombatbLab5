@@ -164,7 +164,6 @@ public class Fight {
         mediator.setNewRoundHealthBars(human, enemy);
         human.setHealth(human.getMaxHealth());
         enemy.setHealth(enemy.getMaxHealth());
-        CharacterAction action = new CharacterAction();
         mediator.setHealthBar(human);
         mediator.setHealthBar(enemy);
     }

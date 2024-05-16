@@ -170,4 +170,9 @@ public class Mediator {
     public void setRoundEndText(String text) {
         endRoundLabel.setText(text);
     }
+    // CantUseItemDialog, ItemsBagDialog
+    public void openCantUseItemDialog(){
+        cantUseItemDialog.setVisible(true);
+        cantUseItemDialog.setBounds(300, 200, 400, 300);
+    }
 }
