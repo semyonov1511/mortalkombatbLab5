@@ -1129,7 +1129,7 @@ public class JFrames extends javax.swing.JFrame {
         EnemyDamageValueLabel.setText(Integer.toString(enemy.getDamage()));
         EnemyHealthLabel.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
         EnemyHeroLabel.setText(enemy.getName());
-        game.action.HP(enemy, EnemyHealthBar);
+        mediator.setHealthBar(enemy);
         EnemyHealthBar.setMaximum(enemy.getMaxHealth());
         game.fight.NewRound(human, enemy, mediator);
 
