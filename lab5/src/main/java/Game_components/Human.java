@@ -26,11 +26,7 @@ public class Human extends Player {
     public int getNextExperience() {
         return this.nextexperience;
     }
-
-    public int getWin() {
-        return this.win;
-    }
-
+    
     public void resetPoints() {
         this.points = 0;
     }
@@ -49,10 +45,6 @@ public class Human extends Player {
 
     public void setNextExperience(int e) {
         this.nextexperience = e;
-    }
-
-    public void setWin() {
-        this.win++;
     }
 
     @Override

@@ -9,6 +9,7 @@ public class Player {
     private int maxhealth;
     private int damage;
     private int attack;
+    private int turnsWithDebuff;
     public ImageIcon icon;
 
     public Player(int level, int health, int damage, int attack) {
@@ -17,6 +18,24 @@ public class Player {
         this.damage = damage;
         this.attack = attack;
         this.maxhealth = health;
+    }
+
+    public boolean isDebuffed() {
+        return turnsWithDebuff > 0;
+    }
+
+    public void loseDebuffTurn() {
+        if (turnsWithDebuff > 0) {
+            turnsWithDebuff--;
+        }
+    }
+
+    public void setDebuffTurns(int i) {
+        turnsWithDebuff = i;
+    }
+
+    public int getDebuffTurns() {
+        return turnsWithDebuff;
     }
 
     public void setPhoto(String path) {
@@ -46,7 +65,7 @@ public class Player {
     public void resetDamage() {
         this.damage = 0;
     }
-    
+
     public void setDamage(int d) {
         this.damage += d;
     }

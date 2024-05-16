@@ -4,14 +4,14 @@ import Fabrics.EnemyFabric;
 import Game_components.Human;
 import Game_components.Player;
 import Game_components.Items;
+import Particular_Actions.*;
+import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JProgressBar;
 
 public class CharacterAction {
 
     private final int experience_for_next_level[] = {40, 90, 180, 260, 410, 1000};
-
-    private final int kind_fight[][] = {{1, 0}, {1, 1, 0}, {0, 1, 0}, {1, 1, 1, 1}};
 
     private final Player enemies[] = new Player[6];
 
@@ -29,45 +29,20 @@ public class CharacterAction {
         return this.enemies;
     }
 
-    public int[] EnemyBehavior(int k1, int k2, int k3, int k4, double i) {
-        int arr[] = null;
-        if (i < k1 * 0.01) {
-            arr = kind_fight[0];
-        }
-        if (i >= k1 * 0.01 & i < (k1 + k2) * 0.01) {
-            arr = kind_fight[1];
-        }
-        if (i >= (k1 + k2) * 0.01 & i < (k1 + k2 + k3) * 0.01) {
-            arr = kind_fight[2];
-        }
-        if (i >= (k1 + k2 + k3) * 0.01 & i < 1) {
-            arr = kind_fight[3];
-        }
-        return arr;
-    }
-
-    public int[] ChooseBehavior(Player enemy) {
-        int arr[] = null;
-        double i = Math.random();
-        CharacterAction action = new CharacterAction();
-        if (null != enemy.getName()) {
-            switch (enemy.getName()) {
-                case "Baraka" ->
-                    arr = action.EnemyBehavior(15, 15, 60, 10, i);
-                case "Sub-Zero" ->
-                    arr = action.EnemyBehavior(25, 25, 0, 50, i);
-                case "Liu Kang" ->
-                    arr = action.EnemyBehavior(13, 13, 10, 64, i);
-                case "Sonya Blade" ->
-                    arr = action.EnemyBehavior(25, 25, 50, 0, i);
-                case "Shao Kahn" ->
-                    arr = action.EnemyBehavior(10, 45, 0, 45, i);
-                default -> {
-                }
+    public Action ChooseEnemyAction(Player enemy, ArrayList<Action> list) {
+        switch (enemy.getName()){
+            case "Sub-Zero" -> {
+                return list.get((int) (Math.random()*3));
+            }
+            case "Shao Kahn" -> {
+                list.remove(2);
+                return list.get((int) (Math.random()*3));
+            }
+            default -> {
+                return list.get((int) (Math.random()*2));
             }
         }
-        return arr;
-    }
+    } 
 
     public void HP(Player player, JProgressBar progress) {
 
@@ -107,16 +82,15 @@ public class CharacterAction {
         return human.getExperience() >= human.getNextExperience();
     }
 
-    public void LevelUp(Human human, Player[] enemyes) {
+    public void LevelUp(Human human, Player[] enemies) {
         human.setLevel();
         int i = 0;
         while (human.getNextExperience() >= experience_for_next_level[i]) {
             i = i + 1;
         }
         human.setNextExperience(experience_for_next_level[i]);
-        System.out.println(human.getDamage());
         for (int j = 0; j < 5; j++) {
-            NewHealthEnemy(enemyes[j], human);
+            NewHealthEnemy(enemies[j], human);
         }
 
     }
