@@ -106,6 +106,7 @@ public class Fight {
         }
         if (human.getHealth() <= 0 | enemy.getHealth() <= 0) {
             if (location.getCurrentLocation() == locationsNumber & "Shao Kahn".equals(enemy.getName())) {
+                location.resetLocation(false, i);
                 EndFinalRound(((Human) human), enemy, action, results, dialog1, dialog2,
                         frame, label4, label5,enemiesList);
             } else {

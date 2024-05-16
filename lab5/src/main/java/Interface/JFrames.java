@@ -621,7 +621,8 @@ public class JFrames extends javax.swing.JFrame {
             new String [] {
                 "Имя", "Количество баллов"
             }
-        ) {
+        )
+        {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Integer.class
             };
@@ -629,6 +630,10 @@ public class JFrames extends javax.swing.JFrame {
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
         });
         RecordsTableScrollPane.setViewportView(RecordsTable);
 
