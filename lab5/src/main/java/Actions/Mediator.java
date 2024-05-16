@@ -102,15 +102,37 @@ public class Mediator {
 
     public void setDebuffLabel(Player player, boolean a) {
         if (a) {
-            switch (player.getName()){
-                case "You" -> playerDebuffLabel.setText(player.getName() + " are debuffed for " + player.getDebuffTurns() + " turns");
-                default -> enemyDebuffLabel.setText(player.getName() + " is debuffed for " + player.getDebuffTurns() + " turns");
+            switch (player.getName()) {
+                case "You" ->
+                    playerDebuffLabel.setText(player.getName() + " are debuffed for " + player.getDebuffTurns() + " turns");
+                default ->
+                    enemyDebuffLabel.setText(player.getName() + " is debuffed for " + player.getDebuffTurns() + " turns");
+            }
+        } else {
+            switch (player.getName()) {
+                case "You" ->
+                    playerDebuffLabel.setText("");
+                default ->
+                    enemyDebuffLabel.setText("");
             }
         }
-        else{
-            switch (player.getName()){
-                case "You" -> playerDebuffLabel.setText("");
-                default -> enemyDebuffLabel.setText("");
+    }
+
+    public void setHealthBar(Player player) {
+        switch (player.getName()) {
+            case "You" -> {
+                if (player.getHealth() >= 0) {
+                    playerHealthBar.setValue(player.getHealth());
+                } else {
+                    playerHealthBar.setValue(0);
+                }
+            }
+            default -> {
+                if (player.getHealth() >= 0) {
+                    enemyHealthBar.setValue(player.getHealth());
+                } else {
+                    enemyHealthBar.setValue(0);
+                }
             }
         }
     }

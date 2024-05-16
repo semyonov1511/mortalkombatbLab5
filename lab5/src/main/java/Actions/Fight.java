@@ -85,8 +85,8 @@ public class Fight {
         }
         mediator.roundTexts(human, enemy);
         checkDebuff(human, enemy, mediator);
-        action.HP(human, pr1);
-        action.HP(enemy, pr2);
+        mediator.setHealthBar(human);
+        mediator.setHealthBar(enemy);
         checkDeath(human, enemy, label2, dialog, label3, pr1, dialog1, dialog2, frame, results, victoryLabel, EndGameWithoutLadderTitlleLabel,
                 PlayerActionLabel, items, rb, location, locationsNumber, enemiesList);
     }

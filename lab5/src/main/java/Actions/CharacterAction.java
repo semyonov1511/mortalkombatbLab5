@@ -46,7 +46,6 @@ public class CharacterAction {
     }
 
     public void HP(Player player, JProgressBar progress) {
-
         if (player.getHealth() >= 0) {
             progress.setValue(player.getHealth());
         } else {
