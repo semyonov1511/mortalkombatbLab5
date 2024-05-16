@@ -1087,7 +1087,7 @@ public class JFrames extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
-        SetLocationsFrame.setVisible(rootPaneCheckingEnabled);
+        SetLocationsFrame.setVisible(true);
         SetLocationsFrame.setBounds(300, 200, 430, 350);
     }//GEN-LAST:event_StartButtonActionPerformed
 
@@ -1198,7 +1198,7 @@ public class JFrames extends javax.swing.JFrame {
         LocationLabel.setText("Текущая локация: " + game.location.getCurrentLocation() + "/" + locationsNumber);
         human = game.NewHuman(PlayerHealthBar);
         game.location.setEnemiesAtLocation(human.getLevel());
-        FightFrame.setVisible(rootPaneCheckingEnabled);
+        FightFrame.setVisible(true);
         FightFrame.setSize(1000, 700);
         if ((game.location.getCurrentEnemyNumber() + 1) <= game.location.getEnemiesAtLocation().size()) {
             EnemyNumberLabel.setText("Номер противника: " + (game.location.getCurrentEnemyNumber() + 1) + "/" + game.location.getEnemiesAtLocation().size());
