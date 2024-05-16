@@ -83,7 +83,7 @@ public class Fight {
                 }
             }
         }
-        change.RoundTexts(human, enemy, label, label2);
+        mediator.roundTexts(human, enemy);
         checkDebuff(human, enemy, EnemyDebuffLabel, PlayerDebuffLabel);
         action.HP(human, pr1);
         action.HP(enemy, pr2);

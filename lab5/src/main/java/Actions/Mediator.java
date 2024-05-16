@@ -86,5 +86,16 @@ public class Mediator {
         playerActionLabel.setText(human.getName() + " uses " + playerAction.getType());
         enemyActionLabel.setText(enemy.getName() + " use " + enemyAction.getType());
     }
-    
+    public void roundTexts(Player human, Player enemy) {
+        if (enemy.getHealth() >= 0) {
+            enemyHealthLabel.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
+        } else {
+            enemyHealthLabel.setText("0/" + Integer.toString(enemy.getMaxHealth()));
+        }
+        if (human.getHealth() >= 0) {
+            playerHealthLabel.setText(Integer.toString(human.getHealth()) + "/" + Integer.toString(human.getMaxHealth()));
+        } else {
+            playerHealthLabel.setText("0/" + Integer.toString(human.getMaxHealth()));
+        }
+    }
 }
