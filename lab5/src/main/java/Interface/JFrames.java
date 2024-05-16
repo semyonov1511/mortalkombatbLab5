@@ -1104,17 +1104,11 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_StartButtonActionPerformed
 
     private void AttackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttackButtonActionPerformed
-        game.fight.Hit(human, enemy, 1, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
-                EndRoundLabel, PlayerHealthBar, EnemyHealthBar, EndGameDialog,
-                EndGameWithoutLadderDialog, FightFrame, game.getResults(), EnemyDebuffLabel, VictoryLabel, EndGameWithoutLadderTitlleLabel,
-                PlayerActionLabel, PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber, game.action.getEnemies(), mediator);
+        game.fight.Hit(human, enemy, 1, game.getResults(), items, game.location, locationsNumber, game.action.getEnemies(), mediator);
     }//GEN-LAST:event_AttackButtonActionPerformed
 
     private void BlockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlockButtonActionPerformed
-        game.fight.Hit(human, enemy, 0, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog, EndRoundLabel,
-                PlayerHealthBar, EnemyHealthBar, EndGameDialog, EndGameWithoutLadderDialog, FightFrame,
-                game.getResults(), EnemyDebuffLabel, VictoryLabel, EndGameWithoutLadderTitlleLabel, PlayerActionLabel,
-                PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber, game.action.getEnemies(), mediator);
+        game.fight.Hit(human, enemy, 0, game.getResults(), items, game.location, locationsNumber, game.action.getEnemies(), mediator);
     }//GEN-LAST:event_BlockButtonActionPerformed
 
     private void NextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextRoundButtonActionPerformed
@@ -1137,7 +1131,7 @@ public class JFrames extends javax.swing.JFrame {
         EnemyHeroLabel.setText(enemy.getName());
         game.action.HP(enemy, EnemyHealthBar);
         EnemyHealthBar.setMaximum(enemy.getMaxHealth());
-        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemyHealthBar);
+        game.fight.NewRound(human, enemy, mediator);
 
         game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel, PlayerHealthBar, EnemyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
@@ -1227,7 +1221,7 @@ public class JFrames extends javax.swing.JFrame {
         game.action.HP(enemy, EnemyHealthBar);
         EnemyHealthBar.setMaximum(enemy.getMaxHealth());
 
-        game.fight.NewRound(human, enemy, PlayerHealthBar, EnemyHealthBar);
+        game.fight.NewRound(human, enemy, mediator);
 
         game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel, PlayerHealthBar, EnemyHealthBar,
                 PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
@@ -1257,10 +1251,7 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_ChooseAttributeButtonActionPerformed
 
     private void DebuffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DebuffButtonActionPerformed
-        game.fight.Hit(human, enemy, 2, EnemyHealthLabel, PlayerHealthLabel, EndFightDialog,
-                EndRoundLabel, PlayerHealthBar, EnemyHealthBar, EndGameDialog,
-                EndGameWithoutLadderDialog, FightFrame, game.getResults(), EnemyDebuffLabel, VictoryLabel, EndGameWithoutLadderTitlleLabel,
-                PlayerActionLabel, PlayerDebuffLabel, EnemyActionLabel, items, ThirdItemButton, game.location, locationsNumber, game.action.getEnemies(), mediator);
+        game.fight.Hit(human, enemy, 2, game.getResults(), items, game.location, locationsNumber, game.action.getEnemies(), mediator);
     }//GEN-LAST:event_DebuffButtonActionPerformed
 
     /**

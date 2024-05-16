@@ -5,11 +5,7 @@ import Game_components.Human;
 import Game_components.Player;
 import Game_components.Items;
 import java.util.ArrayList;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JProgressBar;
-import javax.swing.JRadioButton;
 import Particular_Actions.Action;
 import Particular_Actions.Block;
 import Particular_Actions.Debuff;
@@ -29,7 +25,7 @@ public class Fight {
     };
     public int i = 1;
 
-    public void Move(Player enemy, Player human, JLabel PlayerActionLabel, JLabel EnemyActionLabel, Action enemyAction, Action playerAction, Mediator mediator) {
+    public void Move(Player enemy, Player human, Action enemyAction, Action playerAction, Mediator mediator) {
         mediator.setActionLabels(enemy, human, enemyAction, playerAction);
         playerAction.realisation(human, enemy, enemyAction.getType());
     }
@@ -52,33 +48,29 @@ public class Fight {
 
     }
 
-    public void Hit(Human human, Player enemy, int a, JLabel label,
-            JLabel label2, JDialog dialog, JLabel label3,
-            JProgressBar pr1, JProgressBar pr2, JDialog dialog1,
-            JDialog dialog2, JFrame frame, ArrayList<Result> results, JLabel EnemyDebuffLabel,
-            JLabel victoryLabel, JLabel EndGameWithoutLadderTitlleLabel, JLabel PlayerActionLabel, JLabel PlayerDebuffLabel,
-            JLabel EnemyActionLabel, Items[] items, JRadioButton rb, Location location, int locationsNumber, Player[] enemiesList, Mediator mediator) {
+    public void Hit(Human human, Player enemy, int a, ArrayList<Result> results, Items[] items,
+            Location location, int locationsNumber, Player[] enemiesList, Mediator mediator) {
         CharacterAction action = new CharacterAction();
         Action enemyAction = action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList));
         switch (a) {
             case 0 -> {
-                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction,
+                Move(enemy, human, enemyAction,
                         actionsList.get(1), mediator);
                 if (enemy.getHealth() > 0) {
-                    Move(human, enemy, EnemyActionLabel, PlayerActionLabel, actionsList.get(1), enemyAction, mediator);
+                    Move(human, enemy, actionsList.get(1), enemyAction, mediator);
                 }
             }
             case 1 -> {
-                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, actionsList.get(0), mediator);
+                Move(enemy, human, enemyAction, actionsList.get(0), mediator);
                 if (enemy.getHealth() > 0) {
-                    Move(human, enemy, PlayerActionLabel, EnemyActionLabel, actionsList.get(0),
+                    Move(human, enemy, actionsList.get(0),
                             enemyAction, mediator);
                 }
             }
             case 2 -> {
-                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, actionsList.get(2), mediator);
+                Move(enemy, human, enemyAction, actionsList.get(2), mediator);
                 if (enemy.getHealth() > 0) {
-                    Move(human, enemy, PlayerActionLabel, EnemyActionLabel,actionsList.get(2),
+                    Move(human, enemy, actionsList.get(2),
                             enemyAction, mediator);
                 }
             }
@@ -87,39 +79,33 @@ public class Fight {
         checkDebuff(human, enemy, mediator);
         mediator.setHealthBar(human);
         mediator.setHealthBar(enemy);
-        checkDeath(human, enemy, label2, dialog, label3, pr1, dialog1, dialog2, frame, results, victoryLabel, EndGameWithoutLadderTitlleLabel,
-                PlayerActionLabel, items, rb, location, locationsNumber, enemiesList);
+        checkDeath(human, enemy, results, items, location, locationsNumber, enemiesList, mediator);
     }
 
-    public void checkDeath(Human human, Player enemy, JLabel label2, JDialog dialog, JLabel label3,
-            JProgressBar pr1, JDialog dialog1, JDialog dialog2, JFrame frame, ArrayList<Result> results,
-            JLabel label4, JLabel label5, JLabel label7, Items[] items, JRadioButton rb, Location location, int locationsNumber, Player[] enemiesList) {
+    public void checkDeath(Human human, Player enemy, ArrayList<Result> results,
+            Items[] items, Location location, int locationsNumber, Player[] enemiesList, Mediator mediator) {
         CharacterAction action = new CharacterAction();
         if (human.getHealth() <= 0 & items[2].getCount() > 0) {
             human.setHealth((int) (human.getMaxHealth() * 0.05));
             items[2].setCount(-1);
-            action.HP(human, pr1);
-            label2.setText(human.getHealth() + "/" + human.getMaxHealth());
-            rb.setText(items[2].getName() + ", " + items[2].getCount() + " шт");
-            label7.setText("Вы воскресли");
+            mediator.setHealthBar(human);
+            mediator.revive(human, items);
         }
         if (human.getHealth() <= 0 | enemy.getHealth() <= 0) {
             if (location.getCurrentLocation() == locationsNumber & "Shao Kahn".equals(enemy.getName())) {
                 location.resetLocation(false, i);
-                EndFinalRound(((Human) human), enemy, action, results, dialog1, dialog2,
-                        frame, label4, label5,enemiesList);
+                EndFinalRound(((Human) human), enemy, results, enemiesList, mediator);
             } else {
-                EndRound(human, enemy, dialog, label3, items, location, enemiesList);
+                EndRound(human, enemy, items, location, enemiesList, mediator);
             }
         }
     }
 
-    public void EndRound(Human human, Player enemy, JDialog dialog, JLabel label, Items[] items, Location location, Player[] enemiesList) {
+    public void EndRound(Human human, Player enemy, Items[] items, Location location, Player[] enemiesList, Mediator mediator) {
         CharacterAction action = new CharacterAction();
-        dialog.setVisible(true);
-        dialog.setBounds(300, 150, 700, 600);
+        mediator.setEndFightDialog();
         if (human.getHealth() > 0) {
-            label.setText("You win");
+            mediator.setRoundEndText("You win");
             if ("Shao Kahn".equals(enemy.getName())) {
                 action.AddItems(38, 23, 8, items);
                 action.AddPointsBoss(human);
@@ -130,7 +116,7 @@ public class Fight {
             }
         } else {
             reset(human, enemy, location, enemiesList);
-            label.setText(enemy.getName() + " win");
+            mediator.setRoundEndText(enemy.getName() + " win");
 
         }
     }
@@ -149,9 +135,8 @@ public class Fight {
         location.resetLocation(false, human.getLevel());
     }
 
-    public void EndFinalRound(Human human, Player enemy, CharacterAction action,
-            ArrayList<Result> results, JDialog dialog1, JDialog dialog2, JFrame frame,
-            JLabel label1, JLabel label2, Player[] enemiesList) {
+    public void EndFinalRound(Human human, Player enemy, ArrayList<Result> results, Player[] enemiesList, Mediator mediator) {
+        CharacterAction action = new CharacterAction();
         action.resetEnemies(enemiesList);
         String text = "Победа не на вашей стороне";
         if (human.getHealth() > 0) {
@@ -172,27 +157,16 @@ public class Fight {
                 top = true;
             }
         }
-        if (top) {
-            dialog1.setVisible(true);
-            dialog1.setBounds(150, 150, 600, 500);
-            label1.setText(text);
-        } else {
-            dialog2.setVisible(true);
-            dialog2.setBounds(150, 150, 470, 360);
-            label2.setText(text);
-        }
-        frame.dispose();
+        mediator.gameEnding(text, top);
     }
 
-    public void NewRound(Player human, Player enemy, JProgressBar pr1,
-            JProgressBar pr2) {
-        pr1.setMaximum(human.getMaxHealth());
-        pr2.setMaximum(enemy.getMaxHealth());
+    public void NewRound(Player human, Player enemy, Mediator mediator) {
+        mediator.setNewRoundHealthBars(human, enemy);
         human.setHealth(human.getMaxHealth());
         enemy.setHealth(enemy.getMaxHealth());
         CharacterAction action = new CharacterAction();
-        action.HP(human, pr1);
-        action.HP(enemy, pr2);
+        mediator.setHealthBar(human);
+        mediator.setHealthBar(enemy);
     }
 
 }

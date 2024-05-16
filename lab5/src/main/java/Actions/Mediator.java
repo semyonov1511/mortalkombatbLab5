@@ -1,5 +1,6 @@
 package Actions;
 
+import Game_components.Items;
 import Game_components.Player;
 import Particular_Actions.Action;
 import javax.swing.JDialog;
@@ -135,5 +136,38 @@ public class Mediator {
                 }
             }
         }
+    }
+
+    public void setNewRoundHealthBars(Player human, Player enemy) {
+        playerHealthBar.setMaximum(human.getMaxHealth());
+        enemyHealthBar.setMaximum(enemy.getMaxHealth());
+    }
+
+    public void revive(Player human, Items[] items) {
+        playerHealthLabel.setText(human.getHealth() + "/" + human.getMaxHealth());
+        thirdItemButton.setText(items[2].getName() + ", " + items[2].getCount() + " шт");
+        playerActionLabel.setText("Вы воскресли");
+    }
+
+    public void gameEnding(String text, boolean a) {
+        if (a) {
+            endGameDialog.setVisible(true);
+            endGameDialog.setBounds(150, 150, 600, 500);
+            victoryLabel.setText(text);
+        } else {
+            endGameWithoutLadderDialog.setVisible(true);
+            endGameWithoutLadderDialog.setBounds(150, 150, 600, 500);
+            endGameWithoutLadderTitlleLabel.setText(text);
+        }
+        fightFrame.dispose();
+    }
+
+    public void setEndFightDialog() {
+        endFightDialog.setVisible(true);
+        endFightDialog.setBounds(300, 150, 700, 600);
+    }
+
+    public void setRoundEndText(String text) {
+        endRoundLabel.setText(text);
     }
 }
