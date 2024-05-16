@@ -36,21 +36,21 @@ public class Fight {
     }
 
     public void checkDebuff(Player human, Player enemy, JLabel EnemyDebuffLabel, JLabel PlayerDebuffLabel) {
-        if (!enemy.isDebuffed()){
+        if (!enemy.isDebuffed()) {
             EnemyDebuffLabel.setText("");
         }
         if (enemy.isDebuffed()) {
             EnemyDebuffLabel.setText(enemy.getName() + " is debuffed for " + enemy.getDebuffTurns() + " turns");
             enemy.loseDebuffTurn();
         }
-        if (!human.isDebuffed()){
+        if (!human.isDebuffed()) {
             PlayerDebuffLabel.setText("");
         }
         if (human.isDebuffed()) {
             PlayerDebuffLabel.setText(human.getName() + " are debuffed for " + human.getDebuffTurns() + " turns");
             human.loseDebuffTurn();
         }
-        
+
     }
 
     public void Hit(Human human, Player enemy, int a, JLabel label,
@@ -63,7 +63,7 @@ public class Fight {
         Action enemyAction = action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList));
         switch (a) {
             case 0 -> {
-                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, 
+                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction,
                         actionsList.get(1));
                 if (enemy.getHealth() > 0) {
                     Move(human, enemy, EnemyActionLabel, PlayerActionLabel, actionsList.get(1), enemyAction);
@@ -72,15 +72,15 @@ public class Fight {
             case 1 -> {
                 Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, actionsList.get(0));
                 if (enemy.getHealth() > 0) {
-                    Move(human, enemy, PlayerActionLabel, EnemyActionLabel, actionsList.get(0), 
+                    Move(human, enemy, PlayerActionLabel, EnemyActionLabel, actionsList.get(0),
                             enemyAction);
                 }
             }
             case 2 -> {
-                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, new Debuff(), enemyAction);
+                Move(enemy, human, PlayerActionLabel, EnemyActionLabel, enemyAction, actionsList.get(2));
                 if (enemy.getHealth() > 0) {
-                    Move(human, enemy, PlayerActionLabel, EnemyActionLabel, enemyAction,
-                            new Debuff());
+                    Move(human, enemy, PlayerActionLabel, EnemyActionLabel,actionsList.get(2),
+                            enemyAction);
                 }
             }
         }
@@ -88,7 +88,7 @@ public class Fight {
         checkDebuff(human, enemy, EnemyDebuffLabel, PlayerDebuffLabel);
         action.HP(human, pr1);
         action.HP(enemy, pr2);
-        checkDeath(human, enemy, label2, dialog, label3, pr1, dialog1, dialog2, frame, results, victoryLabel, EndGameWithoutLadderTitlleLabel, 
+        checkDeath(human, enemy, label2, dialog, label3, pr1, dialog1, dialog2, frame, results, victoryLabel, EndGameWithoutLadderTitlleLabel,
                 PlayerActionLabel, items, rb, location, locationsNumber);
     }
 
@@ -131,7 +131,7 @@ public class Fight {
         } else {
             reset(human, enemy, location);
             label.setText(enemy.getName() + " win");
-            
+
         }
     }
 
