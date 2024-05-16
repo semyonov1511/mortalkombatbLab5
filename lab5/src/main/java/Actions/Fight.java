@@ -34,19 +34,19 @@ public class Fight {
         playerAction.realisation(human, enemy, enemyAction.getType());
     }
 
-    public void checkDebuff(Player human, Player enemy, JLabel EnemyDebuffLabel, JLabel PlayerDebuffLabel) {
+    public void checkDebuff(Player human, Player enemy, Mediator mediator) {
         if (!enemy.isDebuffed()) {
-            EnemyDebuffLabel.setText("");
+            mediator.setDebuffLabel(enemy, false);
         }
         if (enemy.isDebuffed()) {
-            EnemyDebuffLabel.setText(enemy.getName() + " is debuffed for " + enemy.getDebuffTurns() + " turns");
+            mediator.setDebuffLabel(enemy, true);
             enemy.loseDebuffTurn();
         }
         if (!human.isDebuffed()) {
-            PlayerDebuffLabel.setText("");
+            mediator.setDebuffLabel(human, false);
         }
         if (human.isDebuffed()) {
-            PlayerDebuffLabel.setText(human.getName() + " are debuffed for " + human.getDebuffTurns() + " turns");
+            mediator.setDebuffLabel(enemy, true);
             human.loseDebuffTurn();
         }
 
@@ -84,7 +84,7 @@ public class Fight {
             }
         }
         mediator.roundTexts(human, enemy);
-        checkDebuff(human, enemy, EnemyDebuffLabel, PlayerDebuffLabel);
+        checkDebuff(human, enemy, mediator);
         action.HP(human, pr1);
         action.HP(enemy, pr2);
         checkDeath(human, enemy, label2, dialog, label3, pr1, dialog1, dialog2, frame, results, victoryLabel, EndGameWithoutLadderTitlleLabel,

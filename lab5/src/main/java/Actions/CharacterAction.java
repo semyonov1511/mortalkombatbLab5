@@ -91,7 +91,6 @@ public class CharacterAction {
         }
         human.setNextExperience(experience_for_next_level[i]);
         for (int j = 0; j < 5; j++) {
-            System.out.println(" повышен уровень " + enemies[j]);
             NewHealthEnemy(enemies[j], human);
         }
         System.out.println(" ");
