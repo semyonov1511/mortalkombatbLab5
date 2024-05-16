@@ -58,7 +58,7 @@ public class Fight {
             JProgressBar pr1, JProgressBar pr2, JDialog dialog1,
             JDialog dialog2, JFrame frame, ArrayList<Result> results, JLabel EnemyDebuffLabel,
             JLabel victoryLabel, JLabel EndGameWithoutLadderTitlleLabel, JLabel PlayerActionLabel, JLabel PlayerDebuffLabel,
-            JLabel EnemyActionLabel, Items[] items, JRadioButton rb, Location location, int locationsNumber) {
+            JLabel EnemyActionLabel, Items[] items, JRadioButton rb, Location location, int locationsNumber, Player[] enemiesList) {
         CharacterAction action = new CharacterAction();
         Action enemyAction = action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList));
         switch (a) {
@@ -89,15 +89,15 @@ public class Fight {
         action.HP(human, pr1);
         action.HP(enemy, pr2);
         checkDeath(human, enemy, label2, dialog, label3, pr1, dialog1, dialog2, frame, results, victoryLabel, EndGameWithoutLadderTitlleLabel,
-                PlayerActionLabel, items, rb, location, locationsNumber);
+                PlayerActionLabel, items, rb, location, locationsNumber, enemiesList);
     }
 
     public void checkDeath(Human human, Player enemy, JLabel label2, JDialog dialog, JLabel label3,
             JProgressBar pr1, JDialog dialog1, JDialog dialog2, JFrame frame, ArrayList<Result> results,
-            JLabel label4, JLabel label5, JLabel label7, Items[] items, JRadioButton rb, Location location, int locationsNumber) {
+            JLabel label4, JLabel label5, JLabel label7, Items[] items, JRadioButton rb, Location location, int locationsNumber, Player[] enemiesList) {
         CharacterAction action = new CharacterAction();
         if (human.getHealth() <= 0 & items[2].getCount() > 0) {
-            human.setNewHealth((int) (human.getMaxHealth() * 0.05));
+            human.setHealth((int) (human.getMaxHealth() * 0.05));
             items[2].setCount(-1);
             action.HP(human, pr1);
             label2.setText(human.getHealth() + "/" + human.getMaxHealth());
@@ -107,14 +107,14 @@ public class Fight {
         if (human.getHealth() <= 0 | enemy.getHealth() <= 0) {
             if (location.getCurrentLocation() == locationsNumber & "Shao Kahn".equals(enemy.getName())) {
                 EndFinalRound(((Human) human), enemy, action, results, dialog1, dialog2,
-                        frame, label4, label5);
+                        frame, label4, label5,enemiesList);
             } else {
-                EndRound(human, enemy, dialog, label3, items, location);
+                EndRound(human, enemy, dialog, label3, items, location, enemiesList);
             }
         }
     }
 
-    public void EndRound(Human human, Player enemy, JDialog dialog, JLabel label, Items[] items, Location location) {
+    public void EndRound(Human human, Player enemy, JDialog dialog, JLabel label, Items[] items, Location location, Player[] enemiesList) {
         CharacterAction action = new CharacterAction();
         dialog.setVisible(true);
         dialog.setBounds(300, 150, 700, 600);
@@ -129,31 +129,30 @@ public class Fight {
                 action.AddPoints(human);
             }
         } else {
-            reset(human, enemy, location);
+            reset(human, enemy, location, enemiesList);
             label.setText(enemy.getName() + " win");
 
         }
     }
 
-    public void reset(Human human, Player enemy, Location location) {
+    public void reset(Human human, Player enemy, Location location, Player[] enemiesList) {
         CharacterAction action = new CharacterAction();
-        human.resetDamage();
         human.setDamage(16);
-        human.setNewHealth(80);
-        human.resetMaxHealth(80);
-        action.setEnemies();
-        human.resetLevel();
+        human.setHealth(80);
+        human.setMaxHealth(80);
+        action.resetEnemies(enemiesList);
+        human.setLevel(0);
         human.resetPoints();
         human.resetExperience();
         human.setNextExperience(40);
-        location.setFullEnemiesList(action.getEnemies());
+        location.setFullEnemiesList(enemiesList);
         location.resetLocation(false, human.getLevel());
     }
 
     public void EndFinalRound(Human human, Player enemy, CharacterAction action,
             ArrayList<Result> results, JDialog dialog1, JDialog dialog2, JFrame frame,
-            JLabel label1, JLabel label2) {
-        action.setEnemies();
+            JLabel label1, JLabel label2, Player[] enemiesList) {
+        action.resetEnemies(enemiesList);
         String text = "Победа не на вашей стороне";
         if (human.getHealth() > 0) {
             action.AddPoints(human);
@@ -189,8 +188,8 @@ public class Fight {
             JProgressBar pr2) {
         pr1.setMaximum(human.getMaxHealth());
         pr2.setMaximum(enemy.getMaxHealth());
-        human.setNewHealth(human.getMaxHealth());
-        enemy.setNewHealth(enemy.getMaxHealth());
+        human.setHealth(human.getMaxHealth());
+        enemy.setHealth(enemy.getMaxHealth());
         CharacterAction action = new CharacterAction();
         action.HP(human, pr1);
         action.HP(enemy, pr2);

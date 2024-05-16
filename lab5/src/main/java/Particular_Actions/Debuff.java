@@ -16,7 +16,7 @@ public class Debuff extends Action {
             }
             case "Block" -> {
                 if (Math.random()<0.75){
-                    enemy.setDebuffTurns(enemy.getLevel()+1);
+                    enemy.setDebuffTurns(enemy.getLevel());
                 }
             }
             case "Debuff" -> {

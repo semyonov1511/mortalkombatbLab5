@@ -6,6 +6,7 @@ import Game_components.Player;
 import Game_components.Items;
 import Particular_Actions.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JDialog;
 import javax.swing.JProgressBar;
 
@@ -13,7 +14,7 @@ public class CharacterAction {
 
     private final int experience_for_next_level[] = {40, 90, 180, 260, 410, 1000};
 
-    private final Player enemies[] = new Player[6];
+    private final Player enemies[] = new Player[5];
 
     EnemyFabric fabric = new EnemyFabric();
 
@@ -30,19 +31,19 @@ public class CharacterAction {
     }
 
     public Action ChooseEnemyAction(Player enemy, ArrayList<Action> list) {
-        switch (enemy.getName()){
+        switch (enemy.getName()) {
             case "Sub-Zero" -> {
-                return list.get((int) (Math.random()*3));
+                return list.get((int) (Math.random() * 3));
             }
             case "Shao Kahn" -> {
                 list.remove(2);
-                return list.get((int) (Math.random()*3));
+                return list.get((int) (Math.random() * 3));
             }
             default -> {
-                return list.get((int) (Math.random()*2));
+                return list.get((int) (Math.random() * 2));
             }
         }
-    } 
+    }
 
     public void HP(Player player, JProgressBar progress) {
 
@@ -83,16 +84,17 @@ public class CharacterAction {
     }
 
     public void LevelUp(Human human, Player[] enemies) {
-        human.setLevel();
+        human.addLevel();
         int i = 0;
         while (human.getNextExperience() >= experience_for_next_level[i]) {
             i = i + 1;
         }
         human.setNextExperience(experience_for_next_level[i]);
         for (int j = 0; j < 5; j++) {
+            System.out.println(" повышен уровень " + enemies[j]);
             NewHealthEnemy(enemies[j], human);
         }
-
+        System.out.println(" ");
     }
 
     public void AddPointsBoss(Human human) {
@@ -129,7 +131,7 @@ public class CharacterAction {
                 hp = 40;
             }
         }
-        human.setMaxHealth(hp);
+        human.addMaxHealth(hp);
     }
 
     public void AddDamageHuman(Human human) {
@@ -148,7 +150,7 @@ public class CharacterAction {
                 damage = 6;
             }
         }
-        human.setDamage(damage);
+        human.addDamage(damage);
     }
 
     public void NewHealthEnemy(Player enemy, Human human) {
@@ -172,16 +174,16 @@ public class CharacterAction {
                 damage = 26;
             }
         }
-        enemy.setMaxHealth((int) enemy.getMaxHealth() * hp / 100);
-        enemy.setDamage((int) enemy.getDamage() * damage / 100);
-        enemy.setLevel();
+        enemy.addMaxHealth((int) enemy.getMaxHealth() * hp / 100);
+        enemy.addDamage((int) enemy.getDamage() * damage / 100);
+        enemy.addLevel();
     }
 
     public void UseItem(Player human, Items[] items, String name, JDialog dialog, JDialog dialog1) {
         switch (name) {
             case "First item" -> {
                 if (items[0].getCount() > 0) {
-                    human.setHealth((int) (human.getMaxHealth() * 0.25));
+                    human.addHealth((int) (human.getMaxHealth() * 0.25));
                     items[0].setCount(-1);
                 } else {
                     dialog.setVisible(true);
@@ -190,7 +192,7 @@ public class CharacterAction {
             }
             case "Second item" -> {
                 if (items[1].getCount() > 0) {
-                    human.setHealth((int) (human.getMaxHealth() * 0.5));
+                    human.addHealth((int) (human.getMaxHealth() * 0.5));
                     items[1].setCount(-1);
                 } else {
                     dialog.setVisible(true);
@@ -207,4 +209,38 @@ public class CharacterAction {
             dialog1.dispose();
         }
     }
+
+    public void resetEnemies(Player[] enemiesList) {
+        for (Player enemy : enemiesList) {
+            enemy.setLevel(1);
+            switch (enemy.getName()) {
+                case "Sub-Zero" -> {
+                    enemy.setLevel(1);
+                    enemy.setDamage(16);
+                    enemy.setMaxHealth(60);
+                }
+                case "Sonya Blade" -> {
+                    enemy.setLevel(1);
+                    enemy.setDamage(16);
+                    enemy.setMaxHealth(80);
+                }
+                case "Shao Kahn" -> {
+                    enemy.setLevel(1);
+                    enemy.setDamage(30);
+                    enemy.setMaxHealth(100);
+                }
+                case "Liu Kang" -> {
+                    enemy.setLevel(1);
+                    enemy.setDamage(20);
+                    enemy.setMaxHealth(70);
+                }
+                case "Baraka" -> {
+                    enemy.setLevel(1);
+                    enemy.setDamage(12);
+                    enemy.setMaxHealth(100);
+                }
+            }
+        }
+    }
 }
+

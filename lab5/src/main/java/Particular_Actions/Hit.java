@@ -14,28 +14,28 @@ public class Hit extends Action {
         switch (enemyActionType) {
             case "Hit" -> {
                 if (enemy.isDebuffed() & human.isDebuffed()){
-                    enemy.setHealth((int) (-human.getDamage()*1.25/2));
+                    enemy.addHealth((int) (-human.getDamage()*1.25/2));
                 }
                 if (enemy.isDebuffed() & !human.isDebuffed()){
-                    enemy.setHealth((int) (-human.getDamage()*1.25));
+                    enemy.addHealth((int) (-human.getDamage()*1.25));
                 }
                 if (!enemy.isDebuffed() & human.isDebuffed()){
-                    enemy.setHealth((int) (-human.getDamage()/2));
+                    enemy.addHealth((int) (-human.getDamage()/2));
                 }
                 if (!enemy.isDebuffed() & !human.isDebuffed()){
-                    enemy.setHealth((int) (-human.getDamage()));
+                    enemy.addHealth((int) (-human.getDamage()));
                 }
             }
             case "Block" -> {
                 if (Math.random() < 0.5) {
-                    enemy.setHealth(-human.getDamage() / 2);
+                    enemy.addHealth(-human.getDamage() / 2);
                 }
             }
             case "Debuff" -> {
-                enemy.setHealth((int) (-human.getDamage()*1.15));
+                enemy.addHealth((int) (-human.getDamage()*1.15));
             }
             case "Heal" -> {
-                enemy.setHealth(-human.getDamage()*2);
+                enemy.addHealth(-human.getDamage()*2);
             }
         }
     }

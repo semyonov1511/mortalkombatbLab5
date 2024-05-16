@@ -15,7 +15,7 @@ public class Heal extends Action {
             case "Hit" -> {
             }
             case "Block" -> {
-                human.setHealth((human.getMaxHealth() - human.getHealth()) / 2);
+                human.addHealth((human.getMaxHealth() - human.getHealth()) / 2);
             }
             case "Debuff" -> {
             }

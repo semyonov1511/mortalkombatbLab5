@@ -45,32 +45,33 @@ public class Player {
     public ImageIcon getPhoto() {
         return icon;
     }
-
-    public void setLevel() {
+    public void setLevel(int i) {
+        this.level = i;
+    }
+    public void addLevel() {
         this.level++;
     }
 
-    public void resetLevel() {
-        this.level = 0;
-    }
-
-    public void setHealth(int h) {
+    public void addHealth(int h) {
         this.health += h;
     }
 
-    public void setNewHealth(int h) {
+    public void setHealth(int h) {
         this.health = h;
+    }
+    public void setDamage(int d) {
+        this.damage = d;
     }
 
     public void resetDamage() {
         this.damage = 0;
     }
 
-    public void setDamage(int d) {
+    public void addDamage(int d) {
         this.damage += d;
     }
 
-    public void resetMaxHealth(int h) {
+    public void setMaxHealth(int h) {
         this.maxhealth = h;
     }
 
@@ -78,7 +79,7 @@ public class Player {
         this.attack = a;
     }
 
-    public void setMaxHealth(int h) {
+    public void addMaxHealth(int h) {
         this.maxhealth += h;
     }
 
