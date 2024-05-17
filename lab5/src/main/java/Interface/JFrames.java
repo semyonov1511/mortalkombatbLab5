@@ -1118,7 +1118,7 @@ public class JFrames extends javax.swing.JFrame {
             enemyNumberLabel.setText("Финальный босс локации!");
         }
         if (game.action.checkExperience(human)) {
-            game.action.LevelUp(human, game.getEnemies());
+            game.action.levelUp(human, game.getEnemies());
             game.location.setFullEnemiesList(game.getEnemies());
             levelUp.setVisible(true);
             levelUp.setBounds(300, 200, 430, 350);
@@ -1182,7 +1182,7 @@ public class JFrames extends javax.swing.JFrame {
         if (thirdItemButton.isSelected()) {
             nameButton = "Third item";
         }
-        game.action.UseItem(human, items, nameButton, mediator);
+        game.action.useItem(human, items, nameButton, mediator);
         mediator.setHealthBar(human);
         playerHealthLabel.setText(human.getHealth() + "/" + human.getMaxHealth());
         mediator.setBagText(items);
@@ -1235,9 +1235,9 @@ public class JFrames extends javax.swing.JFrame {
 
     private void chooseAttributeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseAttributeButtonActionPerformed
         if (healthButton.isSelected()) {
-            game.action.AddHealthHuman(human);
+            game.action.addHealthHuman(human);
         } else {
-            game.action.AddDamageHuman(human);
+            game.action.addDamageHuman(human);
         }
         mediator.setNewRoundTexts(human, enemy, items);
         levelUp.dispose();

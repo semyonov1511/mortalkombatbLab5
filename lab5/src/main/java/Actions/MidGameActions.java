@@ -10,7 +10,7 @@ public class MidGameActions {
 
     private final int experience_for_next_level[] = {40, 90, 180, 260, 410, 1000};
 
-    public Action ChooseEnemyAction(Player enemy, ArrayList<Action> list) {
+    public Action chooseEnemyAction(Player enemy, ArrayList<Action> list) {
         switch (enemy.getName()) {
             case "Sub-Zero" -> {
                 return list.get((int) (Math.random() * 3));
@@ -25,7 +25,7 @@ public class MidGameActions {
         }
     }
 
-    public void AddPoints(Human human) {
+    public void addPoints(Human human) {
         human.setExperience(20+5*human.getLevel());
         human.setPoints(20+5*human.getLevel()+human.getHealth()/4);
     }
@@ -34,7 +34,7 @@ public class MidGameActions {
         return human.getExperience() >= human.getNextExperience();
     }
 
-    public void LevelUp(Human human, Player[] enemies) {
+    public void levelUp(Human human, Player[] enemies) {
         human.addLevel();
         int i = 0;
         while (human.getNextExperience() >= experience_for_next_level[i]) {
@@ -42,16 +42,16 @@ public class MidGameActions {
         }
         human.setNextExperience(experience_for_next_level[i]);
         for (int j = 0; j < 5; j++) {
-            NewHealthEnemy(enemies[j], human);
+            newHealthEnemy(enemies[j], human);
         }
     }
 
-    public void AddPointsBoss(Human human) {
+    public void addPointsBoss(Human human) {
         human.setExperience(50);
         human.setPoints(65 + human.getHealth() / 2);
     }
 
-    public void AddItems(int k1, int k2, int k3, Items[] items) {
+    public void addItems(int k1, int k2, int k3, Items[] items) {
         double i = Math.random();
         if (i < k1 * 0.01) {
             items[0].setCount(1);
@@ -64,21 +64,21 @@ public class MidGameActions {
         }
     }
 
-    public void AddHealthHuman(Human human) {
+    public void addHealthHuman(Human human) {
         human.addMaxHealth(20+5*human.getLevel());
     }
 
-    public void AddDamageHuman(Human human) {
+    public void addDamageHuman(Human human) {
         human.addDamage(2+human.getLevel());
     }
 
-    public void NewHealthEnemy(Player enemy, Human human) {
+    public void newHealthEnemy(Player enemy, Human human) {
         enemy.addMaxHealth((int) enemy.getMaxHealth() * (35-3*human.getLevel()) / 100);
         enemy.addDamage((int) enemy.getDamage() *(20+human.getLevel()) / 100);
         enemy.addLevel();
     }
 
-    public void UseItem(Player human, Items[] items, String name, Mediator mediator) {
+    public void useItem(Player human, Items[] items, String name, Mediator mediator) {
         boolean a = false;
         switch (name) {
             case "First item" -> {

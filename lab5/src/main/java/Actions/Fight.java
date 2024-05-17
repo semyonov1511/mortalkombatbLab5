@@ -47,7 +47,7 @@ public class Fight {
     public void hit(Human human, Player enemy, int a, ArrayList<Result> results, Items[] items,
             Location location, int locationsNumber, Player[] enemiesList, Mediator mediator) {
         MidGameActions action = new MidGameActions();
-        Action enemyAction = action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList));
+        Action enemyAction = action.chooseEnemyAction(enemy, new ArrayList<>(actionsList));
         switch (a) {
             case 0 -> {
                 move(enemy, human, enemyAction,
@@ -102,12 +102,12 @@ public class Fight {
         if (human.getHealth() > 0) {
             mediator.setRoundEndText("You win");
             if ("Shao Kahn".equals(enemy.getName())) {
-                action.AddItems(38, 23, 8, items);
-                action.AddPointsBoss(human);
+                action.addItems(38, 23, 8, items);
+                action.addPointsBoss(human);
                 location.resetLocation(true, human.getLevel());
             } else {
-                action.AddItems(25, 15, 5, items);
-                action.AddPoints(human);
+                action.addItems(25, 15, 5, items);
+                action.addPoints(human);
             }
         } else {
             reset(human, enemy, location, enemiesList);
@@ -135,7 +135,7 @@ public class Fight {
         action.resetEnemies(enemiesList);
         String text = "Победа не на вашей стороне";
         if (human.getHealth() > 0) {
-            action.AddPoints(human);
+            action.addPoints(human);
             text = "Победа на вашей стороне";
         }
         boolean top = false;
