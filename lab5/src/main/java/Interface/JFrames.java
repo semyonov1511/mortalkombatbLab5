@@ -22,7 +22,7 @@ public class JFrames extends javax.swing.JFrame {
 
     public JFrames() {
         initComponents();
-        game.WriteToTable(recordsTable);
+        game.writeToTable(recordsTable);
         game.setEnemies();
         game.location.setFullEnemiesList(game.getEnemies());
         playerIconLabel.setIcon(new ImageIcon("crab.jpg"));
@@ -1103,11 +1103,11 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void attackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attackButtonActionPerformed
-        game.fight.Hit(human, enemy, 1, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
+        game.fight.hit(human, enemy, 1, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
     }//GEN-LAST:event_attackButtonActionPerformed
 
     private void blockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockButtonActionPerformed
-        game.fight.Hit(human, enemy, 0, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
+        game.fight.hit(human, enemy, 0, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
     }//GEN-LAST:event_blockButtonActionPerformed
 
     private void nextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextRoundButtonActionPerformed
@@ -1130,7 +1130,7 @@ public class JFrames extends javax.swing.JFrame {
         enemyHeroLabel.setText(enemy.getName());
         mediator.setHealthBar(enemy);
         enemyHealthBar.setMaximum(enemy.getMaxHealth());
-        game.fight.NewRound(human, enemy, mediator);
+        game.fight.newRound(human, enemy, mediator);
 
         mediator.setNewRoundTexts(human, enemy, items);
 
@@ -1143,7 +1143,7 @@ public class JFrames extends javax.swing.JFrame {
 
     private void endGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endGameButtonActionPerformed
         try {
-            game.EndGameTop(human, enterNameField, recordsTable);
+            game.endGameTop(human, enterNameField, recordsTable);
         } catch (IOException ex) {
             Logger.getLogger(JFrames.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1201,7 +1201,7 @@ public class JFrames extends javax.swing.JFrame {
         setLocationsFrame.setVisible(false);
         locationsNumber = Integer.parseInt(setLocationsField.getText());
         locationLabel.setText("Текущая локация: " + game.location.getCurrentLocation() + "/" + locationsNumber);
-        human = game.NewHuman(mediator);
+        human = game.newHuman(mediator);
         game.location.setEnemiesAtLocation(human.getLevel());
         fightFrame.setVisible(true);
         fightFrame.setSize(1000, 700);
@@ -1218,7 +1218,7 @@ public class JFrames extends javax.swing.JFrame {
         mediator.setHealthBar(enemy);
         enemyHealthBar.setMaximum(enemy.getMaxHealth());
 
-        game.fight.NewRound(human, enemy, mediator);
+        game.fight.newRound(human, enemy, mediator);
 
         mediator.setNewRoundTexts(human, enemy, items);
 
@@ -1244,7 +1244,7 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseAttributeButtonActionPerformed
 
     private void debuffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debuffButtonActionPerformed
-        game.fight.Hit(human, enemy, 2, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
+        game.fight.hit(human, enemy, 2, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
     }//GEN-LAST:event_debuffButtonActionPerformed
 
     /**

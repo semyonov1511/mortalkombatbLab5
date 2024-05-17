@@ -38,21 +38,21 @@ public class Game {
         return this.enemies;
     }
 
-    public Human NewHuman(Mediator mediator) {
+    public Human newHuman(Mediator mediator) {
         Human human = new Human(0, 80, 16, 1);
         mediator.setHealthBar(human);
         mediator.setPlayerMaxHealthBar(human);
         return human;
     }
 
-    public void EndGameTop(Human human, JTextField text, JTable table) throws IOException {
+    public void endGameTop(Human human, JTextField text, JTable table) throws IOException {
         results.add(new Result(text.getText(), human.getPoints()));
         results.sort(Comparator.comparing(Result::getPoints).reversed());
-        WriteToTable(table);
-        WriteToExcel();
+        writeToTable(table);
+        writeToExcel();
     }
 
-    public void WriteToExcel() throws IOException {
+    public void writeToExcel() throws IOException {
         try (XSSFWorkbook book = new XSSFWorkbook()) {
             XSSFSheet sheet = book.createSheet("Результаты ТОП 10");
             XSSFRow r = sheet.createRow(0);
@@ -76,7 +76,7 @@ public class Game {
         return this.results;
     }
 
-    public void ReadFromExcel() throws IOException {
+    public void readFromExcel() throws IOException {
         /*
         XSSFWorkbook book = new XSSFWorkbook("C:\\Users\\semyo\\Desktop\\Results.xlsx");
         XSSFSheet sh = book.getSheetAt(0);
@@ -86,7 +86,7 @@ public class Game {
          */
     }
 
-    public void WriteToTable(JTable table) {
+    public void writeToTable(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         for (int i = 0; i < results.size(); i++) {
             if (i < 10) {
