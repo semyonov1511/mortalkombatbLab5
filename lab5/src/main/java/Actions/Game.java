@@ -39,7 +39,7 @@ public class Game {
     }
 
     public Human NewHuman(Mediator mediator) {
-        Human human = new Human(0, 80, 160, 1);
+        Human human = new Human(0, 80, 16, 1);
         mediator.setHealthBar(human);
         mediator.setPlayerMaxHealthBar(human);
         return human;

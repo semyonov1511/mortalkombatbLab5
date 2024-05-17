@@ -1,6 +1,5 @@
 package Actions;
 
-import Fabrics.EnemyFabric;
 import Game_components.Human;
 import Game_components.Player;
 import Game_components.Items;
@@ -10,8 +9,6 @@ import java.util.ArrayList;
 public class MidGameActions {
 
     private final int experience_for_next_level[] = {40, 90, 180, 260, 410, 1000};
-
-    
 
     public Action ChooseEnemyAction(Player enemy, ArrayList<Action> list) {
         switch (enemy.getName()) {
@@ -27,30 +24,10 @@ public class MidGameActions {
             }
         }
     }
-    
+
     public void AddPoints(Human human) {
-        switch (human.getLevel()) {
-            case 0 -> {
-                human.setExperience(20);
-                human.setPoints(25 + human.getHealth() / 4);
-            }
-            case 1 -> {
-                human.setExperience(25);
-                human.setPoints(30 + human.getHealth() / 4);
-            }
-            case 2 -> {
-                human.setExperience(30);
-                human.setPoints(35 + human.getHealth() / 4);
-            }
-            case 3 -> {
-                human.setExperience(40);
-                human.setPoints(45 + human.getHealth() / 4);
-            }
-            case 4 -> {
-                human.setExperience(50);
-                human.setPoints(55 + human.getHealth() / 4);
-            }
-        }
+        human.setExperience(20+5*human.getLevel());
+        human.setPoints(20+5*human.getLevel()+human.getHealth()/4);
     }
 
     public boolean checkExperience(Human human) {
@@ -212,4 +189,3 @@ public class MidGameActions {
         }
     }
 }
-
