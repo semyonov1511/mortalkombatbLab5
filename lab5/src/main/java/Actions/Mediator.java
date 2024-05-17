@@ -1,5 +1,6 @@
 package Actions;
 
+import Game_components.Human;
 import Game_components.Items;
 import Game_components.Player;
 import Particular_Actions.Action;
@@ -88,19 +89,6 @@ public class Mediator {
         enemyActionLabel.setText(enemy.getName() + " use " + enemyAction.getType());
     }
 
-    public void roundTexts(Player human, Player enemy) {
-        if (enemy.getHealth() >= 0) {
-            enemyHealthLabel.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
-        } else {
-            enemyHealthLabel.setText("0/" + Integer.toString(enemy.getMaxHealth()));
-        }
-        if (human.getHealth() >= 0) {
-            playerHealthLabel.setText(Integer.toString(human.getHealth()) + "/" + Integer.toString(human.getMaxHealth()));
-        } else {
-            playerHealthLabel.setText("0/" + Integer.toString(human.getMaxHealth()));
-        }
-    }
-
     public void setDebuffLabel(Player player, boolean a) {
         if (a) {
             switch (player.getName()) {
@@ -175,5 +163,34 @@ public class Mediator {
     public void openCantUseItemDialog(){
         cantUseItemDialog.setVisible(true);
         cantUseItemDialog.setBounds(300, 200, 400, 300);
+    }
+    public void setBagText( Items[] items){
+        firstItemButton.setText(items[0].getName()+", "+items[0].getCount()+" шт");
+        secondItemButton.setText(items[1].getName()+", "+items[1].getCount()+" шт");
+        thirdItemButton.setText(items[2].getName()+", "+items[2].getCount()+" шт");
+    }
+    public void setRoundTexts(Player human, Player enemy) {
+        if (enemy.getHealth() >= 0) {
+            enemyHealthLabel.setText(Integer.toString(enemy.getHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
+        } else {
+            enemyHealthLabel.setText("0/" + Integer.toString(enemy.getMaxHealth()));
+        }
+        if (human.getHealth() >= 0) {
+            playerHealthLabel.setText(Integer.toString(human.getHealth()) + "/" + Integer.toString(human.getMaxHealth()));
+        } else {
+            playerHealthLabel.setText("0/" + Integer.toString(human.getMaxHealth()));
+        }
+    }
+    public void setNewRoundTexts(Player human, Player enemy, Items[] items){
+        playerActionLabel.setText("");
+        enemyActionLabel.setText("");
+        pointsValueLabel.setText(Integer.toString(((Human) human).getPoints()));
+        experienceValueLabel.setText(Integer.toString(((Human) human).getExperience()) + "/" + ((Human) human).getNextExperience());
+        playerLevelLabel.setText(Integer.toString((human.getLevel())+1) + " level");
+        enemyLevelLabel.setText(Integer.toString(enemy.getLevel()) + " level");
+        playerHealthLabel.setText(Integer.toString(human.getMaxHealth()) + "/" + Integer.toString(human.getMaxHealth()));
+        enemyHealthLabel.setText(Integer.toString(enemy.getMaxHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
+        playerDamageValueLabel.setText(Integer.toString(human.getDamage()));
+        setBagText(items);
     }
 }

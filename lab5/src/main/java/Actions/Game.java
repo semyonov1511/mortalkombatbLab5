@@ -17,7 +17,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class Game {
 
     public CharacterAction action = new CharacterAction();
-    public ChangeTexts change = new ChangeTexts();
     public Fight fight = new Fight();
     public Location location = new Location();
     private final ArrayList<Result> results = new ArrayList<>();

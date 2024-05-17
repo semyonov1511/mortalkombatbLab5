@@ -12,8 +12,6 @@ import Particular_Actions.Heal;
 import Particular_Actions.Hit;
 
 public class Fight {
-
-    ChangeTexts change = new ChangeTexts();
     public ArrayList<Action> actionsList = new ArrayList<>() {
         {
             add(new Hit());
@@ -74,7 +72,7 @@ public class Fight {
                 }
             }
         }
-        mediator.roundTexts(human, enemy);
+        mediator.setRoundTexts(human, enemy);
         checkDebuff(human, enemy, mediator);
         mediator.setHealthBar(human);
         mediator.setHealthBar(enemy);

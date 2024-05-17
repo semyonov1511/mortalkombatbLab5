@@ -5,7 +5,6 @@ import Actions.Mediator;
 import Game_components.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -1133,9 +1132,7 @@ public class JFrames extends javax.swing.JFrame {
         EnemyHealthBar.setMaximum(enemy.getMaxHealth());
         game.fight.NewRound(human, enemy, mediator);
 
-        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel, PlayerHealthBar, EnemyHealthBar,
-                PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
-                EnemyActionLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
+        mediator.setNewRoundTexts(human, enemy, items);
 
         EndFightDialog.dispose();
     }//GEN-LAST:event_NextRoundButtonActionPerformed
@@ -1188,7 +1185,7 @@ public class JFrames extends javax.swing.JFrame {
         game.action.UseItem(human, items, nameButton, mediator);
         mediator.setHealthBar(human);
         PlayerHealthLabel.setText(human.getHealth() + "/" + human.getMaxHealth());
-        game.change.BagText(items, FirstItemButton, SecondItemButton, ThirdItemButton);
+        mediator.setBagText(items);
     }//GEN-LAST:event_UseItemButtonActionPerformed
 
     private void ItemsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemsButtonActionPerformed
@@ -1223,9 +1220,7 @@ public class JFrames extends javax.swing.JFrame {
 
         game.fight.NewRound(human, enemy, mediator);
 
-        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel, PlayerHealthBar, EnemyHealthBar,
-                PointsValueLabel, ExperienceValueLabel, PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
-                EnemyActionLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
+        mediator.setNewRoundTexts(human, enemy, items);
 
         EndFightDialog.dispose();
     }//GEN-LAST:event_StartWithLocationsButtonActionPerformed
@@ -1244,9 +1239,7 @@ public class JFrames extends javax.swing.JFrame {
         } else {
             game.action.AddDamageHuman(human);
         }
-        game.change.NewRoundTexts(human, enemy, PlayerActionLabel, EnemyActionLabel, PlayerHealthBar, EnemyHealthBar, PointsValueLabel, ExperienceValueLabel,
-                PlayerLevelLabel, EnemyLevelLabel, PlayerHealthLabel, EnemyHealthLabel, PlayerDamageValueLabel,
-                EnemyActionLabel, game.fight.i, items, FirstItemButton, SecondItemButton, ThirdItemButton);
+        mediator.setNewRoundTexts(human, enemy, items);
         LevelUp.dispose();
     }//GEN-LAST:event_ChooseAttributeButtonActionPerformed
 
