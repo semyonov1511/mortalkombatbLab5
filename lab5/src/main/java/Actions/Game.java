@@ -1,5 +1,6 @@
 package Actions;
 
+import Fabrics.EnemyFabric;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import Game_components.Human;
+import Game_components.Player;
 import Game_components.Result;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -20,6 +22,21 @@ public class Game {
     public Fight fight = new Fight();
     public Location location = new Location();
     private final ArrayList<Result> results = new ArrayList<>();
+    private final Player enemies[] = new Player[5];
+
+    EnemyFabric fabric = new EnemyFabric();
+
+    public void setEnemies() {
+        enemies[0] = fabric.create(0, 0);
+        enemies[1] = fabric.create(1, 0);
+        enemies[2] = fabric.create(2, 0);
+        enemies[3] = fabric.create(3, 0);
+        enemies[4] = fabric.create(4, 0);
+    }
+
+    public Player[] getEnemies() {
+        return this.enemies;
+    }
 
     public Human NewHuman(Mediator mediator) {
         Human human = new Human(0, 80, 160, 1);

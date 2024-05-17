@@ -11,21 +11,7 @@ public class MidGameActions {
 
     private final int experience_for_next_level[] = {40, 90, 180, 260, 410, 1000};
 
-    private final Player enemies[] = new Player[5];
-
-    EnemyFabric fabric = new EnemyFabric();
-
-    public void setEnemies() {
-        enemies[0] = fabric.create(0, 0);
-        enemies[1] = fabric.create(1, 0);
-        enemies[2] = fabric.create(2, 0);
-        enemies[3] = fabric.create(3, 0);
-        enemies[4] = fabric.create(4, 0);
-    }
-
-    public Player[] getEnemies() {
-        return this.enemies;
-    }
+    
 
     public Action ChooseEnemyAction(Player enemy, ArrayList<Action> list) {
         switch (enemy.getName()) {

@@ -23,8 +23,8 @@ public class JFrames extends javax.swing.JFrame {
     public JFrames() {
         initComponents();
         game.WriteToTable(RecordsTable);
-        game.action.setEnemies();
-        game.location.setFullEnemiesList(game.action.getEnemies());
+        game.setEnemies();
+        game.location.setFullEnemiesList(game.getEnemies());
         PlayerIconLabel.setIcon(new ImageIcon("crab.jpg"));
         AttributesGroup.add(HealthButton);
         AttributesGroup.add(DamageButton);
@@ -1103,11 +1103,11 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_StartButtonActionPerformed
 
     private void AttackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttackButtonActionPerformed
-        game.fight.Hit(human, enemy, 1, game.getResults(), items, game.location, locationsNumber, game.action.getEnemies(), mediator);
+        game.fight.Hit(human, enemy, 1, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
     }//GEN-LAST:event_AttackButtonActionPerformed
 
     private void BlockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlockButtonActionPerformed
-        game.fight.Hit(human, enemy, 0, game.getResults(), items, game.location, locationsNumber, game.action.getEnemies(), mediator);
+        game.fight.Hit(human, enemy, 0, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
     }//GEN-LAST:event_BlockButtonActionPerformed
 
     private void NextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextRoundButtonActionPerformed
@@ -1118,8 +1118,8 @@ public class JFrames extends javax.swing.JFrame {
             EnemyNumberLabel.setText("Финальный босс локации!");
         }
         if (game.action.checkExperience(human)) {
-            game.action.LevelUp(human, game.action.getEnemies());
-            game.location.setFullEnemiesList(game.action.getEnemies());
+            game.action.LevelUp(human, game.getEnemies());
+            game.location.setFullEnemiesList(game.getEnemies());
             LevelUp.setVisible(true);
             LevelUp.setBounds(300, 200, 430, 350);
         }
@@ -1244,7 +1244,7 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_ChooseAttributeButtonActionPerformed
 
     private void DebuffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DebuffButtonActionPerformed
-        game.fight.Hit(human, enemy, 2, game.getResults(), items, game.location, locationsNumber, game.action.getEnemies(), mediator);
+        game.fight.Hit(human, enemy, 2, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
     }//GEN-LAST:event_DebuffButtonActionPerformed
 
     /**
