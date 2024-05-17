@@ -20,7 +20,6 @@ public class Fight {
             add(new Heal());
         }
     };
-    public int i = 1;
 
     public void Move(Player enemy, Player human, Action enemyAction, Action playerAction, Mediator mediator) {
         mediator.setActionLabels(enemy, human, enemyAction, playerAction);
@@ -89,7 +88,7 @@ public class Fight {
         }
         if (human.getHealth() <= 0 | enemy.getHealth() <= 0) {
             if (location.getCurrentLocation() == locationsNumber & "Shao Kahn".equals(enemy.getName())) {
-                location.resetLocation(false, i);
+                location.resetLocation(false, 1);
                 EndFinalRound(((Human) human), enemy, results, enemiesList, mediator);
             } else {
                 EndRound(human, enemy, items, location, enemiesList, mediator);
