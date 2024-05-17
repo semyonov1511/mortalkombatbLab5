@@ -65,66 +65,16 @@ public class MidGameActions {
     }
 
     public void AddHealthHuman(Human human) {
-        int hp = 0;
-        switch (human.getLevel()) {
-            case 1 -> {
-                hp = 25;
-            }
-            case 2 -> {
-                hp = 30;
-            }
-            case 3 -> {
-                hp = 30;
-            }
-            case 4 -> {
-                hp = 40;
-            }
-        }
-        human.addMaxHealth(hp);
+        human.addMaxHealth(20+5*human.getLevel());
     }
 
     public void AddDamageHuman(Human human) {
-        int damage = 0;
-        switch (human.getLevel()) {
-            case 1 -> {
-                damage = 3;
-            }
-            case 2 -> {
-                damage = 3;
-            }
-            case 3 -> {
-                damage = 4;
-            }
-            case 4 -> {
-                damage = 6;
-            }
-        }
-        human.addDamage(damage);
+        human.addDamage(2+human.getLevel());
     }
 
     public void NewHealthEnemy(Player enemy, Human human) {
-        int hp = 0;
-        int damage = 0;
-        switch (human.getLevel()) {
-            case 1 -> {
-                hp = 32;
-                damage = 25;
-            }
-            case 2 -> {
-                hp = 30;
-                damage = 20;
-            }
-            case 3 -> {
-                hp = 23;
-                damage = 24;
-            }
-            case 4 -> {
-                hp = 25;
-                damage = 26;
-            }
-        }
-        enemy.addMaxHealth((int) enemy.getMaxHealth() * hp / 100);
-        enemy.addDamage((int) enemy.getDamage() * damage / 100);
+        enemy.addMaxHealth((int) enemy.getMaxHealth() * (35-3*human.getLevel()) / 100);
+        enemy.addDamage((int) enemy.getDamage() *(20+human.getLevel()) / 100);
         enemy.addLevel();
     }
 
