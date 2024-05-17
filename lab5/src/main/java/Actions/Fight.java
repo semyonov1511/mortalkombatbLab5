@@ -46,7 +46,7 @@ public class Fight {
 
     public void Hit(Human human, Player enemy, int a, ArrayList<Result> results, Items[] items,
             Location location, int locationsNumber, Player[] enemiesList, Mediator mediator) {
-        CharacterAction action = new CharacterAction();
+        MidGameActions action = new MidGameActions();
         Action enemyAction = action.ChooseEnemyAction(enemy, new ArrayList<>(actionsList));
         switch (a) {
             case 0 -> {
@@ -97,7 +97,7 @@ public class Fight {
     }
 
     public void EndRound(Human human, Player enemy, Items[] items, Location location, Player[] enemiesList, Mediator mediator) {
-        CharacterAction action = new CharacterAction();
+        MidGameActions action = new MidGameActions();
         mediator.setEndFightDialog();
         if (human.getHealth() > 0) {
             mediator.setRoundEndText("You win");
@@ -117,7 +117,7 @@ public class Fight {
     }
 
     public void reset(Human human, Player enemy, Location location, Player[] enemiesList) {
-        CharacterAction action = new CharacterAction();
+        MidGameActions action = new MidGameActions();
         human.setDamage(16);
         human.setHealth(80);
         human.setMaxHealth(80);
@@ -131,7 +131,7 @@ public class Fight {
     }
 
     public void EndFinalRound(Human human, Player enemy, ArrayList<Result> results, Player[] enemiesList, Mediator mediator) {
-        CharacterAction action = new CharacterAction();
+        MidGameActions action = new MidGameActions();
         action.resetEnemies(enemiesList);
         String text = "Победа не на вашей стороне";
         if (human.getHealth() > 0) {

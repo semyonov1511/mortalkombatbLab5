@@ -7,7 +7,7 @@ import Game_components.Items;
 import Particular_Actions.*;
 import java.util.ArrayList;
 
-public class CharacterAction {
+public class MidGameActions {
 
     private final int experience_for_next_level[] = {40, 90, 180, 260, 410, 1000};
 
