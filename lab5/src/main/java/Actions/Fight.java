@@ -12,6 +12,9 @@ import Particular_Actions.Heal;
 import Particular_Actions.Hit;
 
 public class Fight {
+
+    Human human;
+    Player enemy;
     public ArrayList<Action> actionsList = new ArrayList<>() {
         {
             add(new Hit());
@@ -21,9 +24,30 @@ public class Fight {
         }
     };
 
-    public void move(Player enemy, Player human, Action enemyAction, Action playerAction, Mediator mediator) {
+    public void setHuman(Human human) {
+        this.human = human;
+    }
+
+    public void setEnemy(Player enemy) {
+        this.enemy = enemy;
+    }
+
+    public Human getHuman() {
+        return this.human;
+    }
+
+    public Player getEnemy() {
+        return this.enemy;
+    }
+
+    public void playerMove(Action enemyAction, Action playerAction, Mediator mediator) {
         mediator.setActionLabels(enemy, human, enemyAction, playerAction);
         playerAction.realisation(human, enemy, enemyAction.getType());
+    }
+
+    public void enemyMove(Action enemyAction, Action playerAction, Mediator mediator) {
+        mediator.setActionLabels(human, enemy, enemyAction, playerAction);
+        playerAction.realisation(enemy, human, enemyAction.getType());
     }
 
     public void checkDebuff(Player human, Player enemy, Mediator mediator) {
@@ -44,29 +68,29 @@ public class Fight {
 
     }
 
-    public void hit(Human human, Player enemy, int a, ArrayList<Result> results, Items[] items,
+    public void hit(int a, ArrayList<Result> results, Items[] items,
             Location location, int locationsNumber, Player[] enemiesList, Mediator mediator) {
         MidGameActions action = new MidGameActions();
         Action enemyAction = action.chooseEnemyAction(enemy, new ArrayList<>(actionsList));
         switch (a) {
             case 0 -> {
-                move(enemy, human, enemyAction,
+                playerMove(enemyAction,
                         actionsList.get(1), mediator);
                 if (enemy.getHealth() > 0) {
-                    move(human, enemy, actionsList.get(1), enemyAction, mediator);
+                    enemyMove(actionsList.get(1), enemyAction, mediator);
                 }
             }
             case 1 -> {
-                move(enemy, human, enemyAction, actionsList.get(0), mediator);
+                playerMove(enemyAction, actionsList.get(0), mediator);
                 if (enemy.getHealth() > 0) {
-                    move(human, enemy, actionsList.get(0),
+                    enemyMove(actionsList.get(0),
                             enemyAction, mediator);
                 }
             }
             case 2 -> {
-                move(enemy, human, enemyAction, actionsList.get(2), mediator);
+                playerMove(enemyAction, actionsList.get(2), mediator);
                 if (enemy.getHealth() > 0) {
-                    move(human, enemy, actionsList.get(2),
+                    enemyMove(actionsList.get(2),
                             enemyAction, mediator);
                 }
             }
@@ -75,10 +99,10 @@ public class Fight {
         checkDebuff(human, enemy, mediator);
         mediator.setHealthBar(human);
         mediator.setHealthBar(enemy);
-        checkDeath(human, enemy, results, items, location, locationsNumber, enemiesList, mediator);
+        checkDeath(results, items, location, locationsNumber, enemiesList, mediator);
     }
 
-    public void checkDeath(Human human, Player enemy, ArrayList<Result> results,
+    public void checkDeath(ArrayList<Result> results,
             Items[] items, Location location, int locationsNumber, Player[] enemiesList, Mediator mediator) {
         if (human.getHealth() <= 0 & items[2].getCount() > 0) {
             human.setHealth((int) (human.getMaxHealth() * 0.05));
@@ -89,14 +113,14 @@ public class Fight {
         if (human.getHealth() <= 0 | enemy.getHealth() <= 0) {
             if (location.getCurrentLocation() == locationsNumber & "Shao Kahn".equals(enemy.getName())) {
                 location.resetLocation(false, 1);
-                endFinalRound(((Human) human), enemy, results, enemiesList, mediator);
+                endFinalRound(results, enemiesList, mediator);
             } else {
-                endRound(human, enemy, items, location, enemiesList, mediator);
+                endRound(items, location, enemiesList, mediator);
             }
         }
     }
 
-    public void endRound(Human human, Player enemy, Items[] items, Location location, Player[] enemiesList, Mediator mediator) {
+    public void endRound(Items[] items, Location location, Player[] enemiesList, Mediator mediator) {
         MidGameActions action = new MidGameActions();
         mediator.setEndFightDialog();
         if (human.getHealth() > 0) {
@@ -110,13 +134,13 @@ public class Fight {
                 action.addPoints(human);
             }
         } else {
-            reset(human, enemy, location, enemiesList);
+            reset(location, enemiesList);
             mediator.setRoundEndText(enemy.getName() + " win");
 
         }
     }
 
-    public void reset(Human human, Player enemy, Location location, Player[] enemiesList) {
+    public void reset(Location location, Player[] enemiesList) {
         MidGameActions action = new MidGameActions();
         human.setDamage(16);
         human.setHealth(80);
@@ -130,7 +154,7 @@ public class Fight {
         location.resetLocation(false, human.getLevel());
     }
 
-    public void endFinalRound(Human human, Player enemy, ArrayList<Result> results, Player[] enemiesList, Mediator mediator) {
+    public void endFinalRound(ArrayList<Result> results, Player[] enemiesList, Mediator mediator) {
         MidGameActions action = new MidGameActions();
         action.resetEnemies(enemiesList);
         String text = "Победа не на вашей стороне";
@@ -155,7 +179,7 @@ public class Fight {
         mediator.gameEnding(text, top);
     }
 
-    public void newRound(Player human, Player enemy, Mediator mediator) {
+    public void newRound(Mediator mediator) {
         mediator.setPlayerMaxHealthBar(human);
         mediator.setEnemyMaxHealthBar(enemy);
         human.setHealth(human.getMaxHealth());
