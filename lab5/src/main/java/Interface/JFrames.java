@@ -22,6 +22,11 @@ public class JFrames extends javax.swing.JFrame {
 
     public JFrames() {
         initComponents();
+        try {
+            game.readFromExcel();
+        } catch (IOException ex) {
+            Logger.getLogger(JFrames.class.getName()).log(Level.SEVERE, null, ex);
+        }
         game.writeToTable(recordsTable);
         game.setEnemies();
         game.location.setFullEnemiesList(game.getEnemies());
