@@ -21,7 +21,6 @@ public class Game {
 
     public MidGameActions action = new MidGameActions();
     public Fight fight = new Fight();
-    public Location location = new Location();
     private final ArrayList<Result> results = new ArrayList<>();
     private final Player enemies[] = new Player[5];
 

@@ -27,7 +27,7 @@ public class JFrames extends javax.swing.JFrame {
         }
         game.writeToTable(recordsTable);
         game.setEnemies();
-        game.location.setFullEnemiesList(game.getEnemies());
+        game.fight.location.setFullEnemiesList(game.getEnemies());
         playerIconLabel.setIcon(new ImageIcon("crab.jpg"));
         attributesGroup.add(healthButton);
         attributesGroup.add(damageButton);
@@ -1107,27 +1107,27 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void attackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attackButtonActionPerformed
-        game.fight.hit(1, game.getResults(), game.fight.getHuman().getItems(), game.location, locationsNumber, game.getEnemies());
+        game.fight.hit(1, game.getResults(), game.fight.getHuman().getItems(), game.fight.location, locationsNumber, game.getEnemies());
     }//GEN-LAST:event_attackButtonActionPerformed
 
     private void blockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockButtonActionPerformed
-        game.fight.hit(0, game.getResults(), game.fight.getHuman().getItems(), game.location, locationsNumber, game.getEnemies());
+        game.fight.hit(0, game.getResults(), game.fight.getHuman().getItems(), game.fight.location, locationsNumber, game.getEnemies());
     }//GEN-LAST:event_blockButtonActionPerformed
 
     private void nextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextRoundButtonActionPerformed
-        locationLabel.setText("Текущая локация: " + game.location.getCurrentLocation() + "/" + locationsNumber);
-        if ((game.location.getCurrentEnemyNumber() + 1) <= game.location.getEnemiesAtLocation().size()) {
-            enemyNumberLabel.setText("Номер противника: " + (game.location.getCurrentEnemyNumber() + 1) + "/" + game.location.getEnemiesAtLocation().size());
+        locationLabel.setText("Текущая локация: " + game.fight.location.getCurrentLocation() + "/" + locationsNumber);
+        if ((game.fight.location.getCurrentEnemyNumber() + 1) <= game.fight.location.getEnemiesAtLocation().size()) {
+            enemyNumberLabel.setText("Номер противника: " + (game.fight.location.getCurrentEnemyNumber() + 1) + "/" + game.fight.location.getEnemiesAtLocation().size());
         } else {
             enemyNumberLabel.setText("Финальный босс локации!");
         }
         if (game.action.checkExperience(game.fight.getHuman())) {
             game.action.levelUp(game.fight.getHuman(), game.getEnemies());
-            game.location.setFullEnemiesList(game.getEnemies());
+            game.fight.location.setFullEnemiesList(game.getEnemies());
             levelUp.setVisible(true);
             levelUp.setBounds(300, 200, 430, 350);
         }
-        game.fight.setEnemy(game.location.getCurrentEnemy());
+        game.fight.setEnemy(game.fight.location.getCurrentEnemy());
         enemyIconLabel.setIcon(game.fight.getEnemy().getPhoto());
         enemyDamageValueLabel.setText(Integer.toString(game.fight.getEnemy().getDamage()));
         enemyHealthLabel.setText(Integer.toString(game.fight.getEnemy().getHealth()) + "/" + Integer.toString(game.fight.getEnemy().getMaxHealth()));
@@ -1205,17 +1205,17 @@ public class JFrames extends javax.swing.JFrame {
     private void startWithLocationsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startWithLocationsButtonActionPerformed
         setLocationsFrame.setVisible(false);
         locationsNumber = Integer.parseInt(setLocationsField.getText());
-        locationLabel.setText("Текущая локация: " + game.location.getCurrentLocation() + "/" + locationsNumber);
+        locationLabel.setText("Текущая локация: " + game.fight.location.getCurrentLocation() + "/" + locationsNumber);
         game.fight.setHuman(game.newHuman(mediator,items));
-        game.location.setEnemiesAtLocation(game.fight.getHuman().getLevel());
+        game.fight.location.setEnemiesAtLocation(game.fight.getHuman().getLevel());
         fightFrame.setVisible(true);
         fightFrame.setSize(1000, 700);
-        if ((game.location.getCurrentEnemyNumber() + 1) <= game.location.getEnemiesAtLocation().size()) {
-            enemyNumberLabel.setText("Номер противника: " + (game.location.getCurrentEnemyNumber() + 1) + "/" + game.location.getEnemiesAtLocation().size());
+        if ((game.fight.location.getCurrentEnemyNumber() + 1) <= game.fight.location.getEnemiesAtLocation().size()) {
+            enemyNumberLabel.setText("Номер противника: " + (game.fight.location.getCurrentEnemyNumber() + 1) + "/" + game.fight.location.getEnemiesAtLocation().size());
         } else {
             enemyNumberLabel.setText("Финальный босс локации!");
         }
-        game.fight.setEnemy(game.location.getCurrentEnemy());
+        game.fight.setEnemy(game.fight.location.getCurrentEnemy());
         enemyIconLabel.setIcon(game.fight.getEnemy().getPhoto());
         enemyDamageValueLabel.setText(Integer.toString(game.fight.getEnemy().getDamage()));
         enemyHealthLabel.setText(Integer.toString(game.fight.getEnemy().getHealth()) + "/" + Integer.toString(game.fight.getEnemy().getMaxHealth()));
@@ -1249,7 +1249,7 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseAttributeButtonActionPerformed
 
     private void debuffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debuffButtonActionPerformed
-        game.fight.hit(2, game.getResults(), game.fight.getHuman().getItems(), game.location, locationsNumber, game.getEnemies());
+        game.fight.hit(2, game.getResults(), game.fight.getHuman().getItems(), game.fight.location, locationsNumber, game.getEnemies());
     }//GEN-LAST:event_debuffButtonActionPerformed
 
     /**

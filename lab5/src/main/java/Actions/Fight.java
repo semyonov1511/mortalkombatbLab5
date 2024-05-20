@@ -15,6 +15,7 @@ public class Fight {
     Mediator mediator;
     Human human;
     Player enemy;
+    public Location location = new Location();
     public ArrayList<Action> actionsList = new ArrayList<>() {
         {
             add(new Hit());
