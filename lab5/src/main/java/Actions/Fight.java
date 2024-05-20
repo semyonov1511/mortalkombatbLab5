@@ -73,7 +73,7 @@ public class Fight {
 
     }
 
-    public void hit(int a, ArrayList<Result> results, Items[] items, int locationsNumber, Player[] enemiesList) {
+    public void hit(int a, ArrayList<Result> results, int locationsNumber, Player[] enemiesList) {
         MidGameActions action = new MidGameActions();
         Action enemyAction = action.chooseEnemyAction(enemy, new ArrayList<>(actionsList));
         switch (a) {
@@ -118,12 +118,12 @@ public class Fight {
                 location.resetLocation(false, 1);
                 endFinalRound(results, enemiesList);
             } else {
-                endRound(human.getItems(), enemiesList);
+                endRound(enemiesList);
             }
         }
     }
 
-    public void endRound(Items[] items, Player[] enemiesList) {
+    public void endRound(Player[] enemiesList) {
         MidGameActions action = new MidGameActions();
         mediator.setEndFightDialog();
         if (human.getHealth() > 0) {
