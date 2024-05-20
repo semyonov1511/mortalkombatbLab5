@@ -6,6 +6,7 @@ public class Human extends Player {
     private int experience;
     private int win;
     private int nextexperience;
+    private Items[] items;
 
     public Human(int level, int health, int damage, int attack) {
         super(level, health, damage, attack);
@@ -14,7 +15,13 @@ public class Human extends Player {
         this.nextexperience = 40;
         this.win = 0;
     }
-
+    
+    public void setItems(Items[] items){
+        this.items = items;
+    }
+    public Items[] getItems(){
+        return this.items;
+    }
     public int getPoints() {
         return this.points;
     }
@@ -51,5 +58,5 @@ public class Human extends Player {
     public String getName() {
         return "You";
     }
-
+    
 }

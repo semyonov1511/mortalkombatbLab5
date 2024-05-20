@@ -1107,11 +1107,11 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void attackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attackButtonActionPerformed
-        game.fight.hit(1, game.getResults(), items, game.location, locationsNumber, game.getEnemies());
+        game.fight.hit(1, game.getResults(), game.fight.getHuman().getItems(), game.location, locationsNumber, game.getEnemies());
     }//GEN-LAST:event_attackButtonActionPerformed
 
     private void blockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockButtonActionPerformed
-        game.fight.hit(0, game.getResults(), items, game.location, locationsNumber, game.getEnemies());
+        game.fight.hit(0, game.getResults(), game.fight.getHuman().getItems(), game.location, locationsNumber, game.getEnemies());
     }//GEN-LAST:event_blockButtonActionPerformed
 
     private void nextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextRoundButtonActionPerformed
@@ -1136,7 +1136,7 @@ public class JFrames extends javax.swing.JFrame {
         enemyHealthBar.setMaximum(game.fight.getEnemy().getMaxHealth());
         game.fight.newRound();
 
-        mediator.setNewRoundTexts(game.fight.getHuman(), game.fight.getEnemy(), items);
+        mediator.setNewRoundTexts(game.fight.getHuman(), game.fight.getEnemy(), game.fight.getHuman().getItems());
 
         endFightDialog.dispose();
     }//GEN-LAST:event_nextRoundButtonActionPerformed
@@ -1186,10 +1186,11 @@ public class JFrames extends javax.swing.JFrame {
         if (thirdItemButton.isSelected()) {
             nameButton = "Third item";
         }
-        game.action.useItem(game.fight.getHuman(), items, nameButton, mediator);
-        mediator.setHealthBar(game.fight.getHuman());
-        playerHealthLabel.setText(game.fight.getHuman().getHealth() + "/" + game.fight.getHuman().getMaxHealth());
-        mediator.setBagText(items);
+        Human human = game.fight.getHuman();
+        game.action.useItem(human, human.getItems(), nameButton, mediator);
+        mediator.setHealthBar(human);
+        playerHealthLabel.setText(human.getHealth() + "/" + human.getMaxHealth());
+        mediator.setBagText(human.getItems());
     }//GEN-LAST:event_useItemButtonActionPerformed
 
     private void itemsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemsButtonActionPerformed
@@ -1205,7 +1206,7 @@ public class JFrames extends javax.swing.JFrame {
         setLocationsFrame.setVisible(false);
         locationsNumber = Integer.parseInt(setLocationsField.getText());
         locationLabel.setText("Текущая локация: " + game.location.getCurrentLocation() + "/" + locationsNumber);
-        game.fight.setHuman(game.newHuman(mediator));
+        game.fight.setHuman(game.newHuman(mediator,items));
         game.location.setEnemiesAtLocation(game.fight.getHuman().getLevel());
         fightFrame.setVisible(true);
         fightFrame.setSize(1000, 700);
@@ -1224,7 +1225,7 @@ public class JFrames extends javax.swing.JFrame {
 
         game.fight.newRound();
 
-        mediator.setNewRoundTexts(game.fight.getHuman(), game.fight.getEnemy(), items);
+        mediator.setNewRoundTexts(game.fight.getHuman(), game.fight.getEnemy(), game.fight.getHuman().getItems());
 
         endFightDialog.dispose();
     }//GEN-LAST:event_startWithLocationsButtonActionPerformed
@@ -1243,12 +1244,12 @@ public class JFrames extends javax.swing.JFrame {
         } else {
             game.action.addDamageHuman(game.fight.getHuman());
         }
-        mediator.setNewRoundTexts(game.fight.getHuman(), game.fight.getEnemy(), items);
+        mediator.setNewRoundTexts(game.fight.getHuman(), game.fight.getEnemy(), game.fight.getHuman().getItems());
         levelUp.dispose();
     }//GEN-LAST:event_chooseAttributeButtonActionPerformed
 
     private void debuffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debuffButtonActionPerformed
-        game.fight.hit(2, game.getResults(), items, game.location, locationsNumber, game.getEnemies());
+        game.fight.hit(2, game.getResults(), game.fight.getHuman().getItems(), game.location, locationsNumber, game.getEnemies());
     }//GEN-LAST:event_debuffButtonActionPerformed
 
     /**

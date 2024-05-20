@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import Game_components.Human;
+import Game_components.Items;
 import Game_components.Player;
 import Game_components.Result;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -38,10 +39,11 @@ public class Game {
         return this.enemies;
     }
 
-    public Human newHuman(Mediator mediator) {
+    public Human newHuman(Mediator mediator, Items[] items) {
         Human human = new Human(0, 80, 16, 1);
         mediator.setHealthBar(human);
         mediator.setPlayerMaxHealthBar(human);
+        human.setItems(items);
         return human;
     }
 
