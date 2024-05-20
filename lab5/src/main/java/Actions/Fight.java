@@ -73,8 +73,7 @@ public class Fight {
 
     }
 
-    public void hit(int a, ArrayList<Result> results, Items[] items,
-            Location location, int locationsNumber, Player[] enemiesList) {
+    public void hit(int a, ArrayList<Result> results, Items[] items, int locationsNumber, Player[] enemiesList) {
         MidGameActions action = new MidGameActions();
         Action enemyAction = action.chooseEnemyAction(enemy, new ArrayList<>(actionsList));
         switch (a) {
@@ -104,48 +103,47 @@ public class Fight {
         checkDebuff(human, enemy);
         mediator.setHealthBar(human);
         mediator.setHealthBar(enemy);
-        checkDeath(results, items, location, locationsNumber, enemiesList);
+        checkDeath(results, locationsNumber, enemiesList);
     }
 
-    public void checkDeath(ArrayList<Result> results,
-            Items[] items, Location location, int locationsNumber, Player[] enemiesList) {
-        if (human.getHealth() <= 0 & items[2].getCount() > 0) {
+    public void checkDeath(ArrayList<Result> results, int locationsNumber, Player[] enemiesList) {
+        if (human.getHealth() <= 0 & human.getItems()[2].getCount() > 0) {
             human.setHealth((int) (human.getMaxHealth() * 0.05));
-            items[2].setCount(-1);
+            human.getItems()[2].setCount(-1);
             mediator.setHealthBar(human);
-            mediator.revive(human, items);
+            mediator.revive(human, human.getItems());
         }
         if (human.getHealth() <= 0 | enemy.getHealth() <= 0) {
             if (location.getCurrentLocation() == locationsNumber & "Shao Kahn".equals(enemy.getName())) {
                 location.resetLocation(false, 1);
                 endFinalRound(results, enemiesList);
             } else {
-                endRound(items, location, enemiesList);
+                endRound(human.getItems(), enemiesList);
             }
         }
     }
 
-    public void endRound(Items[] items, Location location, Player[] enemiesList) {
+    public void endRound(Items[] items, Player[] enemiesList) {
         MidGameActions action = new MidGameActions();
         mediator.setEndFightDialog();
         if (human.getHealth() > 0) {
             mediator.setRoundEndText("You win");
             if ("Shao Kahn".equals(enemy.getName())) {
-                action.addItems(38, 23, 8, items);
+                action.addItems(38, 23, 8, human.getItems());
                 action.addPointsBoss(human);
                 location.resetLocation(true, human.getLevel());
             } else {
-                action.addItems(25, 15, 5, items);
+                action.addItems(25, 15, 5, human.getItems());
                 action.addPoints(human);
             }
         } else {
-            reset(location, enemiesList);
+            reset(enemiesList);
             mediator.setRoundEndText(enemy.getName() + " win");
 
         }
     }
 
-    public void reset(Location location, Player[] enemiesList) {
+    public void reset(Player[] enemiesList) {
         MidGameActions action = new MidGameActions();
         human.setDamage(16);
         human.setHealth(80);
