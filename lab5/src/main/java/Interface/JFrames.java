@@ -43,6 +43,7 @@ public class JFrames extends javax.swing.JFrame {
                 victoryLabel, endGameWithoutLadderTitlleLabel, playerActionLabel, playerDebuffLabel, enemyActionLabel,
                 firstItemButton, secondItemButton, thirdItemButton, enterNameField, recordsTable,
                 cantUseItemDialog, itemsBagDialog);
+        game.fight.setMediator(mediator);
     }
 
     @SuppressWarnings("unchecked")
@@ -1106,11 +1107,11 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void attackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attackButtonActionPerformed
-        game.fight.hit(1, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
+        game.fight.hit(1, game.getResults(), items, game.location, locationsNumber, game.getEnemies());
     }//GEN-LAST:event_attackButtonActionPerformed
 
     private void blockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockButtonActionPerformed
-        game.fight.hit(0, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
+        game.fight.hit(0, game.getResults(), items, game.location, locationsNumber, game.getEnemies());
     }//GEN-LAST:event_blockButtonActionPerformed
 
     private void nextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextRoundButtonActionPerformed
@@ -1133,7 +1134,7 @@ public class JFrames extends javax.swing.JFrame {
         enemyHeroLabel.setText(game.fight.getEnemy().getName());
         mediator.setHealthBar(game.fight.getEnemy());
         enemyHealthBar.setMaximum(game.fight.getEnemy().getMaxHealth());
-        game.fight.newRound(mediator);
+        game.fight.newRound();
 
         mediator.setNewRoundTexts(game.fight.getHuman(), game.fight.getEnemy(), items);
 
@@ -1221,7 +1222,7 @@ public class JFrames extends javax.swing.JFrame {
         mediator.setHealthBar(game.fight.getEnemy());
         enemyHealthBar.setMaximum(game.fight.getEnemy().getMaxHealth());
 
-        game.fight.newRound(mediator);
+        game.fight.newRound();
 
         mediator.setNewRoundTexts(game.fight.getHuman(), game.fight.getEnemy(), items);
 
@@ -1247,7 +1248,7 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseAttributeButtonActionPerformed
 
     private void debuffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debuffButtonActionPerformed
-        game.fight.hit(2, game.getResults(), items, game.location, locationsNumber, game.getEnemies(), mediator);
+        game.fight.hit(2, game.getResults(), items, game.location, locationsNumber, game.getEnemies());
     }//GEN-LAST:event_debuffButtonActionPerformed
 
     /**

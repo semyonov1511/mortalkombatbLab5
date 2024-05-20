@@ -12,15 +12,13 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Lab5 {
 
     public static void main(String[] args) throws LineUnavailableException, UnsupportedAudioFileException {
-
-        System.out.println("lab");
         JFrames app = new JFrames();
         app.setVisible(true);
         try {
             File soundFile = new File("crab.wav");
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile);
             try (
-                    Clip clip = AudioSystem.getClip()) {
+                Clip clip = AudioSystem.getClip()) {
                 clip.open(ais);
                 clip.setFramePosition(0);
                 clip.start();
@@ -28,6 +26,7 @@ public class Lab5 {
                 clip.stop();
             }
         } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | InterruptedException exc) {
+            exc.printStackTrace();
         }
     }
 }
