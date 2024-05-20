@@ -1107,11 +1107,11 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void attackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attackButtonActionPerformed
-        game.fight.hit(1, game.getResults(), game.fight.getHuman().getItems(), game.fight.location, locationsNumber, game.getEnemies());
+        game.fight.hit(1, game.getResults(), game.fight.getHuman().getItems(), locationsNumber, game.getEnemies());
     }//GEN-LAST:event_attackButtonActionPerformed
 
     private void blockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockButtonActionPerformed
-        game.fight.hit(0, game.getResults(), game.fight.getHuman().getItems(), game.fight.location, locationsNumber, game.getEnemies());
+        game.fight.hit(0, game.getResults(), game.fight.getHuman().getItems(), locationsNumber, game.getEnemies());
     }//GEN-LAST:event_blockButtonActionPerformed
 
     private void nextRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextRoundButtonActionPerformed
@@ -1249,7 +1249,7 @@ public class JFrames extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseAttributeButtonActionPerformed
 
     private void debuffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debuffButtonActionPerformed
-        game.fight.hit(2, game.getResults(), game.fight.getHuman().getItems(), game.fight.location, locationsNumber, game.getEnemies());
+        game.fight.hit(2, game.getResults(), game.fight.getHuman().getItems(), locationsNumber, game.getEnemies());
     }//GEN-LAST:event_debuffButtonActionPerformed
 
     /**
