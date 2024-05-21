@@ -1,6 +1,7 @@
 package com.mycompany.lab5;
 
 import Interface.JFrames;
+import Interface.Music;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
@@ -14,19 +15,6 @@ public class Lab5 {
     public static void main(String[] args) throws LineUnavailableException, UnsupportedAudioFileException {
         JFrames app = new JFrames();
         app.setVisible(true);
-        try {
-            File soundFile = new File("crab.wav");
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile);
-            try (
-                Clip clip = AudioSystem.getClip()) {
-                clip.open(ais);
-                clip.setFramePosition(0);
-                clip.start();
-                Thread.sleep(clip.getMicrosecondLength() / 1000);
-                clip.stop();
-            }
-        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | InterruptedException exc) {
-            exc.printStackTrace();
-        }
+        Music.startMusic();
     }
 }

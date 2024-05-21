@@ -4,6 +4,7 @@ import Game_components.Human;
 import Game_components.Items;
 import Game_components.Player;
 import Particular_Actions.Action;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,7 +29,8 @@ public class Mediator {
     private final JLabel playerActionLabel;
     private final JLabel playerDebuffLabel;
     private final JLabel enemyActionLabel;
-
+    private final JLabel GIFLabel;
+    
     private final JProgressBar playerHealthBar;
     private final JProgressBar enemyHealthBar;
 
@@ -53,7 +55,7 @@ public class Mediator {
             JProgressBar enemyHealthBar, JDialog endGameDialog, JDialog endGameWithoutLadderDialog, JFrame fightFrame, JLabel enemyDebuffLabel,
             JLabel victoryLabel, JLabel endGameWithoutLadderTitlleLabel, JLabel playerActionLabel, JLabel playerDebuffLabel, JLabel enemyActionLabel,
             JRadioButton firstItemButton, JRadioButton secondItemButton, JRadioButton thirdItemButton, JTextField enterNameField, JTable recordsTable,
-            JDialog cantUseItemDialog, JDialog itemsBagDialog) {
+            JDialog cantUseItemDialog, JDialog itemsBagDialog, JLabel GIFLabel) {
 
         this.enemyHealthLabel = enemyHealthLabel;
         this.playerHealthLabel = playerHealthLabel;
@@ -82,6 +84,7 @@ public class Mediator {
         this.recordsTable = recordsTable;
         this.cantUseItemDialog = cantUseItemDialog;
         this.itemsBagDialog = itemsBagDialog;
+        this.GIFLabel = GIFLabel;
     }
 
     public void setActionLabels(Player enemy, Player human, Action enemyAction, Action playerAction) {
@@ -192,5 +195,13 @@ public class Mediator {
         enemyHealthLabel.setText(Integer.toString(enemy.getMaxHealth()) + "/" + Integer.toString(enemy.getMaxHealth()));
         playerDamageValueLabel.setText(Integer.toString(human.getDamage()));
         setBagText(items);
+    }
+    public void setGIF(boolean a){
+        if (a){
+            GIFLabel.setIcon(new ImageIcon("Tanets_Kosti_Voronina_avi_1.gif"));
+        }
+        else{
+            GIFLabel.setIcon(new ImageIcon("Увы.gif"));
+        }
     }
 }

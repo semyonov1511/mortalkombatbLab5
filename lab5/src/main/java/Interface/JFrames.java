@@ -42,7 +42,7 @@ public class JFrames extends javax.swing.JFrame {
                 enemyHealthBar, endGameDialog, endGameWithoutLadderDialog, fightFrame, enemyDebuffLabel,
                 victoryLabel, endGameWithoutLadderTitlleLabel, playerActionLabel, playerDebuffLabel, enemyActionLabel,
                 firstItemButton, secondItemButton, thirdItemButton, enterNameField, recordsTable,
-                cantUseItemDialog, itemsBagDialog);
+                cantUseItemDialog, itemsBagDialog,GIFLabel);
         game.fight.setMediator(mediator);
     }
 
@@ -87,6 +87,7 @@ public class JFrames extends javax.swing.JFrame {
         endFightPanel = new javax.swing.JPanel();
         endRoundLabel = new javax.swing.JLabel();
         nextRoundButton = new javax.swing.JButton();
+        GIFLabel = new javax.swing.JLabel();
         endGameDialog = new javax.swing.JDialog();
         endGamePanel = new javax.swing.JPanel();
         victoryLabel = new javax.swing.JLabel();
@@ -483,21 +484,29 @@ public class JFrames extends javax.swing.JFrame {
             .addGroup(endFightPanelLayout.createSequentialGroup()
                 .addGroup(endFightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(endFightPanelLayout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(nextRoundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(156, 156, 156)
+                        .addComponent(GIFLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(endFightPanelLayout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(endRoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(endRoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(nextRoundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         endFightPanelLayout.setVerticalGroup(
             endFightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(endFightPanelLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(endRoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addComponent(nextRoundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                .addGroup(endFightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(endFightPanelLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(endRoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, endFightPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(nextRoundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)))
+                .addComponent(GIFLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout endFightDialogLayout = new javax.swing.GroupLayout(endFightDialog.getContentPane());
@@ -1285,6 +1294,7 @@ public class JFrames extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel GIFLabel;
     private javax.swing.JButton attackButton;
     private javax.swing.JPanel attributePanel;
     private javax.swing.ButtonGroup attributesGroup;

@@ -128,6 +128,7 @@ public class Fight {
         mediator.setEndFightDialog();
         if (human.getHealth() > 0) {
             mediator.setRoundEndText("You win");
+            mediator.setGIF(true);
             if ("Shao Kahn".equals(enemy.getName())) {
                 action.addItems(38, 23, 8, human.getItems());
                 action.addPointsBoss(human);
@@ -139,6 +140,7 @@ public class Fight {
         } else {
             reset(enemiesList);
             mediator.setRoundEndText(enemy.getName() + " win");
+            mediator.setGIF(false);
 
         }
     }
