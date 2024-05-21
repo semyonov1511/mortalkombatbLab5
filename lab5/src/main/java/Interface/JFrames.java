@@ -23,7 +23,7 @@ public class JFrames extends javax.swing.JFrame {
         try {
             game.readFromExcel();
         } catch (IOException ex) {
-            Logger.getLogger(JFrames.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         game.writeToTable(recordsTable);
         game.setEnemies();
@@ -42,7 +42,7 @@ public class JFrames extends javax.swing.JFrame {
                 enemyHealthBar, endGameDialog, endGameWithoutLadderDialog, fightFrame, enemyDebuffLabel,
                 victoryLabel, endGameWithoutLadderTitlleLabel, playerActionLabel, playerDebuffLabel, enemyActionLabel,
                 firstItemButton, secondItemButton, thirdItemButton, enterNameField, recordsTable,
-                cantUseItemDialog, itemsBagDialog,GIFLabel);
+                cantUseItemDialog, itemsBagDialog, GIFLabel);
         game.fight.setMediator(mediator);
     }
 
@@ -1215,7 +1215,7 @@ public class JFrames extends javax.swing.JFrame {
         setLocationsFrame.setVisible(false);
         locationsNumber = Integer.parseInt(setLocationsField.getText());
         locationLabel.setText("Текущая локация: " + game.fight.location.getCurrentLocation() + "/" + locationsNumber);
-        game.fight.setHuman(game.newHuman(mediator,items));
+        game.fight.setHuman(game.newHuman(mediator, items));
         game.fight.location.setEnemiesAtLocation(game.fight.getHuman().getLevel());
         fightFrame.setVisible(true);
         fightFrame.setSize(1000, 700);
