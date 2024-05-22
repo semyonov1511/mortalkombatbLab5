@@ -4,7 +4,6 @@ public class Human extends Player {
 
     private int points;
     private int experience;
-    private int win;
     private int nextexperience;
     private Items[] items;
 
@@ -13,7 +12,6 @@ public class Human extends Player {
         this.points = 0;
         this.experience = 0;
         this.nextexperience = 40;
-        this.win = 0;
     }
     
     public void setItems(Items[] items){

@@ -23,7 +23,7 @@ public class JFrames extends javax.swing.JFrame {
         try {
             game.readFromExcel();
         } catch (IOException ex) {
-            
+
         }
         game.writeToTable(recordsTable);
         game.setEnemies();
