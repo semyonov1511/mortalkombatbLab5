@@ -3,7 +3,6 @@ package Actions;
 import Game_components.Result;
 import Game_components.Human;
 import Game_components.Player;
-import Game_components.Items;
 import java.util.ArrayList;
 import Particular_Actions.Action;
 import Particular_Actions.Block;
@@ -55,7 +54,7 @@ public class Fight {
         playerAction.realisation(enemy, human, enemyAction.getType());
     }
 
-    public void checkDebuff(Player human, Player enemy) {
+    public void checkDebuff() {
         if (!enemy.isDebuffed()) {
             mediator.setDebuffLabel(enemy, false);
         }
@@ -100,7 +99,7 @@ public class Fight {
             }
         }
         mediator.setRoundTexts(human, enemy);
-        checkDebuff(human, enemy);
+        checkDebuff();
         mediator.setHealthBar(human);
         mediator.setHealthBar(enemy);
         checkDeath(results, locationsNumber, enemiesList);
