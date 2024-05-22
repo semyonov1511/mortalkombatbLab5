@@ -201,7 +201,7 @@ public class Mediator {
             GIFLabel.setIcon(new ImageIcon("Tanets_Kosti_Voronina_avi_1.gif"));
         }
         else{
-            GIFLabel.setIcon(new ImageIcon("Увы.gif"));
+            GIFLabel.setIcon(new ImageIcon("uvy.gif"));
         }
     }
 }
